@@ -18,7 +18,7 @@ Claude Style is an independent theme. It is not made, endorsed or supported by A
 
 ## Compatibility
 
-Claude Style is designed and tested on the Mac, where it works best.
+Claude Style is designed on the Mac and tested on macOS, Windows and Linux.
 
 ## Installation
 
