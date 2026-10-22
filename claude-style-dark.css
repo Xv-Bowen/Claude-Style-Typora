@@ -126,10 +126,13 @@
 
 :root {
     /* Claude's chat font, interface font and the code font chosen for Typora.
-       Chinese falls back to PingFang SC, as it does in Claude's serif stack. */
-    --font-text: "Anthropic Serif", "Times New Roman", "PingFang SC", serif;
-    --font-ui: "Anthropic Sans", system-ui, -apple-system, "PingFang SC", sans-serif;
-    --font-code: "JetBrains Mono NL", "JetBrains Mono", "Anthropic Mono", ui-monospace, "SF Mono", Menlo, "PingFang SC", monospace;
+       Chinese falls back to PingFang SC on the Mac and Microsoft YaHei on
+       Windows, as in Claude's stacks. In code Microsoft YaHei comes after
+       monospace: it carries proportional Latin letters, and before monospace
+       it would take them wherever the Mac code fonts are missing. */
+    --font-text: "Anthropic Serif", "Times New Roman", "PingFang SC", "Microsoft YaHei", serif;
+    --font-ui: "Anthropic Sans", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-code: "JetBrains Mono NL", "JetBrains Mono", "Anthropic Mono", ui-monospace, "SF Mono", Menlo, "PingFang SC", monospace, "Microsoft YaHei";
 
     --motion-fast: 60ms;
     --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);

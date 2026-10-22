@@ -51,9 +51,9 @@ Typora 运行时会把主题留在内存里。换成新版本的文件后，要�
 
 | 用于 | 首选 | 依次回退到 |
 | --- | --- | --- |
-| 正文 | Anthropic Serif | Times New Roman，中文用苹方 |
-| 界面 | Anthropic Sans | 系统字体，中文用苹方 |
-| 代码 | JetBrains Mono NL | JetBrains Mono、Anthropic Mono、SF Mono、Menlo |
+| 正文 | Anthropic Serif | Times New Roman，中文用苹方（Windows 上是微软雅黑） |
+| 界面 | Anthropic Sans | 系统字体，中文用苹方（Windows 上是微软雅黑） |
+| 代码 | JetBrains Mono NL | JetBrains Mono、Anthropic Mono、SF Mono、Menlo，中文用苹方（Windows 上是微软雅黑） |
 
 主题不附带、也不下载任何字体，Anthropic 的字体不随主题分发。[JetBrains Mono](https://www.jetbrains.com/lp/mono/) 可以免费安装。
 

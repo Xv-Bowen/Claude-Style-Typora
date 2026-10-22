@@ -51,9 +51,9 @@ The theme uses these fonts when they are installed, and the next ones in each li
 
 | Used for | Preferred | Falls back to |
 | --- | --- | --- |
-| Text | Anthropic Serif | Times New Roman, then PingFang SC for Chinese |
-| Interface | Anthropic Sans | The system font, PingFang SC for Chinese |
-| Code | JetBrains Mono NL | JetBrains Mono, Anthropic Mono, SF Mono, Menlo |
+| Text | Anthropic Serif | Times New Roman, then PingFang SC (Microsoft YaHei on Windows) for Chinese |
+| Interface | Anthropic Sans | The system font, PingFang SC (Microsoft YaHei on Windows) for Chinese |
+| Code | JetBrains Mono NL | JetBrains Mono, Anthropic Mono, SF Mono, Menlo, then PingFang SC (Microsoft YaHei on Windows) for Chinese |
 
 No font is bundled or downloaded. The Anthropic typefaces are not distributed with this theme. [JetBrains Mono](https://www.jetbrains.com/lp/mono/) is free to install.
 
