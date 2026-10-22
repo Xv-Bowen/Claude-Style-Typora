@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in the Claude desktop app. The text, code, tables and alerts follow Claude's chat view, and Typora's own interface (sidebar, menus, find bar, dialogs) takes on Claude's look as well.
+A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in the Claude desktop app. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, and Typora's own interface (sidebar, menus, find bar, dialogs) takes on Claude's look as well.
 
 Claude Style is an independent theme. It is not made, endorsed or supported by Anthropic, and it contains no fonts, icons or other files from Anthropic. Claude is a trademark of Anthropic.
 
@@ -38,7 +38,7 @@ Typora keeps themes in memory while it runs. After you replace the files with a 
 | Reading | Claude's text size, line spacing and heading scale; quiet links, quotes, lists and tables |
 | Code | Claude's code card with a language label and Claude's syntax colours; inline code as Claude's small code chip |
 | Math | Formulas set at the same size as in Claude |
-| Alerts | GitHub alerts (note, tip, important, warning, caution) drawn as Claude's notices |
+| Alerts | GitHub alerts (note, tip, important, warning, caution) drawn the way Claude shows them in a document: a coloured rule with a coloured title and icon above the text |
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
 | Typora interface | Sidebar with file tree, outline and search; menus, find and replace, quick open, dialogs, notifications, the floating toolbar and file preview |
 | Modes | Source mode as a plain code view; focus mode dims the other blocks in Claude's quiet colours |
@@ -56,6 +56,10 @@ The theme uses these fonts when they are installed, and the next ones in each li
 | Code | JetBrains Mono NL | JetBrains Mono, Anthropic Mono, SF Mono, Menlo, then PingFang SC (Microsoft YaHei on Windows) for Chinese |
 
 No font is bundled or downloaded. The Anthropic typefaces are not distributed with this theme. [JetBrains Mono](https://www.jetbrains.com/lp/mono/) is free to install.
+
+### Icons
+
+Every icon in the interface is one Typora already ships: its own icon font, Font Awesome and Ionicons. The theme sets their colour, size and place. Where Claude shows an icon but Typora draws none (the sidebar's folder menu, the floating toolbar's menus, quick open), the theme adds the one Typora uses for the same thing elsewhere. It also draws a few simple strokes itself (the tick in menus, the arrow of a submenu and the close cross), and it contains no icon files. Claude's icons belong to Anthropic and cannot be shared with a theme, so this theme does not use them.
 
 ### Printing and PDF
 

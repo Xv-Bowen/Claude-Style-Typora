@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-一套浅色、一套深色的 [Typora](https://typora.io) 主题，让文档读起来像 Claude 桌面应用里的一篇回复。正文、代码、表格和提示框照着 Claude 的聊天界面来排，Typora 自己的界面（侧栏、菜单、查找栏、对话框）也一起换上了 Claude 的样子。
+一套浅色、一套深色的 [Typora](https://typora.io) 主题，让文档读起来像 Claude 桌面应用里的一篇回复。正文、代码和表格照着 Claude 的聊天界面来排，提示框照 Claude 打开文档时的样子，Typora 自己的界面（侧栏、菜单、查找栏、对话框）也一起换上了 Claude 的样子。
 
 Claude Style 是独立制作的主题，不是 Anthropic 出品，也没有得到 Anthropic 的认可或支持；主题里不含 Anthropic 的字体、图标或其他文件。Claude 是 Anthropic 的商标。
 
@@ -38,7 +38,7 @@ Typora 运行时会把主题留在内存里。换成新版本的文件后，要�
 | 阅读 | Claude 的字号、行距和标题层级；安静的链接、引用、列表和表格 |
 | 代码 | Claude 的代码卡片，带语言标签和 Claude 的语法高亮；行内代码是 Claude 的小代码标签 |
 | 公式 | 和 Claude 里一样大 |
-| 提示框 | GitHub 提示框（note、tip、important、warning、caution）画成 Claude 的提示条 |
+| 提示框 | GitHub 提示框（note、tip、important、warning、caution）照 Claude 显示文档时的样子：一条彩色竖线，上面是带图标的彩色标题 |
 | 图表 | Mermaid 图表用 Claude 画图表时的颜色 |
 | Typora 界面 | 侧栏里的文件树、大纲和搜索；菜单、查找替换、快速打开、对话框、通知、浮动工具栏和文件预览 |
 | 模式 | 源代码模式是一个纯代码视图；专注模式用 Claude 的弱化色淡化其他段落 |
@@ -56,6 +56,10 @@ Typora 运行时会把主题留在内存里。换成新版本的文件后，要�
 | 代码 | JetBrains Mono NL | JetBrains Mono、Anthropic Mono、SF Mono、Menlo，中文用苹方（Windows 上是微软雅黑） |
 
 主题不附带、也不下载任何字体，Anthropic 的字体不随主题分发。[JetBrains Mono](https://www.jetbrains.com/lp/mono/) 可以免费安装。
+
+### 图标
+
+界面上的图标都是 Typora 自带的：Typora 自己的图标字体、Font Awesome 和 Ionicons。主题调整它们的颜色、大小和位置；Claude 有图标、Typora 却没画的地方（侧栏的文件夹菜单、浮动工具栏的菜单、快速打开），主题配上 Typora 在别处表示同一件事用的图标。另外主题自己画了几处简单的线条（菜单里的对勾、子菜单的箭头、关闭用的叉），不带任何图标文件。Claude 的图标属于 Anthropic，不能随主题分发，所以这套主题没有用。
 
 ### 打印和 PDF
 
