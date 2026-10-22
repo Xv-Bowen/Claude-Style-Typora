@@ -16,12 +16,11 @@ Claude Style is an independent theme. It is not made, endorsed or supported by A
 
 ![Claude Style Dark](images/preview-dark.png)
 
-## Requirements
+## Compatibility
 
-- macOS
-- Typora 1.14 (tested with 1.14.10)
+Claude Style is designed and tested on macOS with Typora 1.14 (tested with 1.14.10), where it works best.
 
-Windows, Linux and older versions of Typora are not supported.
+It has not been tested on Windows, Linux or older versions of Typora. The document styles should mostly carry over, but parts of Typora's own interface may look different. Reports and screenshots from other platforms are welcome.
 
 ## Installation
 

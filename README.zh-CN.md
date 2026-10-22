@@ -18,10 +18,9 @@ Claude Style 是独立制作的主题，不是 Anthropic 出品，也没有得�
 
 ## 适用环境
 
-- macOS
-- Typora 1.14（在 1.14.10 上测试）
+Claude Style 在 macOS 上的 Typora 1.14 里设计和测试（测试版本 1.14.10），在这里效果最好。
 
-不支持 Windows、Linux 和更早版本的 Typora。
+Windows、Linux 和更早版本的 Typora 没有测试过。文档部分的样式应该大体可用，Typora 自身界面的一些地方可能不一样。欢迎反馈其他平台上的使用情况和截图。
 
 ## 安装
 
