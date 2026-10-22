@@ -1,0 +1,3516 @@
+/*
+ * Claude Style Dark for Typora
+ * https://github.com/Xv-Bowen/Claude-Style-Typora
+ * Copyright (c) 2026 Xv-Bowen
+ * SPDX-License-Identifier: CC-BY-NC-ND-4.0
+ * Not affiliated with Anthropic
+ */
+
+:root {
+    color-scheme: dark;
+
+    /* Surfaces */
+    --surface-page: #151515;
+    --surface-sidebar: rgb(16.8 16.8 16.8);
+    --surface-sunken: #0b0b0b;
+    --surface-raised: #20201f;
+    --surface-fence: rgb(32 32 31 / 50%);
+    --surface-field: rgb(255 255 255 / 5%);
+
+    /* Text */
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --text-link: #6da7ec;
+    --text-code: #ec7e7e;
+    --text-danger: #ec7e7e;
+    --accent: #2a78d6;
+
+    /* Lines and tints, all drawn from white */
+    --line: rgb(255 255 255 / 10%);
+    --line-strong: rgb(255 255 255 / 20%);
+    --tint: rgb(255 255 255 / 5%);
+    /* The same tint laid on the page, as one opaque colour: WebKit prints a
+       translucent gradient as solid ink */
+    --tint-on-page: color-mix(in srgb, #ffffff 5%, var(--surface-page));
+    --row-hover: rgb(255 255 255 / 7.5%);
+    --row-selected: rgb(255 255 255 / 15%);
+    --item-hover: rgb(255 255 255 / 7.5%);
+    --segment-thumb: rgb(255 255 255 / 10%);
+    --danger-item-hover: rgb(208 59 59);
+    --danger-item-hover-text: #ffffff;
+    --mark: rgb(250 178 25 / 33%);
+    --selection: rgb(82 81 77 / 99.6%);
+    /* The caret of Claude's iOS app: its neutral-700 token, as on the Mac */
+    --caret: #c3c2b7;
+    --selection-image: rgb(82 81 77 / 80%);
+
+    /* Claude's role colours: ink, wash and edge */
+    --info-ink: #6da7ec;
+    --info-wash: rgb(3 32 66);
+    --info-edge: rgb(13 54 107);
+    --success-ink: rgb(12 163 12);
+    --success-wash: rgb(17 38 15);
+    --success-edge: rgb(7 69 6);
+    --warning-ink: rgb(219 147 0);
+    --warning-wash: rgb(49 26 0);
+    --warning-edge: rgb(81 46 0);
+    --danger-ink: rgb(236 126 126);
+    --danger-wash: rgb(60 14 14);
+    --danger-edge: rgb(100 25 25);
+
+    --scrollbar-thumb: hsl(52.5 11.76% 86.67% / 35%);
+
+    /* Overlays */
+    --tip-surface: #20201f;
+    --tip-text: #f0efec;
+    --menu-shadow: inset 0 0 0 1px var(--line), 0 8px 24px rgb(0 0 0 / 32%), 0 2px 6px rgb(0 0 0 / 20%);
+    --tip-shadow: inset 0 0 0 1px var(--line), 0 1px 2px rgb(11 11 11 / 6%), 0 2px 8px rgb(0 0 0 / 24%);
+    --field-ring: inset 0 0 0 0.5px var(--line), 0 1px rgb(0 0 0 / 5%);
+    --focus-ring: inset 0 0 0 1px #0b0b0b, 0 0 0 1px #2a78d6, 0 0 6px 1px rgb(24 79 149 / 60%);
+
+    /* Buttons, panels and dialogs */
+    --button-fill: rgb(255 255 255 / 10%);
+    --button-ring: 0 1px 2px rgb(0 0 0 / 5%);
+    --surface-panel: #1a1a19;
+    --panel-shadow: 0 0 0 1px var(--line), 0 1px 2px rgb(11 11 11 / 6%), 0 2px 8px rgb(0 0 0 / 24%);
+    --panel-title: rgb(255 255 255 / 70%);
+    --search-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
+    --dialog-shadow: inset 0 0 0 1px var(--line), 0 4px 8px rgb(11 11 11 / 8%), 0 12px 28px -2px rgb(0 0 0 / 24%);
+    --input-ring: inset 0 0 0 1px var(--line);
+    --primary-fill: #ffffff;
+    --primary-text: #0b0b0b;
+    --backdrop: rgb(0 0 0 / 50%);
+
+    /* Mermaid: a custom theme name makes Typora pass these to Mermaid */
+    --mermaid-theme: claude;
+    --node-fill: #151515;
+    --node-text-color: #e5e5e5;
+    --cluster-fill: #2d2d2d;
+    --mermaid-background: #151515;
+
+    /* Claude's Mermaid colours, dark, including the clay Claude itself uses for clusters */
+    --diagram-node: transparent;
+    --diagram-node-edge: rgb(161 161 161);
+    --diagram-line: rgb(161 161 161);
+    --diagram-text: rgb(229 229 229);
+    --diagram-label: transparent;
+    --diagram-note: rgb(45 45 45);
+    --diagram-cluster: rgb(204 120 92);
+    --diagram-cluster-text: rgb(51 135 163);
+    --diagram-cluster-edge: rgb(138 115 107);
+
+    /* Claude thins its variable fonts on dark backgrounds */
+    --axis-regular: "GRAD" 0, "wght" 360;
+    --axis-medium: "GRAD" 0, "wght" 460;
+    --axis-bold: "GRAD" 0, "wght" 560;
+
+    /* Claude's chat code highlighting, dark */
+    --syntax-text: hsl(220 15% 93%);
+    --syntax-comment: hsl(220 10% 55%);
+    --syntax-punctuation: hsl(220 15% 85%);
+    --syntax-keyword: hsl(280 85% 72%);
+    --syntax-string: hsl(95 75% 65%);
+    --syntax-regex: hsl(95 70% 63%);
+    --syntax-number: hsl(180 80% 65%);
+    --syntax-property: hsl(355 85% 72%);
+    --syntax-attribute: hsl(355 80% 70%);
+    --syntax-function: hsl(210 100% 72%);
+    --syntax-parameter: hsl(30 90% 67%);
+    --syntax-variable: hsl(30 95% 68%);
+}
+
+/* ---------------------------------------------------------------------------
+   Base: fonts, motion and the variables Typora reads
+   --------------------------------------------------------------------------- */
+
+:root {
+    /* Claude's chat font, interface font and the code font chosen for Typora.
+       Chinese falls back to PingFang SC, as it does in Claude's serif stack. */
+    --font-text: "Anthropic Serif", "Times New Roman", "PingFang SC", serif;
+    --font-ui: "Anthropic Sans", system-ui, -apple-system, "PingFang SC", sans-serif;
+    --font-code: "JetBrains Mono NL", "JetBrains Mono", "Anthropic Mono", ui-monospace, "SF Mono", Menlo, "PingFang SC", monospace;
+
+    --motion-fast: 60ms;
+    --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    /* Claude's prose rhythm: one flow step is 12px at the body size, the same
+       inside headings and footnotes */
+    --flow: 0.75rem;
+    /* Chat text starts 4px in from blocks and stops 56px short of them */
+    --text-inset: 4px;
+    --text-stop: 56px;
+
+    /* Variables read by Typora's own scripts and stylesheets */
+    --bg-color: var(--surface-page);
+    --text-color: var(--text-primary);
+    --side-bar-bg-color: var(--surface-sidebar);
+    --item-hover-bg-color: var(--row-hover);
+    --item-hover-text-color: var(--text-primary);
+    --active-file-bg-color: var(--row-selected);
+    --active-file-text-color: var(--text-primary);
+    --active-file-border-color: transparent;
+    --active-toggle-btn-color: var(--row-selected);
+    --control-text-color: var(--text-secondary);
+    --control-text-hover-color: var(--text-primary);
+    --select-text-bg-color: var(--selection);
+    --select-text-font-color: inherit;
+    --search-select-bg-color: rgb(250 178 25 / 66%);
+    --search-select-text-color: inherit;
+    --monospace: var(--font-code);
+    --md-char-color: var(--text-muted);
+    --meta-content-color: var(--text-secondary);
+    --heading-char-color: var(--text-muted);
+    --blur-text-color: var(--text-muted);
+    --primary-color: var(--accent);
+    --primary-btn-border-color: var(--primary-fill);
+    --primary-btn-text-color: var(--primary-text);
+    --border-color: var(--line);
+    --table-border-color: var(--line);
+    --panel-border-color: var(--line);
+    --window-border: 1px solid var(--line);
+    --rawblock-edit-panel-bd: var(--tint);
+    --drag-placeholder-color: var(--line-strong);
+    --focus-ring-color: var(--accent);
+    --mermaid-font-family: var(--font-ui);
+    --side-bar-menu-active-tint: var(--row-selected);
+}
+
+/* The caret takes Claude's iOS caret colour everywhere, inherited so that
+   Typora can still hide it while previewing a file. WebKit keeps the width
+   of its own caret; the one CodeMirror draws also takes the iOS shape. */
+html {
+    background-color: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    caret-color: var(--caret);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-variation-settings: var(--axis-regular);
+}
+
+/* WebKit draws an opaque selection colour at 80%, so the colour is given a
+   hair short of opaque to come out exactly as measured on iOS. Selected
+   images keep the 80% tint, or they would disappear under it. */
+::selection {
+    background-color: var(--selection);
+}
+
+img::selection {
+    background-color: var(--selection-image);
+}
+
+/* ---------------------------------------------------------------------------
+   Prose: the document column, laid out like a Claude chat reply
+   --------------------------------------------------------------------------- */
+
+#write {
+    max-width: 808px;
+    padding: 36px 36px 96px;
+    font-family: var(--font-text);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    font-variation-settings: var(--axis-regular);
+    color: var(--text-primary);
+    overflow-wrap: break-word;
+}
+
+/* Block rhythm. Every block opens with one flow step; nothing closes. The
+   flow is set in rem so it stays the same inside smaller text. */
+#write :is(p, ul, ol, blockquote, figure, pre.md-fences, pre.md-meta-block,
+    .md-math-block, .md-htmlblock, .md-alert, .md-toc, .footnotes) {
+    margin-block: var(--flow) 0;
+}
+
+#write > :first-child,
+#write :is(li, blockquote, .md-alert, td, th) > :first-child {
+    margin-block-start: 0;
+}
+
+#write :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: calc(var(--flow) * var(--heading-space, 1.667)) 0;
+    font-family: var(--font-text);
+    font-weight: 600;
+    font-variation-settings: var(--axis-bold);
+    color: var(--text-primary);
+}
+
+#write > :is(h1, h2, h3, h4, h5, h6):first-child {
+    margin-block-start: 0;
+}
+
+/* Claude shows each Markdown heading one level down: # is its h2. */
+#write h1 { --heading-space: 2.5; font-size: 1.375em; line-height: 1.25; }
+#write h2 { --heading-space: 2; font-size: 1.125em; line-height: 1.3; }
+#write h3 { font-size: 1em; line-height: 1.3; }
+#write h4 { font-size: 0.875em; line-height: 1.3; }
+#write :is(h5, h6) { font-size: 0.875em; line-height: 1.3; color: var(--text-secondary); }
+
+#write :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-block-start: calc(var(--flow) * 0.667);
+}
+
+#write :is(ul, ol, figure, .md-hr) + * {
+    margin-block-start: calc(var(--flow) * 2);
+}
+
+#write :is(ul, ol, figure, .md-hr) + :is(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: calc(var(--flow) * max(2, var(--heading-space, 1.667)));
+}
+
+/* Chat text sits a little inside the blocks and stops short on the right. */
+#write :is(p, h1, h2, h3, h4, h5, h6) {
+    padding-inline-start: var(--text-inset);
+}
+
+#write :is(p, h1, h2, h3, h4, h5, h6, ul, ol) {
+    padding-inline-end: var(--text-stop);
+}
+
+#write :is(li, blockquote, .md-alert, figure, td, th) {
+    --text-inset: 0px;
+}
+
+#write :is(li, figure, td, th) {
+    --text-stop: 0px;
+}
+
+/* Inline text */
+#write :is(strong, b) {
+    font-weight: 600;
+    font-variation-settings: var(--axis-bold);
+}
+
+#write :is(em, i) {
+    font-style: italic;
+}
+
+#write :is(del, s) {
+    text-decoration-line: line-through;
+    text-decoration-color: color-mix(in oklab, currentColor 60%, transparent);
+}
+
+#write mark {
+    padding-inline: 0.125em;
+    border-radius: 2px;
+    background: var(--mark);
+    color: inherit;
+}
+
+#write :is(sup, sub) {
+    font-size: 0.75em;
+    line-height: 0;
+}
+
+/* Claude's chat gives keys no styling of their own, so <kbd> reads as body
+   text; this only undoes Typora's keycap. */
+#write kbd {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: inherit;
+    font: inherit;
+    vertical-align: baseline;
+    white-space: inherit;
+}
+
+#write a,
+#write .md-link,
+#write .md-def-url {
+    color: var(--text-link);
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    text-underline-offset: 3px;
+    border-radius: 2px;
+    transition-property: color, text-decoration-color, box-shadow;
+    transition-duration: var(--motion-fast);
+    transition-timing-function: var(--ease-out);
+}
+
+#write a:is(:hover, :focus-visible) {
+    text-decoration-color: currentColor;
+}
+
+#write a:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: var(--focus-ring);
+}
+
+#write sup.md-footnote {
+    color: var(--text-link);
+}
+
+/* Lists */
+#write :is(ul, ol) {
+    padding-inline-start: 2em;
+}
+
+#write ul { list-style-type: disc; }
+#write ol { list-style-type: decimal; }
+#write ul > li > ul { list-style-type: circle; }
+#write ul > li > ul > li > ul { list-style-type: square; }
+#write ol > li > ol { list-style-type: lower-alpha; }
+#write ol > li > ol > li > ol { list-style-type: lower-roman; }
+
+#write li {
+    margin-block: calc(var(--flow) * 0.333) 0;
+    padding-inline-start: 0.5em;
+}
+
+#write li:first-child {
+    margin-block-start: 0;
+}
+
+#write li::marker {
+    color: var(--text-secondary);
+}
+
+/* Typora always wraps list text in a paragraph. */
+#write li > p {
+    margin: 0;
+}
+
+#write li > :is(p, ul, ol, blockquote, figure, pre.md-fences, .md-math-block) + * {
+    margin-block-start: calc(var(--flow) * 0.333);
+}
+
+#write li > * + :is(ul, ol) {
+    margin-block-start: calc(var(--flow) * 0.333);
+}
+
+/* With the first line indent on, Typora moves every item 2em in to line up
+   with the indented paragraphs; a nested list is already inside its item, so
+   only the outer items move. */
+#write.first-line-indent li li {
+    margin-inline-start: 0;
+}
+
+/* Tasks */
+#write li.md-task-list-item {
+    padding-inline-start: 0;
+    list-style-type: none;
+}
+
+/* Claude's checkbox is inline before the text, on the baseline of the 24px
+   line: its top 6.6px down the line, its middle 0.82em, a little above the
+   middle of the lowercase letters. Typora's is positioned at the item's top
+   and comes first in it, so the rule that clears an item's first top margin
+   (an :is() with a class, which outranks a plain input selector) would hold
+   it at the top of the line; the attribute keeps this rule ahead. */
+#write .md-task-list-item > input[type="checkbox"] {
+    width: 13px;
+    height: 13px;
+    margin: calc(0.82em - 6.5px) 0 0 -22px;
+    accent-color: var(--accent);
+}
+
+/* The text is not the item's first child either, so it would open with a
+   paragraph's flow step and set tasks further apart than list items; in
+   Claude they are as close. Its first line starts where Claude's does: after
+   the box, its 8px and the space Claude writes after the box (Anthropic
+   Serif's is 0.194em), 1px short of that 22px. */
+#write .md-task-list-item > input + p {
+    margin-block-start: 0;
+    text-indent: calc(0.194em - 1px);
+}
+
+/* Claude greys and strikes a finished task; here only its own line, so
+   unfinished subtasks under it stay readable. */
+#write .task-list-done > p {
+    color: var(--text-secondary);
+    text-decoration-line: line-through;
+}
+
+/* Quotes */
+#write blockquote {
+    margin-inline: 0.5em 0;
+    padding-inline-start: 1em;
+    border-inline-start: 4px solid var(--line);
+    color: var(--text-secondary);
+}
+
+/* Rules */
+#write .md-hr,
+#write > hr {
+    margin-block-start: calc(var(--flow) * 2);
+}
+
+#write hr {
+    height: 0;
+    margin: 0 6px;
+    border: 0;
+    border-block-start: 0.5px solid var(--line);
+    background: none;
+}
+
+/* Tables */
+#write figure.md-table-fig {
+    overflow-x: auto;
+}
+
+/* While a table is being edited Typora puts its 32px tool row (28px
+   buttons, 4px under them) in the gap above it; the gap grows so the row
+   clears the block before by 8px. */
+#write figure.md-table-fig:has(> .ty-table-edit) {
+    margin-block-start: 40px;
+}
+
+#write table {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 7px;
+    font: inherit;
+    text-align: start;
+}
+
+#write :is(th, td) {
+    padding: 0.4375em 0.75em;
+    vertical-align: top;
+    border: 0;
+}
+
+#write th {
+    background: var(--tint);
+    font-weight: 500;
+    font-variation-settings: var(--axis-medium);
+    text-align: start;
+}
+
+#write thead :is(th, td) {
+    border-block-end: 1px solid var(--line);
+}
+
+#write tbody tr + tr > :is(td, th) {
+    border-block-start: 1px solid var(--line);
+}
+
+#write thead tr:first-child > :first-child { border-start-start-radius: 6px; }
+#write thead tr:first-child > :last-child { border-start-end-radius: 6px; }
+
+/* Images */
+#write img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footnote and link definitions, in Claude's footnote style */
+/* Typora also fades this block to 80%; the secondary colour is enough. */
+#write .footnotes {
+    font-size: 0.875em;
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+/* A definition is one line of text, so it lines up with the paragraphs */
+#write div.footnotes {
+    padding-inline: var(--text-inset) var(--text-stop);
+}
+
+/* Typora pads the name by 2ch and 2.5ch and pins "[" and "] :" to its ends,
+   which reads "[  ref  ] :" in bold. Written as in the Markdown instead. */
+#write .md-def-name {
+    padding-inline: 0;
+    color: var(--text-muted);
+    font-weight: inherit;
+    font-variation-settings: inherit;
+}
+
+#write .md-def-name::before,
+#write .md-def-name::after {
+    position: static;
+    color: var(--text-muted);
+}
+
+#write .md-def-name::after {
+    content: "]:";
+}
+
+#write .md-def-name:empty::after {
+    content: "name]:";
+}
+
+/* Exported footnotes: Typora writes them as .footnotes-area in a fixed grey
+   (#888), each line at 0.7em of that and pressed to the edge; they take the
+   editor's footnote style, a step apart */
+.typora-export #write .footnotes-area {
+    margin-block-start: var(--flow);
+    padding-inline: var(--text-inset) var(--text-stop);
+    color: var(--text-secondary);
+    font-size: 0.875em;
+}
+
+.typora-export #write .footnote-line {
+    margin-block-start: var(--flow);
+    font-size: inherit;
+}
+
+/* Typora sets the back arrow in the system monospace */
+#write .reversefootnote {
+    color: var(--text-link);
+    font-family: inherit;
+}
+
+/* ---------------------------------------------------------------------------
+   Code: inline code, fenced blocks, front matter and highlighting
+   --------------------------------------------------------------------------- */
+
+/* Inline code: Claude's small red chip */
+#write code {
+    padding: 0.0625em 0.25em;
+    border: 0.5px solid var(--line);
+    border-radius: 0.4em;
+    background: var(--tint);
+    color: var(--text-code);
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    font-variation-settings: normal;
+    font-feature-settings: "calt" 0, "liga" 0;
+    line-height: 1;
+}
+
+#write th code {
+    background: none;
+}
+
+/* Fenced blocks: a soft card with the language on top */
+#write pre.md-fences,
+#write pre.md-meta-block {
+    position: relative;
+    padding: 0;
+    border: 0.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-fence);
+    color: var(--syntax-text);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    line-height: 1.625;
+    font-variation-settings: normal;
+    font-feature-settings: "calt" 0, "liga" 0;
+    tab-size: 2;
+}
+
+#write pre.md-fences:not([lang=""])::before,
+#write pre.md-meta-block::before {
+    content: attr(lang);
+    display: block;
+    padding: 14px 14px 0;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    line-height: 17px;
+    font-variation-settings: var(--axis-regular);
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+#write pre.md-fences:not([lang])::before {
+    content: none;
+}
+
+#write pre.md-meta-block::before {
+    content: "yaml";
+}
+
+#write .md-fences .CodeMirror {
+    padding: 14px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+}
+
+#write .md-fences :is(.CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-gutters, .CodeMirror-lines) {
+    background: transparent;
+}
+
+#write .md-fences .CodeMirror-lines {
+    padding: 0;
+}
+
+#write .md-fences .CodeMirror pre.CodeMirror-line,
+#write .md-fences .CodeMirror pre.CodeMirror-line-like {
+    padding: 0;
+    font: inherit;
+    line-height: inherit;
+}
+
+/* Line numbers (Typora's "show line numbers" preference), as in Claude's file
+   viewer: a column as wide as the numbers, at least three, set right and
+   2ch from the code, in the muted colour, with no rule between (CodeMirror
+   draws one in #ddd). Typora's CodeMirror counts the numbers' padding twice
+   when it sizes the column, so the gap is padding on the gutter box, whose
+   width moves the code. */
+#write .md-fences .CodeMirror-gutters {
+    padding-inline-end: 2ch;
+    border: 0;
+}
+
+#write .md-fences .CodeMirror-linenumber {
+    min-width: 3ch;
+    padding: 0;
+    color: var(--text-muted);
+}
+
+/* HTML exports copy the editor's CodeMirror, but leave out the no-wrap class
+   the editor's #write has, so Typora's `#write pre { white-space: pre-wrap }`
+   wraps every code line. On screen the lines stay whole and the card scrolls,
+   as in the editor and in Claude; print keeps wrapping, since paper cannot
+   scroll. */
+@media screen {
+    .typora-export #write .md-fences .CodeMirror pre.CodeMirror-line,
+    .typora-export #write .md-fences.mock-cm {
+        white-space: pre;
+    }
+
+    .typora-export #write .md-fences.mock-cm {
+        overflow-x: auto;
+    }
+}
+
+/* Front matter is plain text, so the card's padding goes on the block itself. */
+#write pre.md-meta-block {
+    padding: 0 14px 14px;
+    white-space: pre-wrap;
+}
+
+#write pre.md-meta-block::before {
+    margin-block-end: 14px;
+    padding-inline: 0;
+}
+
+/* Highlighting: Claude's chat theme mapped onto CodeMirror's token classes */
+.cm-s-inner .cm-comment { color: var(--syntax-comment); }
+.cm-s-inner :is(.cm-punctuation, .cm-bracket) { color: var(--syntax-punctuation); }
+.cm-s-inner .cm-keyword { color: var(--syntax-keyword); }
+.cm-s-inner .cm-operator { color: var(--syntax-text); }
+.cm-s-inner .cm-string { color: var(--syntax-string); }
+.cm-s-inner .cm-string-2 { color: var(--syntax-regex); }
+.cm-s-inner :is(.cm-number, .cm-atom, .cm-link) { color: var(--syntax-number); }
+.cm-s-inner :is(.cm-tag, .cm-property) { color: var(--syntax-property); }
+.cm-s-inner :is(.cm-attribute, .cm-qualifier) { color: var(--syntax-attribute); }
+.cm-s-inner :is(.cm-def, .cm-builtin, .cm-meta) { color: var(--syntax-function); }
+.cm-s-inner .cm-variable { color: var(--syntax-text); }
+.cm-s-inner .cm-variable-2 { color: var(--syntax-parameter); }
+.cm-s-inner :is(.cm-variable-3, .cm-type) { color: var(--syntax-variable); }
+.cm-s-inner .cm-negative { color: var(--syntax-property); }
+.cm-s-inner .cm-positive { color: var(--syntax-string); }
+.cm-s-inner .cm-header { font-weight: 600; }
+.cm-s-inner .cm-strong { font-weight: 600; }
+.cm-s-inner .cm-em { font-style: italic; }
+.cm-s-inner .cm-error { color: var(--text-danger); }
+
+/* CodeMirror's own colours for Markdown headings (#00f), quotes (#090) and
+   rules (#999), and red for invalid characters, show through wherever the
+   mapping above has no entry. Claude's theme gives those scopes no colour
+   of their own, so they stay in the code's default colour. */
+:is(.cm-s-inner, #ty-preview-content) :is(.cm-header, .cm-quote, .cm-hr) { color: inherit; }
+:is(.cm-s-inner, #ty-preview-content) .cm-invalidchar { color: var(--text-danger); }
+
+/* Code blocks and source mode draw their own caret: Claude's iOS caret, a
+   2px bar with round ends as tall as the line, centred on the gap. Typora's
+   source mode caret is a 3px pink bar. */
+.CodeMirror:not(.cm-keymap-fat-cursor) div.CodeMirror-cursor,
+.CodeMirror.cm-s-typora-default:not(.cm-keymap-fat-cursor) div.CodeMirror-cursor {
+    width: 2px;
+    margin-left: -1px;
+    border: 0;
+    border-radius: 1px;
+    background: var(--caret);
+}
+
+#write .md-fences .CodeMirror-selected,
+#write .md-fences .CodeMirror-focused .CodeMirror-selected {
+    background: var(--selection);
+}
+
+/* ---------------------------------------------------------------------------
+   Blocks Claude does not have, drawn in its language: alerts follow Claude's
+   Banner, the table of contents follows its details card and sidebar rows.
+   --------------------------------------------------------------------------- */
+
+/* GitHub alerts as Claude banners: role wash, a 1px role edge, role-coloured title */
+#write .md-alert {
+    --alert-ink: var(--info-ink);
+    --alert-wash: var(--info-wash);
+    --alert-edge: var(--info-edge);
+    margin-inline: 0;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--alert-wash);
+    box-shadow: inset 0 0 0 1px var(--alert-edge);
+    color: var(--text-primary);
+}
+
+#write .md-alert-tip { --alert-ink: var(--success-ink); --alert-wash: var(--success-wash); --alert-edge: var(--success-edge); }
+#write .md-alert-warning { --alert-ink: var(--warning-ink); --alert-wash: var(--warning-wash); --alert-edge: var(--warning-edge); }
+#write .md-alert-caution { --alert-ink: var(--danger-ink); --alert-wash: var(--danger-wash); --alert-edge: var(--danger-edge); }
+
+/* Claude's neutral banner: the page with a faint tint and a hairline ring */
+#write .md-alert-important {
+    --alert-ink: var(--text-primary);
+    --alert-wash: var(--tint-on-page);
+    --alert-edge: var(--line);
+}
+
+#write .md-alert-text {
+    display: inline-flex;
+    align-items: center;
+    color: var(--alert-ink);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    font-variation-settings: var(--axis-bold);
+    line-height: 19.5px;
+}
+
+#write .md-alert-text svg {
+    top: 0;
+    margin-inline-end: 6px;
+    fill: currentColor;
+}
+
+#write .md-alert-text-container::after {
+    margin-inline-end: 0;
+}
+
+/* The title and the first lines of text share one paragraph, so the first
+   line indent (Typora's preference) moved the title alone. Both start flush;
+   later paragraphs keep the indent. */
+#write.first-line-indent .md-alert > p:first-child {
+    text-indent: 0;
+}
+
+/* Table of contents: a quiet card of rows */
+#write .md-toc {
+    margin-inline: 0;
+    padding: 0.5em 0.5em;
+    border: 0.5px solid var(--line);
+    border-radius: 12px;
+    font-size: 0.875em;
+}
+
+#write .md-toc-content {
+    margin: 0;
+    padding: 0;
+}
+
+#write .md-toc-item {
+    display: block;
+    color: var(--text-secondary);
+}
+
+#write .md-toc-inner {
+    display: block;
+    margin: 0;
+    padding: 2px 8px;
+    border-radius: 6px;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Like Claude's sidebar rows: the tint appears at once and the text keeps its colour */
+#write .md-toc-inner:hover {
+    background: var(--row-hover);
+}
+
+#write .md-toc-h1 .md-toc-inner { color: var(--text-primary); }
+#write .md-toc-h2 .md-toc-inner { margin-inline-start: 1em; }
+#write .md-toc-h3 .md-toc-inner { margin-inline-start: 2em; }
+#write .md-toc-h4 .md-toc-inner { margin-inline-start: 3em; }
+#write .md-toc-h5 .md-toc-inner { margin-inline-start: 4em; }
+#write .md-toc-h6 .md-toc-inner { margin-inline-start: 5em; }
+
+/* Tags that label raw blocks while they are being edited */
+#write .md-rawblock-tooltip,
+#write .md-toc-tooltip {
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+}
+
+/* A raw block's tag (its type, then edit / done) is plain text like a code
+   card's language label. Typora sets it on a grey tab faded in over half a
+   second, the type at 50%; its buttons light up as Claude's segmented
+   options do, the text turning to the body colour at once. */
+#write .md-rawblock .md-rawblock-tooltip {
+    background: transparent;
+    animation: none;
+    transition: none;
+}
+
+#write .md-rawblock-tooltip-name {
+    opacity: 1;
+}
+
+#write .md-rawblock-tooltip-btn:hover {
+    background: transparent;
+    color: var(--text-primary);
+}
+
+/* Editing a math or HTML block: its source in Claude's code card, as a
+   fenced block's, the $$ around TeX in the Markdown mark colour. Typora
+   greys each part, and tints a hovered HTML block over half a second. */
+#write .md-rawblock-control:not(.md-rawblock-tooltip) {
+    background: transparent;
+}
+
+#write .md-rawblock:hover > .md-rawblock-container {
+    transition: none;
+}
+
+#write .md-htmlblock > .md-htmlblock-panel {
+    padding: 14px;
+    border: 0.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-fence);
+}
+
+/* $$, the source and $$ make one card; the preview follows outside it */
+#write .md-mathblock-panel > :is(.md-rawblock-before, .md-rawblock-input, .md-rawblock-after) {
+    padding-inline: 14px;
+    border-inline: 0.5px solid var(--line);
+    background: var(--surface-fence);
+}
+
+#write .md-mathblock-panel > .md-rawblock-before {
+    padding-block-start: 14px;
+    border-block-start: 0.5px solid var(--line);
+    border-start-start-radius: 12px;
+    border-start-end-radius: 12px;
+}
+
+#write .md-mathblock-panel > .md-rawblock-after {
+    padding-block-end: 14px;
+    border-block-end: 0.5px solid var(--line);
+    border-end-start-radius: 12px;
+    border-end-end-radius: 12px;
+}
+
+#write :is(.md-rawblock-before, .md-rawblock-after) {
+    color: var(--md-char-color);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    line-height: 1.625;
+}
+
+#write .md-rawblock-input {
+    padding: 0;
+    color: var(--syntax-text);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    line-height: 1.625;
+    font-feature-settings: "calt" 0, "liga" 0;
+}
+
+#write .md-rawblock-input .CodeMirror {
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+}
+
+#write .md-rawblock-input :is(.CodeMirror-scroll, .CodeMirror-lines) {
+    padding: 0;
+}
+
+#write .md-rawblock-input .CodeMirror pre.CodeMirror-line {
+    padding: 0;
+    font: inherit;
+}
+
+#write .md-rawblock-input .CodeMirror-activeline-background {
+    background: transparent;
+}
+
+#write .md-rawblock-input :is(.CodeMirror-selected, .CodeMirror-focused .CodeMirror-selected) {
+    background: var(--selection);
+}
+
+#write .md-rawblock-input .CodeMirror-placeholder {
+    color: var(--text-muted);
+}
+
+/* An HTML block still loading: Typora's spinner, in the muted colour as
+   Claude's loading marks are, over the block's tint */
+#write .md-htmlblock-panel-placeholder {
+    color: var(--text-muted);
+}
+
+/* A video or page in an HTML block that fails to load: its address in the
+   code font, muted by colour instead of Typora's 80% */
+#write .md-resouce-error-wrapper {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    opacity: 1;
+}
+
+/* The preview under the source is page, not a raised tooltip */
+#write .md-mathblock-panel .code-tooltip {
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Math: centred, with a little room as in Claude. A wide formula scrolls in
+   Typora's own container; scrolling the block would clip its "Math" tag. */
+#write .md-math-block {
+    padding-block: 2px;
+}
+
+/* Claude sets math at 1.21em (KaTeX). Typora draws it as MathJax SVG sized
+   in the text's ex, one math em being 2.262ex, so its size followed the body
+   font: 19.5px over Anthropic Serif, 16.2px over Times New Roman. Fixing the
+   ex at 0.5348 of the font size (1.21 / 2.262) gives 1.21em over any font,
+   in running text, headings and tables alike. */
+#write mjx-container {
+    font-size-adjust: 0.5348;
+}
+
+/* MathJax cuts inline math into pieces where a line may break and holds the
+   space between them (a thick space before "=") in a 1em blank of a font
+   with no x-height, pulled in by letter-spacing. The fixed ex above would
+   blow that blank up (11.3px for 5.4px), and left alone it is sized in the
+   text's em, not the math's. Set in the math em, it is the space TeX means. */
+#write mjx-container mjx-break {
+    font-size: 1.21em;
+    font-size-adjust: none;
+}
+
+/* In the editor Typora also takes 5% off (inline math zoomed to .95, blocks
+   set at .95em); exports keep the full size. Undone, so math is 1.21em in
+   both. */
+#write .md-inline-math-container mjx-container {
+    zoom: 1;
+}
+
+#write .md-math-container {
+    font-size: 1em;
+}
+
+/* TeX that does not parse is boxed in a fixed red; Claude's danger colour */
+#write script.math-jax-error {
+    border-color: var(--text-danger);
+}
+
+/* Footnote marks and definitions */
+#write sup.md-footnote {
+    padding: 0;
+    background: none;
+    font-size: 0.75em;
+}
+
+#write sup.md-footnote a {
+    color: var(--text-link);
+    text-decoration: none;
+}
+
+#write .md-def-link .md-def-title,
+#write .md-def-split {
+    color: var(--text-muted);
+}
+
+/* A link definition's empty "input description here", which Typora writes
+   in a fixed light grey */
+#write .md-def-content > span:first-child:empty::after {
+    color: var(--md-char-color);
+}
+
+/* Hard line breaks and the Markdown marks shown while editing */
+#write .md-linebreak,
+#write .md-meta,
+#write .md-before,
+#write .md-after {
+    color: var(--md-char-color);
+}
+
+/* Raw HTML tags, break marks and HTML comments: Typora fades them to 60%
+   (35% in headings, and the comments a dark yellow); the mark colour does it */
+#write :is(.md-linebreak-mark, .md-raw-inline, .md-tag, .md-raw-html-src-content, .md-comment),
+#write [md-inline="linebreak"],
+#write :is(h1, h2, h3, h4, h5, h6) .md-tag {
+    color: var(--md-char-color);
+    opacity: 1;
+}
+
+/* Mermaid: Claude puts diagrams in the code card, without a label, 16px in */
+#write pre.md-fences.md-diagram::before {
+    content: none;
+}
+
+#write .md-diagram-panel {
+    margin: 0;
+    padding: 16px;
+    border: 0;
+    background: transparent;
+}
+
+/* Editing a diagram: Typora floats the preview under the source in a 1px
+   frame, padding the block's foot (inline, by the preview's height) to
+   make room, and the language field lands on the preview. The preview
+   stays in the card instead, under the source and a divider, as the
+   diagram sits in the card when not editing. */
+#write pre.md-fences-advanced.md-focus {
+    margin-block-end: 0 !important;
+}
+
+#write pre.md-fences-advanced.md-focus .md-fences-adv-panel {
+    position: static;
+    border: 0;
+    border-block-start: 0.5px solid var(--line);
+    border-radius: 0;
+}
+
+/* In an export Typora writes a diagram without the code block around it,
+   so the panel itself takes the card the diagram sits in while editing */
+.typora-export #write > .md-diagram-panel {
+    margin-block: var(--flow) 0;
+    padding: 16px;
+    border: 0.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-fence);
+}
+
+#write .md-diagram-panel-header {
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+}
+
+#write .md-diagram-panel-error {
+    color: var(--text-danger);
+    font-family: var(--font-ui);
+    font-size: 13px;
+}
+
+#write .md-diagram-panel svg {
+    max-width: 100%;
+}
+
+/* Mermaid's own stylesheet is scoped to the diagram's id; these rules are
+   more specific, so diagrams take Claude's colours in the editor and exports. */
+#write .md-diagram-panel :is(.node, .actor, .labelBox) :is(rect, circle, ellipse, polygon, path),
+#write .md-diagram-panel :is(rect.actor, rect.labelBox) {
+    fill: var(--diagram-node);
+    stroke: var(--diagram-node-edge);
+    stroke-width: 1px;
+}
+
+#write .md-diagram-panel :is(.flowchart-link, .edgePath .path, .relation, .actor-line, .loopLine) {
+    stroke: var(--diagram-line);
+}
+
+#write .md-diagram-panel :is(.marker, .arrowheadPath, marker path) {
+    fill: var(--diagram-line);
+    stroke: var(--diagram-line);
+}
+
+#write .md-diagram-panel :is(.messageLine0, .messageLine1) {
+    stroke: var(--diagram-text);
+}
+
+/* Mermaid writes font-family: sans-serif into some labels' style attribute
+   (sequence messages), so only !important reaches them. */
+#write .md-diagram-panel :is(text, tspan, .label, .nodeLabel, .edgeLabel, .messageText, .noteText, text.actor, .loopText, .labelText) {
+    fill: var(--diagram-text);
+    color: var(--diagram-text);
+    font-family: var(--font-ui) !important;
+}
+
+/* Mermaid's own rule for the span inside a label comes after the theme with
+   the same weight; naming it here outweighs it. */
+#write .md-diagram-panel :is(.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg, .edgeLabel .label span) {
+    background-color: var(--diagram-label);
+    fill: var(--diagram-label);
+}
+
+#write .md-diagram-panel rect.note {
+    fill: var(--diagram-note);
+    stroke: var(--diagram-node-edge);
+}
+
+#write .md-diagram-panel .cluster rect {
+    fill: var(--diagram-cluster);
+    stroke: var(--diagram-cluster-edge);
+}
+
+#write .md-diagram-panel :is(.cluster text, .cluster-label text, .cluster span, .cluster-label span) {
+    fill: var(--diagram-cluster-text);
+    color: var(--diagram-cluster-text);
+}
+
+/* ---------------------------------------------------------------------------
+   Sidebar: Claude's flush sidebar with 26px rounded rows
+   --------------------------------------------------------------------------- */
+
+/* Claude shows and hides its sidebar at once: nothing animates on ⌘B. Typora
+   slides the sidebar, page and title bar for 0.4s, eases the page's padding
+   and unrolls the search results; 1ms rather than none keeps the transition
+   events its layout code listens for. */
+#typora-sidebar,
+content,
+titlebar,
+#write,
+#file-library-search {
+    transition-duration: 1ms;
+}
+
+#typora-sidebar {
+    background-color: var(--surface-sidebar);
+    border-inline-end: 0.5px solid var(--line);
+    box-shadow: none;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19.5px;
+    font-variation-settings: var(--axis-regular);
+}
+
+/* Once a sidebar list is scrolled, its top fades in over 12px, as Claude's
+   sidebar list does (mask-image: linear-gradient(#0000 0, #000 12px) while
+   scrolled). The fade grows with the first 12px of scroll; a list at rest
+   or too short to scroll keeps a full mask. A scroll timeline needs
+   animation-duration: auto, or the shorthand's 0s keeps it at its start. */
+@property --claude-list-fade {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@keyframes claude-list-fade {
+    from { --claude-list-fade: 0px; }
+    to { --claude-list-fade: 12px; }
+}
+
+#sidebar-content,
+#outline-content {
+    -webkit-mask-image: linear-gradient(transparent 0, #000 var(--claude-list-fade));
+    mask-image: linear-gradient(transparent 0, #000 var(--claude-list-fade));
+    animation: claude-list-fade linear both;
+    animation-duration: auto;
+    animation-timeline: scroll(self block);
+    animation-range: 0 12px;
+}
+
+/* Files / Outline switch: Claude's segmented control */
+.sidebar-osx-tab {
+    padding: 8px 8px 4px;
+}
+
+.sidebar-tabs {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: auto;
+    height: 28px;
+    margin: 0;
+    padding: 1px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--tint);
+}
+
+/* As in Claude, the chosen option is marked by a thumb of its own that slides
+   across (200ms, Claude's snap easing). The two options share the space
+   between the 26px icon buttons, so the thumb's place follows from that. */
+.sidebar-tabs::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 27px;
+    width: calc((100% - 54px) / 2);
+    border-radius: 6px;
+    background: var(--segment-thumb);
+    box-shadow: inset 0 0 0 1px var(--line), 0 1px 2px rgb(0 0 0 / 5%);
+    pointer-events: none;
+    transition: transform 200ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.sidebar-tabs:has(#sidepanel-segmented-input-outline.active)::before {
+    transform: translateX(100%);
+}
+
+.sidebar-tabs:not(:has(.sidebar-tab.active))::before {
+    visibility: hidden;
+}
+
+/* Typora writes the Files / Articles label only once a folder is open, and
+   its own styles show just the chosen tab. In a window with no folder the
+   control would show an empty option, so it holds the outline alone. */
+.sidebar-tabs:has(#sidepanel-segmented-input-files:empty) #sidepanel-segmented-input-files {
+    display: none;
+}
+
+.sidebar-tabs:has(#sidepanel-segmented-input-files:empty)::before {
+    width: calc(100% - 54px);
+    transform: none;
+}
+
+/* Hovering lights the text at once; the chosen option keeps the body colour. */
+.sidebar-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 19.5px;
+    text-transform: none;
+    opacity: 1;
+}
+
+.sidebar-tab:hover {
+    color: var(--text-primary);
+}
+
+.sidebar-tab.active {
+    display: inline-flex;
+    background: transparent;
+    box-shadow: none;
+    color: var(--text-primary);
+}
+
+.sidebar-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    line-height: 26px;
+    opacity: 1;
+}
+
+.sidebar-tab-btn:hover {
+    background: var(--row-hover);
+    color: var(--text-primary);
+}
+
+.sidebar-tab-btn > * {
+    opacity: 1;
+}
+
+/* Typora lifts the search icon 2px; the button centres it on the row instead */
+#sidebar-search-btn {
+    margin-top: 0;
+}
+
+/* Sidebar search: Claude's search field, in the row the segmented control
+   leaves (the panel sits inside the same padded header) */
+#ty-sidebar-search-tabs {
+    align-items: center;
+    gap: 4px;
+    height: 28px;
+    padding: 0;
+}
+
+/* Typora's Mac margins push the field 8px down and stop it 16px short, and it
+   slides in for 0.3s; the right padding leaves room for the option buttons. */
+#file-library-search-input,
+.ty-show-search #file-library-search-input {
+    height: 26px;
+    margin: 0;
+    padding: 0 76px 0 8px;
+    animation: none;
+    border: 0;
+    border-radius: 6px;
+    background: var(--surface-field);
+    box-shadow: var(--field-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    outline: none;
+    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#file-library-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+#file-library-search-input:focus {
+    box-shadow: var(--focus-ring);
+}
+
+.ty-sidebar-search-panel .searchpanel-search-option-btn {
+    border-radius: 6px;
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+/* Centred on the field (each is 16px with a 1px top margin), the last one
+   4px in from its right edge */
+#ty-sidebar-search-tabs .searchpanel-search-option-btn { top: 5px; }
+#ty-sidebar-search-tabs #filesearch-regexp-option-btn { right: 4px; }
+#ty-sidebar-search-tabs #filesearch-word-option-btn { right: 26px; }
+#ty-sidebar-search-tabs #filesearch-case-option-btn { right: 48px; }
+
+.ty-sidebar-search-panel .searchpanel-search-option-btn.select,
+.ty-sidebar-search-panel .searchpanel-search-option-btn:hover {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+/* File tree rows */
+#file-library-tree {
+    padding: 4px 8px 8px;
+}
+
+.file-node-background {
+    left: 8px;
+    width: calc(100% - 16px);
+    height: 26px;
+    border: 0;
+    border-radius: 6px;
+}
+
+.file-tree-node.active > .file-node-background {
+    border: 0;
+    background-color: var(--row-selected);
+}
+
+.file-tree-node:not(.active):has(> .file-node-content:hover) > .file-node-background {
+    background-color: var(--row-hover);
+}
+
+/* Rows are 26px with 1.5px between them, a 27.5px step like Claude's list.
+   Typora sets the title inline-block on the baseline, which adds 8.5px. */
+.file-node-content {
+    margin-block-end: 1.5px;
+    padding-block: 0;
+    color: var(--text-secondary);
+    line-height: 26px;
+}
+
+.file-node-title {
+    vertical-align: top;
+}
+
+/* As in Claude, hovering only tints the row; the text stays secondary
+   until the row is the current one. */
+.file-tree-node.active > .file-node-content {
+    color: var(--text-primary);
+}
+
+/* Typora gives the icons a 22px line; on the 26px row they would sit 2px high. */
+.file-node-icon,
+.file-node-open-state {
+    min-height: 26px;
+    color: var(--text-muted);
+    line-height: 26px;
+}
+
+/* Files Typora cannot open: faded to 70% there, the muted colour here */
+.file-tree-node.file-not-editable > .file-node-content,
+.file-list-item.file-not-editable.active,
+.file-list-item.file-not-editable:not(.active):not(.select) {
+    opacity: 1;
+}
+
+.file-tree-node.file-not-editable > .file-node-content,
+.file-list-item.file-not-editable .file-list-item-file-name {
+    color: var(--text-muted);
+}
+
+/* Renaming in the tree: the row's title becomes Claude's sidebar search
+   field, which is the row's own 26px; Typora leaves a bare input */
+.file-tree-rename-input {
+    width: 100%;
+    height: 26px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--surface-field);
+    box-shadow: var(--field-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+}
+
+.file-tree-rename-input:focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* A file Typora points out (one changed on disk, one just revealed) flashes
+   yellow eight times over two seconds; Claude never blinks. It takes the
+   mark colour, Claude's highlight, steadily for those two seconds. */
+.blink-area {
+    border-radius: 6px;
+    background-color: var(--mark);
+    animation: none;
+}
+
+/* A folder with too many files for the list: Typora's note, faded to 80%,
+   in the muted and secondary colours instead */
+#file-library-list .oversize-list-template {
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+}
+
+#file-library-list[data-state] .oversize-list-template,
+#file-library-list .oversize-list-template-mark {
+    opacity: 1;
+}
+
+#file-library-list .oversize-list-template-mark {
+    color: var(--text-muted);
+}
+
+/* Dragging files onto the sidebar: Typora rings it with a 2px square line
+   in the accent; Claude's focus ring, on the rows' 6px corners */
+.sidebar-content.on-drop::after {
+    border: 0;
+    border-radius: 6px;
+    box-shadow: var(--focus-ring);
+}
+
+/* With no folder open, searching says so at once (Typora fades it in) */
+#typora-sidebar.ty-no-mount-folder.ty-show-search #file-library-list-children::after {
+    animation: none;
+}
+
+/* An empty tree, list or outline says so in the muted colour */
+#file-library-list-children:empty::after,
+#file-library-tree:empty::after,
+#outline-content:empty::after {
+    color: var(--text-muted);
+    font-size: 13px;
+    opacity: 1;
+}
+
+.file-node-title-ext-part,
+.file-list-item-file-ext-part {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+/* File list: rows with a title and a quiet description, like Claude's described rows */
+#file-library-list-children {
+    padding: 4px 8px 8px;
+}
+
+.file-list-item {
+    margin-block-end: 2px;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+.file-list-item:not(.active):not(.select) {
+    opacity: 1;
+}
+
+.file-list-item:hover {
+    background: var(--row-hover);
+}
+
+.file-list-item.active {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+/* Typora sets these in bold, PT Mono and Raleway and fades them with opacity;
+   the interface font and the muted colour do that job here. */
+.file-list-item-file-name {
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: inherit;
+    line-height: 19.5px;
+}
+
+.file-list-item-summary,
+.file-list-item-time,
+.file-list-item-parent-loc {
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 16px;
+    opacity: 1;
+}
+
+/* Typora's 38px box would show the top of a third line; two whole lines instead */
+.file-list-item-summary {
+    display: -webkit-box;
+    height: auto;
+    max-height: 32px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+/* Search results: each file and each matching line is a 26px sidebar row,
+   in the interface font. Typora sets the lines in Raleway at 80%, clips them
+   without an ellipsis, rules a line under every file and boxes the count. */
+#file-library-search-result {
+    padding: 4px 8px 8px;
+}
+
+.ty-search-item {
+    border-bottom: 0;
+}
+
+.ty-search-item + .ty-search-item {
+    margin-block-start: 8px;
+}
+
+.ty-search-item-summary,
+.html-for-mac .ty-search-item-summary {
+    padding-block: 3.25px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 19.5px;
+}
+
+.ty-search-item-summary .file-list-item-parent-loc {
+    padding-block-start: 0;
+}
+
+.ty-search-item-collapse-icon {
+    padding-inline-start: 8px;
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+.ty-search-item-collapse-icon:hover {
+    color: var(--text-primary);
+    opacity: 1;
+}
+
+.ty-search-item-matches {
+    padding-block-end: 0;
+}
+
+.ty-search-item-line,
+.html-for-mac .ty-search-item-line {
+    padding: 3.25px 8px 3.25px 24px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19.5px;
+    text-overflow: ellipsis;
+}
+
+.ty-search-item-line span,
+.ty-search-item-line-expand {
+    opacity: 1;
+}
+
+/* As elsewhere in the sidebar, hovering only tints; the line Typora has
+   jumped to, or the open file's row, takes the selected row. */
+.ty-search-item-line:hover {
+    background: var(--row-hover);
+    color: var(--text-secondary);
+}
+
+.ty-search-item-line.active {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+.ty-search-item.active {
+    background: transparent;
+}
+
+.ty-search-item.active > .ty-search-item-summary {
+    background: var(--row-selected);
+}
+
+/* The number of matches, quiet like the time on a file row */
+.file-list-item-count,
+.html-for-mac .file-list-item-count {
+    margin: 0 8px 0 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    vertical-align: baseline;
+}
+
+.ty-search-result-error-message {
+    padding: 4px 8px;
+    color: var(--text-muted);
+}
+
+.file-list-item.select,
+.file-tree-node.select:not(.file-node-root) > .file-node-background,
+.ty-search-item-line.select,
+.ty-search-item.select > .ty-search-item-summary,
+.outline-item.select {
+    outline: none;
+    box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.ty-search-item.select {
+    outline: none;
+}
+
+/* Outline */
+#outline-content {
+    padding: 4px 8px 8px;
+}
+
+/* Same 27.5px step as the file tree (Typora's own margins make it 28px) */
+#outline-content .outline-item {
+    margin-block: 0 1.5px;
+}
+
+.outline-item {
+    min-height: 26px;
+    padding-block: 3.25px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    line-height: 19.5px;
+}
+
+.outline-item:hover {
+    background: var(--row-hover);
+}
+
+/* On hover Typora widens the row by 28px each side (negative margins under
+   transparent borders), so the tint ran to the sidebar's edges, and it
+   underlines the label. Like the file tree, the row keeps its place and
+   only the tint changes. */
+.outline-item:hover,
+.typora-export .outline-item:hover {
+    margin-inline: 0;
+    border-inline-width: 0;
+}
+
+.outline-label:hover {
+    text-decoration: none;
+}
+
+.outline-item-active > .outline-item,
+.outline-item.outline-item-active {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+/* Typora bolds the current entry; like Claude's list, only the row and the
+   text colour change. */
+.pin-outline #outline-content .outline-active {
+    font-weight: inherit;
+}
+
+/* An HTML export with its outline beside the page: the sidebar's 13px rows
+   (Typora sets 0.8rem), and the current heading marked by its selected row
+   alone, as in the sidebar, where Typora bolds it */
+.typora-export-sidebar {
+    font-size: 13px;
+}
+
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label {
+    font-weight: inherit;
+}
+
+/* Filtering the outline bolds the headings that match, at Typora's 700;
+   Claude's bold is 600, thinned in dark mode */
+.ty-on-outline-filter .ty-outline-hit {
+    font-weight: 600;
+    font-variation-settings: var(--axis-bold);
+}
+
+.outline-expander {
+    color: var(--text-muted);
+}
+
+/* Divider between the sidebar and the page: Claude's resize handle. A 12px hit
+   area sits across the edge; resting on it fades in a 3 x 48px muted pill after
+   200ms, and the pill fades out the same way. */
+#typora-sidebar-resizer {
+    width: 12px;
+    margin-left: -6px;
+}
+
+#typora-sidebar-resizer:not(.dragging) .typora-sidebar-resizer-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 48px;
+    max-height: 100%;
+    border-radius: 9999px;
+    background: var(--text-muted);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;
+}
+
+#typora-sidebar-resizer:not(.dragging):hover .typora-sidebar-resizer-bar,
+#typora-sidebar-resizer:not(.dragging) .typora-sidebar-resizer-bar:hover {
+    width: 3px;
+    background: var(--text-muted);
+    opacity: 1;
+    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;
+}
+
+/* Footer: a row of 26px buttons, 4px clear of the rule and 8px in from the
+   sides, so the hover tint no longer runs into the window's edge. Typora
+   fades it in over 0.5s when the pointer enters the sidebar, and fades the
+   tab buttons in again although they are always shown; Claude reveals on
+   hover at once. */
+#typora-sidebar:hover .sidebar-tab-btn,
+.pin-outline #typora-sidebar:hover .sidebar-footer:not(.show-sidebar-footer-context) {
+    animation: none;
+}
+
+.sidebar-footer {
+    padding: 4px 8px;
+    border-block-start: 0.5px solid var(--line);
+    background: var(--surface-sidebar);
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 26px;
+}
+
+#ty-sidebar-footer > div {
+    gap: 4px;
+}
+
+.sidebar-footer .sidebar-footer-item,
+.html-for-mac .sidebar-footer .sidebar-footer-item {
+    height: 26px;
+    padding-block: 0;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+#sidebar-new-file-btn,
+#unpin-outline-btn,
+#switch-file-list-btn {
+    width: 26px;
+    padding-inline: 0;
+    text-align: center;
+}
+
+.footer-btn,
+.sidebar-footer-main-item-label {
+    opacity: 1;
+}
+
+.sidebar-footer-item:hover,
+.footer-item:hover {
+    border-radius: 6px;
+    background: var(--row-hover);
+    color: var(--text-primary);
+}
+
+/* The footer's menu (actions, sort order, recent folders) is Claude's menu
+   card; Typora's id rule gives it the sidebar's background, its own border
+   and shadow, and 12.5px rows. */
+#sidebar-files-menu {
+    padding: 4px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    font-size: 13px;
+}
+
+#sidebar-files-menu.dropdown-menu > li {
+    font-size: 13px;
+}
+
+#sidebar-files-menu.dropdown-menu > li > a {
+    align-items: center;
+    line-height: 19px;
+}
+
+/* Groups are parted by Claude's inset menu divider, not a full-width rule:
+   4px, the line, 4px, then the label's own padding. The items clip their
+   overflow, so the line is drawn inside the label. */
+#sidebar-files-menu > .show + .menuitem-group-label.show {
+    position: relative;
+    margin-block-start: 4px;
+    padding-block-start: 11px;
+    border-block-start: 0;
+}
+
+#sidebar-files-menu > .show + .menuitem-group-label.show::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 8px;
+    left: 8px;
+    height: 1px;
+    background: var(--line);
+}
+
+/* The sort label shares the 24px line of its buttons */
+#sidebar-files-menu .file-sort-item {
+    padding-block-end: 2px;
+    line-height: 24px;
+}
+
+#close-sidebar-menu-btn {
+    margin: 0;
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+#close-sidebar-menu-btn:hover {
+    color: var(--text-primary);
+}
+
+/* Sort buttons: ghost buttons; the chosen order takes the selected row
+   instead of Typora's blue at 40% */
+.ty-side-sort-btn {
+    width: 24px;
+    height: 24px;
+    margin: 0 0 0 2px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    line-height: 24px;
+    opacity: 1;
+}
+
+.ty-side-sort-btn:hover {
+    background: var(--item-hover);
+    color: var(--text-primary);
+}
+
+.ty-side-sort-btn.active {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+#sidebar-files-menu .folder-menu-item a {
+    position: relative;
+}
+
+.sidebar-folder-right-icon {
+    border-radius: 6px;
+    color: var(--text-muted);
+}
+
+#sidebar-files-menu a:hover .sidebar-folder-right-icon {
+    opacity: 1;
+}
+
+.sidebar-folder-right-icon:hover {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+/* The open folder is ticked as Claude ticks the current choice in a menu,
+   rather than with Typora's blue dot */
+#sidebar-files-menu .selected-folder-menu-item a::after {
+    content: "";
+    top: 50%;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    color: inherit;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.75 8.25 2.75 2.75 5.75-6' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+/* ---------------------------------------------------------------------------
+   Overlays: Claude's menu card, tooltip and search field
+   --------------------------------------------------------------------------- */
+
+/* Menu card */
+.dropdown-menu,
+.auto-suggest-container,
+.popover,
+.ty-editor-toolbar-menu {
+    padding: 4px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+    font-variation-settings: var(--axis-regular);
+    filter: none;
+}
+
+.dropdown-menu > li > a,
+.auto-suggest-container li,
+.ty-editor-toolbar-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 24px;
+    padding: 2.5px 8px;
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 19px;
+    text-decoration: none;
+}
+
+/* Suggestions lead with an emoji, a file icon or a fixed grey glyph for
+   diagrams, in 38px slots of their own; they take the 16px icon slot of
+   Claude's menu items and their item's text colour, and the emoji's name
+   its 13px rather than 90% */
+.auto-suggest-container :is(.ty-emoji-icon, .ty-file-icon) {
+    flex: none;
+    width: 16px;
+    padding: 0;
+    text-align: center;
+}
+
+.auto-suggest-container :is(.ty-file-icon, .ty-fi-diagram)::before {
+    color: inherit;
+}
+
+.auto-suggest-container .emoji-meta {
+    font-size: inherit;
+}
+
+.dropdown-menu > li > a:is(:hover, :focus),
+.dropdown-menu > li.active > a,
+.auto-suggest-container li:is(:hover, .active),
+.ty-editor-toolbar-menu-item:hover {
+    background: var(--item-hover);
+    color: var(--text-primary);
+}
+
+/* A toolbar menu's .active item is the current choice, which Typora also
+   tints; in Claude only the item under the pointer is tinted, and the
+   current choice is shown by its tick. */
+.ty-editor-toolbar-menu-item.active:not(:hover) {
+    background: transparent;
+}
+
+.dropdown-menu .divider,
+.ty-editor-toolbar-menu-divider {
+    height: 1px;
+    margin: 4px 8px;
+    border: 0;
+    background: var(--line);
+}
+
+/* The toolbar menu's three slots, laid out as Claude's menu items: a 16px icon
+   in the item's colour, the label, then a quiet shortcut or submenu chevron */
+.ty-editor-toolbar-menu-item .tmi-icon {
+    align-items: center;
+    width: 16px;
+    opacity: 1;
+}
+
+.ty-editor-toolbar-menu-item .tmi-extra {
+    margin-inline-start: 12px;
+    color: var(--text-muted);
+    font-size: 12px;
+    opacity: 1;
+}
+
+.ty-editor-toolbar-menu-item .tmi-extra .fa-caret-right {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-inline-end: -4px;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6.25 3.75 10.75 8l-4.5 4.25' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+.ty-editor-toolbar-menu-item .tmi-extra .fa-caret-right::before {
+    content: none;
+}
+
+/* Typora keeps the icon slot even in menus whose items have no icons (the
+   block types), which pushes every label 22px in, and ticks the current
+   choice there. Such labels start at the item's padding, as in Claude, and
+   the tick moves to the far end. */
+.ty-editor-toolbar-menu:not(:has(.tmi-icon > .ty-icon)) .tmi-icon {
+    order: 3;
+}
+
+.ty-editor-toolbar-menu:not(:has(.tmi-icon > .ty-icon)) .tmi-icon:empty {
+    display: none;
+}
+
+.ty-editor-toolbar-menu-item .tmi-check {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.75 8.25 2.75 2.75 5.75-6' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+.ty-editor-toolbar-menu-item .tmi-check::before {
+    content: none;
+}
+
+/* Claude's destructive item: red text, and a solid red row with white text when hovered */
+.ty-editor-toolbar-menu-item[data-action="delete-block"] {
+    color: var(--danger-ink);
+}
+
+.ty-editor-toolbar-menu-item[data-action="delete-block"]:hover {
+    background: var(--danger-item-hover);
+    color: var(--danger-item-hover-text);
+}
+
+.ty-editor-toolbar-menu-item[data-action="delete-block"]:hover .tmi-extra {
+    color: inherit;
+}
+
+.dropdown-menu .menuitem-group-label {
+    padding: 6px 8px 2px;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.popover > .arrow,
+.popover > .arrow::after {
+    display: none;
+}
+
+.popover-title {
+    border: 0;
+    background: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+/* Tooltips: Claude's small dark label, no arrow */
+.ty-tooltip,
+.ty-editor-toolbar-tooltip,
+.md-hover-tip.code-tooltip {
+    padding: 3px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--tip-surface);
+    box-shadow: var(--tip-shadow);
+    color: var(--tip-text);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 18px;
+    font-variation-settings: "GRAD" 0, "wght" 360;
+    filter: none;
+}
+
+/* The footnote preview: Typora pads its inner box by 1ch, lifts it 2px and
+   fades it to 95%, which made a 40px label; the outer box alone carries
+   Claude's padding. The label is dark in both modes, so a link or code in
+   it takes Claude's dark-mode link and inline code colours. */
+.md-hover-tip.code-tooltip .code-tooltip-content {
+    margin-top: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    line-height: inherit;
+    opacity: 1;
+}
+
+.md-hover-tip.code-tooltip a {
+    color: #6da7ec;
+}
+
+.md-hover-tip.code-tooltip .code-tooltip-content code {
+    padding: 0.0625em 0.25em;
+    border-radius: 0.4em;
+    background: rgb(255 255 255 / 5%);
+    box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 10%);
+    color: #ec7e7e;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    line-height: 1;
+}
+
+/* The hints Typora hangs under an image's source ("image is loading",
+   "image load failed") and under a reference link with no definition: a
+   white box with a heavy shadow, now the same small dark label */
+.md-image > .md-show-hint::after,
+.md-no-ref.md-expand > .md-content::after,
+.md-no-ref > .md-show-hint::after {
+    min-width: 0;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--tip-surface);
+    box-shadow: var(--tip-shadow);
+    color: var(--tip-text);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 18px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* The block-type hint at the window's foot: a translucent grey box with a
+   heavy shadow, faded to 80%, now the same small dark label */
+#bottom-hint.ty-block-hint {
+    min-width: 0;
+    padding: 3px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--tip-surface);
+    box-shadow: var(--tip-shadow);
+    color: var(--tip-text);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 18px;
+    opacity: 1;
+}
+
+/* Claude fades a tooltip in as it grows from 98%, in 120ms with its snap
+   easing. Typora keeps its own 0.8s wait before showing one. */
+.ty-tooltip {
+    scale: 0.98;
+    transition:
+        opacity 0.12s cubic-bezier(0.32, 0.72, 0, 1),
+        scale 0.12s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.ty-tooltip.shown {
+    scale: 1;
+}
+
+.md-hover-tip .code-tooltip-content {
+    margin: 0;
+    opacity: 1;
+    line-height: inherit;
+}
+
+.md-hover-tip .md-arrow {
+    display: none;
+}
+
+.md-hover-tip a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+/* Find and replace bar */
+#md-searchpanel {
+    border-block-end: 0.5px solid var(--line);
+    background: var(--surface-page);
+    box-shadow: none;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+}
+
+/* Typora grows the bar over 0.4s for the replace row and fades the row in;
+   like Claude's panels it opens at once. */
+#md-searchpanel:is(.searchpanel-replace-mode, .searchpanel-msg-mode),
+.searchpanel-replace-mode .ty-replace-panel-row,
+#md-searchpanel.searchpanel-msg-mode #searchpanel-msg {
+    transition-duration: 1ms;
+    transition-delay: 0s;
+}
+
+/* Text fields ease their focus ring in over 200ms, as Claude's composer does */
+#md-searchpanel .form-control {
+    height: 26px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--surface-field);
+    box-shadow: var(--field-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#md-searchpanel .form-control:focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+#md-searchpanel .form-control::placeholder,
+#typora-quick-open-input input::placeholder {
+    color: var(--text-muted);
+}
+
+#md-searchpanel .input-group-addon {
+    border: 0;
+    background: none;
+    color: var(--text-secondary);
+}
+
+#md-searchpanel .btn {
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    box-shadow: none;
+    color: var(--text-secondary);
+}
+
+#md-searchpanel .btn:hover,
+#md-searchpanel .searchpanel-search-option-btn:hover,
+#md-searchpanel .searchpanel-search-option-btn.select {
+    background: var(--row-hover);
+    color: var(--text-primary);
+}
+
+#md-searchpanel .searchpanel-search-option-btn {
+    border-radius: 6px;
+    color: var(--text-muted);
+}
+
+#search-panel-status {
+    color: var(--text-muted);
+}
+
+/* An expression that does not parse: Typora's material red, now Claude's */
+#search-panel-status .error-message {
+    color: var(--text-danger);
+}
+
+#searchpanel-msg .alert {
+    border: 0;
+    border-radius: 6px;
+    background: var(--warning-wash);
+    color: var(--warning-ink);
+}
+
+/* "Dismiss" and "Undo" in that note are underlined as Claude's links are */
+#searchpanel-msg .searchpanel-msg-btn {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    text-underline-offset: 3px;
+}
+
+#searchpanel-msg .searchpanel-msg-btn:hover {
+    text-decoration-color: currentColor;
+}
+
+/* Search hits. Typora 1.14 paints them in the document through the CSS
+   highlight API; code blocks and the sidebar search still use classes. */
+::highlight(search-hit),
+.md-search-hit,
+.cm-search-hit,
+.ty-file-search-match-text {
+    background-color: var(--mark);
+    color: inherit;
+}
+
+.md-search-hit {
+    border-radius: 2px;
+}
+
+.md-search-hit.md-search-select {
+    background: var(--search-select-bg-color);
+}
+
+/* The find bar's close button, which Typora fades */
+#md-searchpanel .input-group-addon.close-btn {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+/* Quick open: Claude's search dialog */
+#typora-quick-open {
+    padding: 8px;
+    border: 0.5px solid var(--line-strong);
+    border-radius: 20px;
+    background: var(--surface-raised);
+    box-shadow: var(--search-shadow);
+    color: var(--text-primary);
+}
+
+#typora-quick-open-input {
+    padding: 0 0 6px;
+    border-block-end: 0.5px solid var(--line);
+}
+
+#typora-quick-open-input input {
+    width: 100%;
+    height: 32px;
+    padding: 6px 10px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#typora-quick-open-input input:focus {
+    box-shadow: none;
+}
+
+.ty-quick-open-category-title {
+    height: auto;
+    padding: 10px 12px 4px;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 17px;
+    opacity: 1;
+}
+
+.typora-quick-open-item {
+    min-height: 36px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+}
+
+.typora-quick-open-item:hover,
+.typora-quick-open-item.active {
+    background: var(--item-hover);
+    color: var(--text-primary);
+}
+
+.typora-quick-open-item-title {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.typora-quick-open-item-path {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 16px;
+    opacity: 1;
+}
+
+/* "Searching" and its spinner, also used while the file list loads */
+.typora-quick-open-info-item,
+.typora-search-spinner {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+/* Floating editor toolbar */
+.ty-editor-toolbar {
+    padding: 4px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    filter: none;
+}
+
+/* Typora slides the toolbar after the sidebar and the find bar; with those
+   showing at once, as in Claude, it moves with them. */
+.ty-editor-toolbar,
+.ty-editor-toolbar.is-reflowing {
+    transition-duration: 1ms;
+}
+
+.ty-editor-toolbar-btn {
+    min-width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 7px;
+    background: none;
+    color: var(--text-secondary);
+    opacity: 1;
+    transition: background-color var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-out);
+}
+
+.ty-editor-toolbar-btn:is(:hover, .hover) {
+    background: var(--row-hover);
+    color: var(--text-primary);
+}
+
+.ty-editor-toolbar-btn.active {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+.ty-editor-toolbar-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.ty-editor-toolbar-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+.ty-editor-toolbar-select-label {
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.ty-editor-toolbar-select .fa {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+.ty-editor-toolbar-divider {
+    width: 1px;
+    margin-inline: 4px;
+    background: var(--line);
+}
+
+.ty-editor-toolbar-hint-text,
+.ty-editor-toolbar-hint-close {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+/* Dialogs: Claude's Dialog component */
+.modal-backdrop,
+.modal-backdrop.in {
+    background: var(--backdrop);
+    opacity: 1;
+}
+
+.modal-content {
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--dialog-shadow);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+}
+
+.modal-header,
+.modal-footer {
+    border: 0;
+}
+
+/* Claude's dialogs read from the left: the title, the text and the labels
+   start at the left edge ("Create a project", measured). Typora's Mac
+   dialogs centre everything. */
+.modal .modal-dialog {
+    text-align: start;
+}
+
+.modal-title {
+    font-family: var(--font-ui);
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 600;
+    font-variation-settings: "GRAD" 0, "wght" 580;
+}
+
+.modal label {
+    font-size: 13px;
+    font-weight: 500;
+    font-variation-settings: var(--axis-medium);
+}
+
+.modal :is(input.form-control, textarea.form-control, select.form-control) {
+    min-height: 24px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--surface-field);
+    box-shadow: var(--input-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal :is(input.form-control, select.form-control) {
+    height: 24px;
+}
+
+.modal :is(input.form-control, textarea.form-control):focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* "Columns" and "Rows" in Insert Table: Bootstrap's grey tab glued to the
+   field becomes a form label beside it (Claude's: 13px, 500), and the
+   field keeps all four corners */
+.modal .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal .input-group .input-group-addon {
+    width: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    font-variation-settings: var(--axis-medium);
+    line-height: 13px;
+}
+
+.modal .input-group .form-control {
+    border-radius: 6px;
+}
+
+/* A dialog's "Don't ask again": the label in the dialog's text size, the
+   box in Claude's accent */
+#common-dialog .checkbox label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+#common-dialog .checkbox input[type="checkbox"] {
+    position: static;
+    margin: 0;
+    accent-color: var(--accent);
+}
+
+/* Bootstrap's close cross (a 21px bold character with a white text shadow,
+   at 80%) becomes the close button of Claude's dialogs: 24px, 6px corners,
+   a 16px cross in the text colour, set 6px out into the corner */
+.modal .close {
+    width: 24px;
+    height: 24px;
+    margin: -6px -6px 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0;
+    text-shadow: none;
+    opacity: 1;
+    transition: background-color var(--motion-fast) var(--ease-out);
+}
+
+.modal .close::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 4.5l7 7M11.5 4.5l-7 7' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+
+.modal .close:is(:hover, :focus) {
+    background: var(--item-hover);
+    color: var(--text-primary);
+    opacity: 1;
+}
+
+/* A file too large to open: Typora's note is faded to 80% by inline styles
+   and its buttons are Bootstrap's grey; the note takes the secondary colour
+   at the dialog's text size and the buttons are Claude's default button */
+#ty-oversize-body {
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+}
+
+#ty-oversize-body .ty-oversize-modal > div {
+    opacity: 1 !important;
+}
+
+#ty-oversize-body .fa {
+    color: var(--text-muted);
+}
+
+#ty-oversize-body .btn {
+    height: 24px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--button-fill);
+    box-shadow: var(--button-ring);
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 24px;
+}
+
+#ty-oversize-body .btn:hover {
+    background: var(--item-hover);
+}
+
+/* Dialog buttons: Claude's default button, and its inverted primary button */
+.modal .btn,
+#common-dialog .btn {
+    height: 24px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--button-fill);
+    box-shadow: var(--button-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 24px;
+    transition: background-color var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) var(--ease-out);
+}
+
+/* The common dialog's buttons are reached through its id above, so every
+   state names it too, or the id rule would win over them. */
+.modal .btn:is(:hover, :focus),
+#common-dialog .btn:is(:hover, :focus) {
+    background: var(--item-hover);
+    color: var(--text-primary);
+}
+
+.modal .btn:focus-visible,
+#common-dialog .btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+.modal .btn-primary,
+#common-dialog .btn-primary {
+    background: var(--primary-fill);
+    box-shadow: none;
+    color: var(--primary-text);
+    font-weight: 500;
+    font-variation-settings: var(--axis-medium);
+}
+
+.modal .btn-primary:is(:hover, :focus),
+#common-dialog .btn-primary:is(:hover, :focus) {
+    background: color-mix(in srgb, var(--primary-fill) 85%, var(--surface-raised));
+    color: var(--primary-text);
+}
+
+/* ---------------------------------------------------------------------------
+   Typora panels Claude has no counterpart for, built from the Claude parts
+   above: its menu card, ghost buttons, text fields and tooltip.
+   --------------------------------------------------------------------------- */
+
+/* Notifications (file changed on disk, update available): the sidebar's menu
+   card, at its 13px size, with Claude's default buttons instead of Typora's
+   full-width bar */
+#md-notification {
+    max-width: 560px;
+    margin: 8px auto 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+}
+
+.mac-seamless-mode #md-notification {
+    margin-top: calc(var(--title-bar-height, 28px) + 8px);
+    padding-top: 0;
+}
+
+/* The bell sits in the middle of the card's height, wherever the card starts;
+   Typora pads it down by the title bar in the seamless window. */
+#md-notification::before,
+.mac-seamless-mode #md-notification::before {
+    top: 50%;
+    padding-top: 0;
+    color: var(--text-muted);
+    transform: translateY(-50%);
+}
+
+#md-notification p {
+    font-size: 13px;
+}
+
+#md-notification .md-notification-detail {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+/* Typora sits the buttons on the text's last line and runs the last one to
+   the card's edge; they are centred on the text, 8px in from the edge, and
+   the card is tall enough to leave 8px above and below them too. */
+#md-notification .md-notification-content {
+    align-items: center;
+    gap: 4px;
+    min-height: 40px;
+    padding-inline-end: 8px;
+}
+
+/* The spinner shown while exporting: Typora drops it by the title bar's
+   height to clear its full-width bar, which puts it under the card. */
+.mac-seamless-mode #md-notification .typora-export-spinner {
+    margin-top: 0;
+}
+
+#md-notification .btn {
+    flex-shrink: 0;
+    height: 24px;
+    margin: 0;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--button-fill);
+    box-shadow: var(--button-ring);
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+/* The focus and typewriter mode notice is laid out with inline styles: a
+   faded line of help, then a checkbox and a floated button on different
+   baselines. It becomes the same centred row, faded by colour. */
+#md-notification .ty-enter-mode-warning-header + div {
+    align-items: center !important;
+    padding-inline-end: 8px;
+}
+
+#md-notification .ty-enter-mode-warning-body,
+#md-notification label:has(> #ty-suppress-mode-warning-input) {
+    color: var(--text-secondary);
+    font-size: 12px !important;
+    opacity: 1 !important;
+}
+
+#md-notification div:has(> #ty-suppress-mode-warning-close-btn) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#md-notification label:has(> #ty-suppress-mode-warning-input) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 !important;
+}
+
+#ty-suppress-mode-warning-input {
+    margin: 0 !important;
+    accent-color: var(--accent);
+}
+
+#ty-suppress-mode-warning-close-btn {
+    float: none !important;
+    margin: 0 !important;
+}
+
+#md-notification .btn:hover {
+    background: var(--item-hover);
+}
+
+/* "View More" under a long message: Typora pads it 10px with !important */
+#md-notification #md-notification-more-btn {
+    padding: 0 8px !important;
+    vertical-align: middle;
+}
+
+#md-notification :is(.close-btn, .ty-icon-close-btn) {
+    color: var(--text-muted);
+}
+
+/* Floating outline window: the sidebar's menu card holding its outline rows */
+#toc-dropmenu {
+    padding: 4px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19.5px;
+}
+
+#toc-dropmenu .outline-title {
+    padding: 6px 8px 4px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+}
+
+#toc-dropmenu .divider {
+    height: 1px;
+    margin: 4px 8px;
+    border: 0;
+    background: var(--line);
+}
+
+#toc-dropmenu .outline-title-wrapper .btn {
+    color: var(--text-muted);
+}
+
+#toc-content .outline-item {
+    margin-block: 0 1.5px;
+}
+
+/* Zoom indicator: the sidebar's menu card, its buttons the card's 24px items
+   side by side */
+#zoom-hint {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+}
+
+#zoom-hint #zoom-hint-current {
+    padding: 2.5px 8px;
+    text-align: center;
+}
+
+#zoom-hint .zoom-hint-button {
+    width: auto;
+    min-width: 24px;
+    margin: 0;
+    padding: 2.5px 8px;
+    border: 0;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-align: center;
+}
+
+#zoom-hint .zoom-hint-button:hover {
+    background: var(--item-hover);
+    color: var(--text-primary);
+}
+
+/* Typora sets "Reset" apart with two ids: blue 12px text and a divider */
+#zoom-hint #zoom-hint-reset {
+    margin: 0;
+    padding: 2.5px 8px;
+    border: 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 19px;
+}
+
+#zoom-hint #zoom-hint-reset:hover {
+    color: var(--text-primary);
+}
+
+/* Table editing: a row of icon buttons above the table, as the floating
+   toolbar's (Claude's 28px ghost icon button, its icons at the toolbar's
+   13px), and Claude's focus blue for the insert markers. Typora lifts the
+   row by its own height, so the padding keeps the buttons 4px off the
+   table's edge. */
+.ty-table-edit {
+    padding-block-end: 4px;
+}
+
+.ty-table-edit :is(button, .btn) {
+    min-width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    box-shadow: none;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 28px;
+    transition: background-color var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-out);
+}
+
+.ty-table-edit :is(button, .btn):hover {
+    background: var(--row-hover);
+    color: var(--text-primary);
+}
+
+.ty-table-edit :is(button, .btn).active {
+    background: var(--row-selected);
+    color: var(--text-primary);
+}
+
+.typora-table-insert-marker .fa {
+    color: var(--accent);
+}
+
+/* Resizing a table: a grid of cells in the menu card, then width x height.
+   Typora's greys and lilac become the theme's: the header row takes the
+   table header's tint, the table's present size the strong line colour,
+   and the size under the pointer Claude's blue role wash and edge. */
+/* Typora fixes the card at 134px and the grid's box at 100px, which the
+   fields and "Resize" at Claude's sizes overflow; both fit their content */
+.md-resize-table-th .md-table-resize-popover,
+.md-grid-board-wrap {
+    width: auto;
+}
+
+/* The grid is a table inside the document, so the prose table rules reach
+   it past Typora's .md-reset */
+.md-grid-board,
+#write .md-grid-board {
+    width: auto;
+    margin-inline: auto;
+    border: 0;
+    border-radius: 0;
+}
+
+#write .md-grid-board td {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+/* Its cells are links too, which the prose rounds and animates */
+#write .md-grid-board a {
+    border-radius: 0;
+    transition: none;
+}
+
+.md-grid-board tr[row='1'] {
+    background: var(--tint);
+}
+
+.md-grid-board .md-grid-ext,
+.md-grid-board tr[row='1'] .md-grid-ext {
+    background: var(--line-strong);
+}
+
+.md-grid-board a.md-active,
+.md-grid-board a:hover,
+.md-grid-board tr[row='1'] a.md-active,
+.md-grid-board tr[row='1'] a:hover {
+    border-color: var(--info-edge);
+    background: var(--info-wash);
+}
+
+.md-grid-board-wrap .popover-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 4px;
+    padding: 4px 0 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* The two numbers are Claude's text field; "Resize" its primary button */
+/* Typora forces border-box on inputs: its 3ch of room, plus the padding */
+.md-grid-board-wrap :is(#md-grid-width, #md-grid-height) {
+    width: calc(3ch + 16px);
+    height: 24px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--surface-field);
+    box-shadow: var(--input-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    /* Typora sets the width right and the height left, against the "x";
+       Claude's fields start their text at the left */
+    text-align: start;
+}
+
+.md-grid-board-wrap :is(#md-grid-width, #md-grid-height):focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+#md-resize-grid {
+    height: 24px;
+    margin: 0 0 0 4px;
+    padding: 0 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--primary-fill);
+    color: var(--primary-text);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    font-variation-settings: var(--axis-medium);
+    line-height: 24px;
+}
+
+/* An image with no source shows two buttons in its source line, "enter the
+   path" and "pick a file". Typora draws them as dark chips; they are
+   Claude's default button as in its dialogs (24px, 0 8px, 13px), split in
+   two. */
+.md-image-btn {
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 6px;
+    background: var(--button-fill);
+    box-shadow: var(--button-ring);
+    line-height: 24px;
+}
+
+.md-image-btn:is(:hover, .selected) {
+    background: var(--item-hover);
+}
+
+.md-image-btn::before {
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+}
+
+.md-image-input-src-btn {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+}
+
+/* The halves overlap by a pixel so their rings meet in a single line */
+.md-image-pick-file-btn {
+    margin-inline-start: -1px;
+    border-inline-start: 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+}
+
+.md-image-pick-file-btn::before {
+    color: var(--text-secondary);
+    font-family: FontAwesome;
+}
+
+/* Uploading or copying an image: Claude's dialog backdrop over the image,
+   square-cornered as the image itself */
+.md-image-uploading-mask-wrapper {
+    border-radius: 0;
+    background-color: var(--backdrop);
+}
+
+.md-image-uploading-label {
+    color: #ffffff;
+    font-family: var(--font-ui);
+    font-size: 13px;
+}
+
+/* The three bouncing squares under the label, white as the label (Typora's are grey) */
+.md-image-uploading-mask .uploading-line {
+    background-color: #ffffff;
+}
+
+/* Code block language field: Claude's text field, 4px under the card's
+   right corner (Typora hangs it by 2.5em, over the card's edge). Claude's
+   field is white at 50% (5% in dark) over the page; this one floats over
+   the next block too, so it takes the opaque colour it comes to. Placed
+   from the card's padding box, so its 0.5px line is counted in. */
+#write .md-fences .code-tooltip {
+    top: calc(100% + 0.5px + 4px);
+    right: -0.5px;
+    bottom: auto;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    line-height: 19px;
+}
+
+#write .md-fences .code-tooltip :is(.ty-input, input) {
+    box-sizing: border-box;
+    height: 24px;
+    margin: 0;
+    padding: 2.5px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--surface-raised);
+    box-shadow: var(--input-ring);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 19px;
+    text-align: start;
+    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#write .md-fences .code-tooltip :is(.ty-input, input):focus {
+    box-shadow: var(--focus-ring);
+}
+
+/* The empty field's "code language": Typora centres it on the Mac by
+   padding the field half its width and laying the text over it */
+.html-for-mac #write .md-fences .ty-cm-lang-input:empty {
+    padding-left: 8px !important;
+}
+
+#write .md-fences .ty-cm-lang-input:empty::after {
+    position: static;
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   File preview (Typora 1.14): Claude's document panel header and buttons
+   --------------------------------------------------------------------------- */
+
+#ty-preview {
+    background: var(--surface-page);
+    color: var(--text-primary);
+}
+
+/* Claude's panel header: 40px in all, 8px in from the sides (its floating
+   panel's header padding, .5rem) */
+#ty-preview-banner {
+    box-sizing: border-box;
+    min-height: 40px;
+    padding: 0 8px;
+    border-block-end: 0.5px solid var(--line);
+    background: var(--surface-page);
+    font-family: var(--font-ui);
+}
+
+#ty-preview-name {
+    color: var(--panel-title);
+    font-size: 13px;
+    line-height: 17px;
+    opacity: 1;
+}
+
+/* "Open with" button: Claude's secondary button, split in two */
+#ty-preview-pill {
+    border: 0;
+    border-radius: 7px;
+    background: var(--button-fill);
+    box-shadow: var(--button-ring);
+    backdrop-filter: none;
+}
+
+#ty-preview-pill .ty-preview-btn {
+    height: 28px;
+    padding: 0 10px;
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 20px;
+    transition: background-color var(--motion-fast) var(--ease-out);
+}
+
+#ty-preview-pill .ty-preview-btn:hover {
+    background: var(--item-hover);
+}
+
+#ty-preview-pill .ty-preview-btn:active {
+    background: var(--row-selected);
+}
+
+#ty-preview-pill #ty-preview-open-caret {
+    padding: 0 6px;
+    border-inline-start: 0.5px solid var(--line);
+}
+
+/* Typora fades the button's icons; Claude's buttons draw them in the text colour */
+#ty-preview-pill .ty-preview-open-ext,
+#ty-preview-pill #ty-preview-open-caret .ty-preview-caret-icon {
+    opacity: 1;
+}
+
+#ty-preview-open-menu {
+    padding: 4px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+}
+
+#ty-preview-open-menu li {
+    min-height: 24px;
+    padding: 2.5px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 19px;
+}
+
+#ty-preview-open-menu li:hover {
+    background: var(--item-hover);
+}
+
+#ty-preview-open-menu li.separator {
+    min-height: 0;
+    margin: 4px 8px;
+    padding: 0;
+    border-block-start: 1px solid var(--line);
+    border-radius: 0;
+}
+
+/* Files with no preview: Claude's "No preview available", the picture over a
+   line of secondary text, 16px apart and 24px in from the sides (Claude also
+   names the file there; Typora's banner already does). */
+#ty-preview-unsupported {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 20px;
+    opacity: 1;
+}
+
+/* Claude draws a 96px pictogram here; Typora's glyph keeps its own 32px,
+   since a line icon blown up to that size reads far heavier. */
+#ty-preview-unsupported .fa {
+    margin: 0;
+    padding: 24px;
+    color: var(--text-primary);
+}
+
+/* Code and text files: Claude's file pane source view, 12px code on 22px
+   rows from the top of the pane, wrapped anywhere, with the code card's
+   highlighting */
+#ty-preview-content .CodeMirror {
+    background: var(--surface-page);
+    color: var(--syntax-text);
+    font-family: var(--font-code);
+    font-size: 0.75rem;
+    line-height: 1.375rem;
+    font-feature-settings: "calt" 0, "liga" 0;
+}
+
+#ty-preview-content .CodeMirror-lines {
+    padding: 0;
+}
+
+/* Claude keeps a 16px column for diff marks after the numbers, and the code
+   stops 8px short of the edge. */
+#ty-preview-content .CodeMirror pre.CodeMirror-line,
+#ty-preview-content .CodeMirror pre.CodeMirror-line-like {
+    padding-inline: 16px 8px;
+    word-break: break-all;
+}
+
+/* Line numbers: 7px in (each row's 3px edge and 4px), set right in a column
+   of 3 x 0.6rem + 0.5rem less its 4px and 8px padding, then 8px and a
+   hairline. As in code blocks the spacing sits on the gutter box, since
+   Typora's CodeMirror counts the numbers' own padding twice, and the column
+   is written 2px short for the 2px it adds. Past three digits CodeMirror
+   widens it by the digit, Claude by 0.6rem. */
+#ty-preview-content .CodeMirror-gutters {
+    padding-inline: 7px 8px;
+    border: 0;
+    border-inline-end: 1px solid var(--line);
+    background: transparent;
+}
+
+#ty-preview-content .CodeMirror-linenumber {
+    min-width: calc(1.8rem - 6px);
+    padding: 0;
+    color: var(--text-muted);
+}
+
+#ty-preview-content .CodeMirror-activeline-background {
+    background: transparent;
+}
+
+#ty-preview-content .cm-comment { color: var(--syntax-comment); }
+#ty-preview-content :is(.cm-punctuation, .cm-bracket) { color: var(--syntax-punctuation); }
+#ty-preview-content .cm-keyword { color: var(--syntax-keyword); }
+#ty-preview-content .cm-string { color: var(--syntax-string); }
+#ty-preview-content .cm-string-2 { color: var(--syntax-regex); }
+#ty-preview-content :is(.cm-number, .cm-atom, .cm-link) { color: var(--syntax-number); }
+#ty-preview-content :is(.cm-tag, .cm-property) { color: var(--syntax-property); }
+#ty-preview-content :is(.cm-attribute, .cm-qualifier) { color: var(--syntax-attribute); }
+#ty-preview-content :is(.cm-def, .cm-builtin, .cm-meta) { color: var(--syntax-function); }
+#ty-preview-content .cm-variable-2 { color: var(--syntax-parameter); }
+#ty-preview-content :is(.cm-variable-3, .cm-type) { color: var(--syntax-variable); }
+#ty-preview-content .cm-positive { color: var(--syntax-string); }
+#ty-preview-content .cm-negative { color: var(--syntax-property); }
+#ty-preview-content .cm-error { color: var(--text-danger); }
+
+/* ---------------------------------------------------------------------------
+   Editing modes: source mode, focus mode and the window around the page
+   --------------------------------------------------------------------------- */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+content,
+#typora-source,
+.typora-export {
+    background-color: var(--surface-page);
+}
+
+/* The page's edges, as Claude's transcript: text scrolling to the top or
+   bottom edge fades into the page over 32px, through the steps of Claude's
+   fade strip, which has no blur.
+   The strips are the scroller's own first and last children, kept at its
+   edges. Claude hides them at either end of the scroll; here the page's own
+   padding, 36px above the text and 96px below, is what lies under them
+   there. Typora keeps its notifications inside this scroller, so masking
+   the scroller itself would fade those too. Above the code blocks'
+   CodeMirror (3) and below Typora's own tooltips (6 and up). Source mode
+   scrolls its own CodeMirror, with 30px above the lines and 60px below,
+   and takes the same strips over its lines and line numbers; the page's
+   strips would lie over it there, so they go. */
+content::before,
+content::after,
+#typora-source .CodeMirror-scroll::before,
+#typora-source .CodeMirror-scroll::after {
+    content: "";
+    display: block;
+    position: sticky;
+    z-index: 4;
+    height: 32px;
+    pointer-events: none;
+}
+
+.typora-sourceview-on content::before,
+.typora-sourceview-on content::after {
+    display: none;
+}
+
+content::before,
+#typora-source .CodeMirror-scroll::before {
+    top: 0;
+    margin-bottom: -32px;
+    background: linear-gradient(to bottom,
+        var(--surface-page),
+        color-mix(in srgb, var(--surface-page) 85%, transparent) 13%,
+        color-mix(in srgb, var(--surface-page) 50%, transparent) 40%,
+        color-mix(in srgb, var(--surface-page) 15%, transparent) 70%,
+        transparent);
+}
+
+content::after,
+#typora-source .CodeMirror-scroll::after {
+    bottom: 0;
+    margin-top: -32px;
+    background: linear-gradient(to top,
+        var(--surface-page),
+        color-mix(in srgb, var(--surface-page) 85%, transparent) 13%,
+        color-mix(in srgb, var(--surface-page) 50%, transparent) 40%,
+        color-mix(in srgb, var(--surface-page) 15%, transparent) 70%,
+        transparent);
+}
+
+/* Source mode: Markdown in the code font, its marks quietened */
+.cm-s-typora-default {
+    color: var(--text-primary);
+    font-family: var(--font-code);
+    font-size: 0.875rem;
+    line-height: 1.625;
+    font-variation-settings: normal;
+    font-feature-settings: "calt" 0, "liga" 0;
+}
+
+/* Source mode is a code view: Typora enlarges # and ## lines, Claude's code
+   never changes size line to line. */
+.cm-s-typora-default :is(.cm-header1, .cm-header2):not(.cm-atom):not(.cm-s-inner) {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.cm-s-typora-default .CodeMirror-selected,
+.cm-s-typora-default.CodeMirror-focused .CodeMirror-selected {
+    background: var(--selection);
+}
+
+.cm-s-typora-default .CodeMirror-gutters {
+    border: 0;
+    background: transparent;
+}
+
+.cm-s-typora-default .CodeMirror-linenumber {
+    color: var(--text-muted);
+}
+
+/* Typora's line numbers use the system monospace at 60%, and its current
+   line a fixed grey band. */
+#typora-source .CodeMirror-gutter-wrapper {
+    font-family: var(--font-code);
+    opacity: 1;
+}
+
+.cm-s-typora-default .CodeMirror-activeline-background {
+    background: var(--tint);
+}
+
+.cm-s-typora-default :is(.cm-header, .cm-strong) { color: var(--text-primary); font-weight: 600; }
+.cm-s-typora-default .cm-em { font-style: italic; }
+.cm-s-typora-default .cm-del { text-decoration: line-through; }
+.cm-s-typora-default .cm-quote { color: var(--text-secondary); }
+.cm-s-typora-default .cm-link { color: var(--text-link); }
+.cm-s-typora-default :is(.cm-url, .cm-formatting, .cm-hr) { color: var(--text-muted); }
+.cm-s-typora-default :is(.cm-comment, .cm-code) { color: var(--text-code); }
+.cm-s-typora-default :is(.cm-variable-2, .cm-variable-3) { color: inherit; }
+
+/* Code inside source mode keeps Claude's highlighting */
+.cm-s-typora-default :is(.cm-keyword) { color: var(--syntax-keyword); }
+.cm-s-typora-default :is(.cm-string, .cm-string-2) { color: var(--syntax-string); }
+.cm-s-typora-default :is(.cm-number, .cm-atom) { color: var(--syntax-number); }
+.cm-s-typora-default :is(.cm-def, .cm-builtin, .cm-meta) { color: var(--syntax-function); }
+.cm-s-typora-default :is(.cm-tag, .cm-property) { color: var(--syntax-property); }
+.cm-s-typora-default :is(.cm-attribute, .cm-qualifier) { color: var(--syntax-attribute); }
+
+/* Focus mode fades everything but the current block to the muted text colour */
+.on-focus-mode #write .md-end-block:not(.md-focus):not(.md-focus-container) :is(img, .md-fences, .md-alert, figure) {
+    opacity: 0.5;
+}
+
+/* ---------------------------------------------------------------------------
+   Print and PDF, in the active theme's own colours: Typora frames every PDF
+   page in the theme's background, which no stylesheet reaches, so the page
+   takes that colour too rather than white.
+   --------------------------------------------------------------------------- */
+
+@media print {
+    :root {
+        --text-stop: 0px;
+    }
+
+    html,
+    body,
+    content,
+    .typora-export {
+        background: var(--surface-page);
+    }
+
+    #write {
+        max-width: none;
+        padding: 0;
+    }
+
+    #write :is(h1, h2, h3, h4, h5, h6) {
+        break-after: avoid;
+    }
+
+    #write :is(pre.md-fences, pre.md-meta-block, blockquote, .md-alert, figure, tr) {
+        break-inside: avoid;
+    }
+
+    /* WebKit, Typora's engine, only knows the prefixed name */
+    #write table {
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+
+    #write .md-math-block {
+        overflow: visible;
+    }
+
+    .ty-editor-toolbar,
+    .ty-editor-toolbar-menu,
+    .ty-editor-toolbar-tooltip,
+    content::before,
+    content::after,
+    .ty-tooltip {
+        display: none !important;
+    }
+}
+
+@media print {
+    :root {
+        --mermaid-theme: dark;
+    }
+}
