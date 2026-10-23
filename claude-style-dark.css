@@ -63,6 +63,46 @@
     /* Claude's violet "pro" text colour (--cds-text-pro) */
     --pro-ink: #a096eb;
 
+    /* Claude's file cards (its sheet cards): the card's fill and the edge it
+       takes under the pointer, how much of its colour it washes over the
+       card at rest and under the pointer, and the sheet's gloss, light and
+       drop; then, per colour, the wash, the sheet, its edge and the icon
+       (grey has no wash and draws its icon in the muted text colour) */
+    --file-card-fill: rgb(26 26 25 / 30%);
+    --file-card-edge-hover: rgb(255 255 255 / 35%);
+    --file-card-wash-rest: 15%;
+    --file-card-wash-hover: 33%;
+    --file-sheet-gloss: inset 0.5px 1px 0 rgb(255 255 255 / 15%), inset 0 0 0 1px rgb(255 255 255 / 5%);
+    --file-sheet-lit: 0.08;
+    --file-sheet-lit-hover: 0.12;
+    --file-sheet-shadow: 0 4px 8px rgb(11 11 11 / 8%), 0 12px 28px -2px rgb(0 0 0 / 24%);
+    --file-blue-wash: #032042;
+    --file-blue-sheet: #032042;
+    --file-blue-edge: #0d366b;
+    --file-blue-ink: #6da7ec;
+    --file-green-wash: #11260f;
+    --file-green-sheet: #11260f;
+    --file-green-edge: #074506;
+    --file-green-ink: #55bf50;
+    --file-orange-wash: #371407;
+    --file-orange-sheet: #371407;
+    --file-orange-edge: #5d230b;
+    --file-orange-ink: #ec835a;
+    --file-violet-wash: #1d1649;
+    --file-violet-sheet: #1d1649;
+    --file-violet-edge: #322777;
+    --file-violet-ink: #a096eb;
+    --file-yellow-wash: #311a00;
+    --file-yellow-sheet: #311a00;
+    --file-yellow-edge: #512e00;
+    --file-yellow-ink: #db9300;
+    --file-magenta-wash: #390f1f;
+    --file-magenta-sheet: #390f1f;
+    --file-magenta-edge: #5e1c34;
+    --file-magenta-ink: #e87ba4;
+    --file-gray-sheet: #20201f;
+    --file-gray-edge: rgb(255 255 255 / 10%);
+
     --scrollbar-thumb: hsl(52.5 11.76% 86.67% / 35%);
 
     /* Overlays */
@@ -157,8 +197,12 @@
     --font-code: "JetBrains Mono NL", "JetBrains Mono", "Anthropic Mono", ui-monospace, "SF Mono", Menlo, "PingFang SC", monospace, "Microsoft YaHei";
 
     --motion-fast: 60ms;
+    --motion-snap: 0.12s;
+    --motion-base: 0.2s;
     --motion-slow: 0.45s;
     --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* Claude's snap easing (--cds-ease-snap) */
+    --ease-snap: cubic-bezier(0.32, 0.72, 0, 1);
     /* Claude's button spring (--cds-btn-spring), for a press letting go */
     --ease-spring: linear(0, 0.2459, 0.6526, 0.9468, 1.0764, 1.0915, 1.0585, 1.0219, 0.9993, 0.9914, 0.9921, 0.9957, 0.9988, 1.0004, 1);
 
@@ -410,6 +454,645 @@ img::selection {
     outline: 2px solid transparent;
     outline-offset: 2px;
     box-shadow: var(--focus-ring);
+}
+
+/* A file linked in a paragraph of its own is drawn as Claude draws a file it
+   shares in a reply (its sheet card, on the Mac; Claude's iOS app draws its
+   own): a card up to 520px wide and at least 71px tall, with a hairline edge
+   in the strong line colour, 10px corners, a faint drop and 30% of the
+   raised surface for its fill. Like Claude's blocks it starts 4px left of
+   the text, 16px under what comes before, 8px under a card before it. On
+   the left a sheet 56px wide stands 10px into a 56px slot, 72px tall, so the
+   card's lower edge cuts it off; it is tinted by the kind of file, with the
+   gloss of a lit page and its icon above the middle. The name follows 20px
+   on in the 14px heading type, on one line, and under it the kind and the
+   extension in the 12px footnote type, muted; in a window under 640px wide
+   each may take two lines and the card grows. Claude's labels and colours
+   come from its own rules: a few extensions get a label (文档, 电子表格,
+   表格, 演示文稿, 图片, 图表, 代码, from its Chinese text), the rest show the
+   extension alone; documents are blue, sheets and data green, code yellow,
+   web pages magenta, slides orange, images violet, and PDF, plain text,
+   Markdown and archives grey. Under the pointer the card's tint deepens and
+   its edge darkens, the sheet rises 2px as its light swings round, and a
+   second sheet fans out behind it. Claude shows a download button too;
+   Typora cannot download, and opens a link with Command-click anywhere on
+   the card, so there is none. Claude also drops the extension from the name;
+   the name here is the link's text as written.
+   Only for files: links to web addresses stay links, as Claude never draws
+   a card for one. Only in the editor, where Typora wraps plain text in its
+   own spans so a paragraph holding nothing but a link can be told apart, and
+   not in lists, where Claude never draws one; once the caret is in the link
+   it is a link again, to be edited, and exports keep the plain link.
+   The card's own rule sets --claude-card and the icon and second line it
+   shows; the sheets, the icon and the second line read them, so their rules
+   need not repeat the list of extensions, and other links draw nothing. */
+@property --claude-card-wash {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: transparent;
+}
+
+@property --claude-sheet-lit {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0.55;
+}
+
+@property --claude-sheet-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 165deg;
+}
+
+@property --claude-sheet-reach {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 55%;
+}
+
+/* The second line, per extension: Claude's label and the extension, set
+   apart by a middle dot 4px either side */
+#write .md-link:has(> a[href$=".pdf" i]) { --claude-file-meta: "文档\2004·\2004 PDF"; }
+#write .md-link:has(> a[href$=".doc" i]) { --claude-file-meta: "DOC"; }
+#write .md-link:has(> a[href$=".docx" i]) { --claude-file-meta: "文档\2004·\2004 DOCX"; }
+#write .md-link:has(> a[href$=".rtf" i]) { --claude-file-meta: "RTF"; }
+#write .md-link:has(> a[href$=".odt" i]) { --claude-file-meta: "ODT"; }
+#write .md-link:has(> a[href$=".pages" i]) { --claude-file-meta: "PAGES"; }
+#write .md-link:has(> a[href$=".txt" i]) { --claude-file-meta: "TXT"; }
+#write .md-link:has(> a[href$=".md" i]) { --claude-file-meta: "文档\2004·\2004 MD"; }
+#write .md-link:has(> a[href$=".markdown" i]) { --claude-file-meta: "MARKDOWN"; }
+#write .md-link:has(> a[href$=".log" i]) { --claude-file-meta: "LOG"; }
+#write .md-link:has(> a[href$=".rst" i]) { --claude-file-meta: "RST"; }
+#write .md-link:has(> a[href$=".tex" i]) { --claude-file-meta: "TEX"; }
+#write .md-link:has(> a[href$=".epub" i]) { --claude-file-meta: "EPUB"; }
+#write .md-link:has(> a[href$=".mobi" i]) { --claude-file-meta: "MOBI"; }
+#write .md-link:has(> a[href$=".xls" i]) { --claude-file-meta: "电子表格\2004·\2004 XLS"; }
+#write .md-link:has(> a[href$=".xlsx" i]) { --claude-file-meta: "电子表格\2004·\2004 XLSX"; }
+#write .md-link:has(> a[href$=".csv" i]) { --claude-file-meta: "表格\2004·\2004 CSV"; }
+#write .md-link:has(> a[href$=".tsv" i]) { --claude-file-meta: "表格\2004·\2004 TSV"; }
+#write .md-link:has(> a[href$=".ods" i]) { --claude-file-meta: "ODS"; }
+#write .md-link:has(> a[href$=".numbers" i]) { --claude-file-meta: "NUMBERS"; }
+#write .md-link:has(> a[href$=".db" i]) { --claude-file-meta: "DB"; }
+#write .md-link:has(> a[href$=".jsonl" i]) { --claude-file-meta: "JSONL"; }
+#write .md-link:has(> a[href$=".parquet" i]) { --claude-file-meta: "PARQUET"; }
+#write .md-link:has(> a[href$=".sqlite" i]) { --claude-file-meta: "SQLITE"; }
+#write .md-link:has(> a[href$=".sqlite3" i]) { --claude-file-meta: "SQLITE3"; }
+#write .md-link:has(> a[href$=".ppt" i]) { --claude-file-meta: "PPT"; }
+#write .md-link:has(> a[href$=".pptx" i]) { --claude-file-meta: "演示文稿\2004·\2004 PPTX"; }
+#write .md-link:has(> a[href$=".odp" i]) { --claude-file-meta: "ODP"; }
+#write .md-link:has(> a[href$=".key" i]) { --claude-file-meta: "KEY"; }
+#write .md-link:has(> a[href$=".zip" i]) { --claude-file-meta: "ZIP"; }
+#write .md-link:has(> a[href$=".rar" i]) { --claude-file-meta: "RAR"; }
+#write .md-link:has(> a[href$=".7z" i]) { --claude-file-meta: "7Z"; }
+#write .md-link:has(> a[href$=".tar" i]) { --claude-file-meta: "TAR"; }
+#write .md-link:has(> a[href$=".gz" i]) { --claude-file-meta: "GZ"; }
+#write .md-link:has(> a[href$=".tgz" i]) { --claude-file-meta: "TGZ"; }
+#write .md-link:has(> a[href$=".bz2" i]) { --claude-file-meta: "BZ2"; }
+#write .md-link:has(> a[href$=".xz" i]) { --claude-file-meta: "XZ"; }
+#write .md-link:has(> a[href$=".dmg" i]) { --claude-file-meta: "DMG"; }
+#write .md-link:has(> a[href$=".mp3" i]) { --claude-file-meta: "MP3"; }
+#write .md-link:has(> a[href$=".wav" i]) { --claude-file-meta: "WAV"; }
+#write .md-link:has(> a[href$=".m4a" i]) { --claude-file-meta: "M4A"; }
+#write .md-link:has(> a[href$=".aac" i]) { --claude-file-meta: "AAC"; }
+#write .md-link:has(> a[href$=".flac" i]) { --claude-file-meta: "FLAC"; }
+#write .md-link:has(> a[href$=".ogg" i]) { --claude-file-meta: "OGG"; }
+#write .md-link:has(> a[href$=".oga" i]) { --claude-file-meta: "OGA"; }
+#write .md-link:has(> a[href$=".opus" i]) { --claude-file-meta: "OPUS"; }
+#write .md-link:has(> a[href$=".wma" i]) { --claude-file-meta: "WMA"; }
+#write .md-link:has(> a[href$=".aiff" i]) { --claude-file-meta: "AIFF"; }
+#write .md-link:has(> a[href$=".mp4" i]) { --claude-file-meta: "MP4"; }
+#write .md-link:has(> a[href$=".mov" i]) { --claude-file-meta: "MOV"; }
+#write .md-link:has(> a[href$=".m4v" i]) { --claude-file-meta: "M4V"; }
+#write .md-link:has(> a[href$=".avi" i]) { --claude-file-meta: "AVI"; }
+#write .md-link:has(> a[href$=".mkv" i]) { --claude-file-meta: "MKV"; }
+#write .md-link:has(> a[href$=".webm" i]) { --claude-file-meta: "WEBM"; }
+#write .md-link:has(> a[href$=".ogv" i]) { --claude-file-meta: "OGV"; }
+#write .md-link:has(> a[href$=".3gp" i]) { --claude-file-meta: "3GP"; }
+#write .md-link:has(> a[href$=".png" i]) { --claude-file-meta: "图片\2004·\2004 PNG"; }
+#write .md-link:has(> a[href$=".jpg" i]) { --claude-file-meta: "图片\2004·\2004 JPG"; }
+#write .md-link:has(> a[href$=".jpeg" i]) { --claude-file-meta: "图片\2004·\2004 JPEG"; }
+#write .md-link:has(> a[href$=".gif" i]) { --claude-file-meta: "图片\2004·\2004 GIF"; }
+#write .md-link:has(> a[href$=".webp" i]) { --claude-file-meta: "图片\2004·\2004 WEBP"; }
+#write .md-link:has(> a[href$=".svg" i]) { --claude-file-meta: "图片\2004·\2004 SVG"; }
+#write .md-link:has(> a[href$=".bmp" i]) { --claude-file-meta: "图片\2004·\2004 BMP"; }
+#write .md-link:has(> a[href$=".ico" i]) { --claude-file-meta: "ICO"; }
+#write .md-link:has(> a[href$=".heic" i]) { --claude-file-meta: "HEIC"; }
+#write .md-link:has(> a[href$=".tif" i]) { --claude-file-meta: "TIF"; }
+#write .md-link:has(> a[href$=".tiff" i]) { --claude-file-meta: "TIFF"; }
+#write .md-link:has(> a[href$=".psd" i]) { --claude-file-meta: "PSD"; }
+#write .md-link:has(> a[href$=".ai" i]) { --claude-file-meta: "AI"; }
+#write .md-link:has(> a[href$=".sketch" i]) { --claude-file-meta: "SKETCH"; }
+#write .md-link:has(> a[href$=".fig" i]) { --claude-file-meta: "FIG"; }
+#write .md-link:has(> a[href$=".mermaid" i]) { --claude-file-meta: "图表\2004·\2004 MERMAID"; }
+#write .md-link:has(> a[href$=".mmd" i]) { --claude-file-meta: "图表\2004·\2004 MMD"; }
+#write .md-link:has(> a[href$=".html" i]) { --claude-file-meta: "代码\2004·\2004 HTML"; }
+#write .md-link:has(> a[href$=".htm" i]) { --claude-file-meta: "HTM"; }
+#write .md-link:has(> a[href$=".xhtml" i]) { --claude-file-meta: "XHTML"; }
+#write .md-link:has(> a[href$=".js" i]) { --claude-file-meta: "JS"; }
+#write .md-link:has(> a[href$=".jsx" i]) { --claude-file-meta: "代码\2004·\2004 JSX"; }
+#write .md-link:has(> a[href$=".gs" i]) { --claude-file-meta: "GS"; }
+#write .md-link:has(> a[href$=".ts" i]) { --claude-file-meta: "TS"; }
+#write .md-link:has(> a[href$=".tsx" i]) { --claude-file-meta: "代码\2004·\2004 TSX"; }
+#write .md-link:has(> a[href$=".py" i]) { --claude-file-meta: "PY"; }
+#write .md-link:has(> a[href$=".rb" i]) { --claude-file-meta: "RB"; }
+#write .md-link:has(> a[href$=".go" i]) { --claude-file-meta: "代码\2004·\2004 GO"; }
+#write .md-link:has(> a[href$=".rs" i]) { --claude-file-meta: "RS"; }
+#write .md-link:has(> a[href$=".c" i]) { --claude-file-meta: "C"; }
+#write .md-link:has(> a[href$=".cpp" i]) { --claude-file-meta: "CPP"; }
+#write .md-link:has(> a[href$=".h" i]) { --claude-file-meta: "H"; }
+#write .md-link:has(> a[href$=".hpp" i]) { --claude-file-meta: "HPP"; }
+#write .md-link:has(> a[href$=".java" i]) { --claude-file-meta: "代码\2004·\2004 JAVA"; }
+#write .md-link:has(> a[href$=".kt" i]) { --claude-file-meta: "KT"; }
+#write .md-link:has(> a[href$=".swift" i]) { --claude-file-meta: "代码\2004·\2004 SWIFT"; }
+#write .md-link:has(> a[href$=".sh" i]) { --claude-file-meta: "SH"; }
+#write .md-link:has(> a[href$=".bash" i]) { --claude-file-meta: "代码\2004·\2004 BASH"; }
+#write .md-link:has(> a[href$=".zsh" i]) { --claude-file-meta: "ZSH"; }
+#write .md-link:has(> a[href$=".json" i]) { --claude-file-meta: "代码\2004·\2004 JSON"; }
+#write .md-link:has(> a[href$=".yaml" i]) { --claude-file-meta: "YAML"; }
+#write .md-link:has(> a[href$=".yml" i]) { --claude-file-meta: "YML"; }
+#write .md-link:has(> a[href$=".toml" i]) { --claude-file-meta: "TOML"; }
+#write .md-link:has(> a[href$=".xml" i]) { --claude-file-meta: "XML"; }
+#write .md-link:has(> a[href$=".css" i]) { --claude-file-meta: "代码\2004·\2004 CSS"; }
+#write .md-link:has(> a[href$=".scss" i]) { --claude-file-meta: "代码\2004·\2004 SCSS"; }
+#write .md-link:has(> a[href$=".sql" i]) { --claude-file-meta: "代码\2004·\2004 SQL"; }
+#write .md-link:has(> a[href$=".graphql" i]) { --claude-file-meta: "代码\2004·\2004 GRAPHQL"; }
+#write .md-link:has(> a[href$=".proto" i]) { --claude-file-meta: "PROTO"; }
+#write .md-link:has(> a[href$=".lua" i]) { --claude-file-meta: "LUA"; }
+#write .md-link:has(> a[href$=".r" i]) { --claude-file-meta: "代码\2004·\2004 R"; }
+#write .md-link:has(> a[href$=".cs" i]) { --claude-file-meta: "CS"; }
+#write .md-link:has(> a[href$=".vue" i]) { --claude-file-meta: "VUE"; }
+#write .md-link:has(> a[href$=".pl" i]) { --claude-file-meta: "PL"; }
+#write .md-link:has(> a[href$=".php" i]) { --claude-file-meta: "代码\2004·\2004 PHP"; }
+
+/* The colour and the icon: blue and a page unless named below. Typora's
+   Font Awesome glyphs stand in for Claude's icons (and Ionicons' outline
+   globe, as Font Awesome's is solid), each sized to cover about the same
+   ground as Claude's in its 20px slot */
+#write .md-link {
+    --claude-file-wash: var(--file-blue-wash);
+    --claude-file-sheet: var(--file-blue-sheet);
+    --claude-file-edge: var(--file-blue-edge);
+    --claude-file-ink: var(--file-blue-ink);
+    --claude-file-glyph: "\f0f6";
+    --claude-file-glyph-size: 16px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".pdf" i], [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".zip" i], [href$=".rar" i],
+    [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i], [href$=".xz" i])) {
+    --claude-file-wash: transparent;
+    --claude-file-sheet: var(--file-gray-sheet);
+    --claude-file-edge: var(--file-gray-edge);
+    --claude-file-ink: var(--text-muted);
+}
+
+#write .md-link:has(> a:is(
+    [href$=".md" i], [href$=".markdown" i])) {
+    --claude-file-glyph: "\f016";
+    --claude-file-glyph-size: 14px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i])) {
+    --claude-file-wash: var(--file-green-wash);
+    --claude-file-sheet: var(--file-green-sheet);
+    --claude-file-edge: var(--file-green-edge);
+    --claude-file-ink: var(--file-green-ink);
+    --claude-file-glyph: "\f0ce";
+    --claude-file-glyph-size: 16px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i], [href$=".sqlite3" i])) {
+    --claude-file-wash: var(--file-green-wash);
+    --claude-file-sheet: var(--file-green-sheet);
+    --claude-file-edge: var(--file-green-edge);
+    --claude-file-ink: var(--file-green-ink);
+    --claude-file-glyph: "\f1c0";
+    --claude-file-glyph-size: 14px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".ppt" i], [href$=".pptx" i])) {
+    --claude-file-wash: var(--file-orange-wash);
+    --claude-file-sheet: var(--file-orange-sheet);
+    --claude-file-edge: var(--file-orange-edge);
+    --claude-file-ink: var(--file-orange-ink);
+    --claude-file-glyph: "\f0c5";
+    --claude-file-glyph-size: 14px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i], [href$=".webp" i], [href$=".svg" i],
+    [href$=".bmp" i], [href$=".ico" i], [href$=".mermaid" i], [href$=".mmd" i])) {
+    --claude-file-wash: var(--file-violet-wash);
+    --claude-file-sheet: var(--file-violet-sheet);
+    --claude-file-edge: var(--file-violet-edge);
+    --claude-file-ink: var(--file-violet-ink);
+    --claude-file-glyph: "\f03e";
+    --claude-file-glyph-size: 15px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".zip" i], [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i],
+    [href$=".bz2" i], [href$=".xz" i])) {
+    --claude-file-glyph: "\f187";
+}
+
+#write .md-link:has(> a:is(
+    [href$=".js" i], [href$=".jsx" i], [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i],
+    [href$=".rb" i], [href$=".go" i], [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i],
+    [href$=".hpp" i], [href$=".java" i], [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i],
+    [href$=".zsh" i], [href$=".json" i], [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i],
+    [href$=".css" i], [href$=".scss" i], [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i],
+    [href$=".r" i], [href$=".cs" i], [href$=".vue" i], [href$=".pl" i], [href$=".php" i])) {
+    --claude-file-wash: var(--file-yellow-wash);
+    --claude-file-sheet: var(--file-yellow-sheet);
+    --claude-file-edge: var(--file-yellow-edge);
+    --claude-file-ink: var(--file-yellow-ink);
+    --claude-file-glyph: "\f121";
+    --claude-file-glyph-size: 16px;
+}
+
+#write .md-link:has(> a:is(
+    [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i])) {
+    --claude-file-wash: var(--file-magenta-wash);
+    --claude-file-sheet: var(--file-magenta-sheet);
+    --claude-file-edge: var(--file-magenta-edge);
+    --claude-file-ink: var(--file-magenta-ink);
+    --claude-file-glyph: "\f1f7";
+    --claude-file-glyph-size: 18.5px;
+    --claude-file-glyph-font: Ionicons;
+}
+
+/* The card: the sheet sits in the 56px before the name, out of the flow */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand):has(> a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) {
+    display: inline-flex;
+    position: relative;
+    isolation: isolate;
+    box-sizing: border-box;
+    align-items: center;
+    width: 100%;
+    max-width: 520px;
+    min-height: 71px;
+    padding: 6px 16px 8px 96px;
+    overflow: hidden;
+    border: 0.5px solid var(--claude-card-edge, var(--line-strong));
+    border-radius: 10px;
+    background-color: var(--file-card-fill);
+    background-image: linear-gradient(var(--claude-card-wash) 0 0);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    font-family: var(--font-ui);
+    font-variation-settings: var(--axis-regular);
+    text-decoration-line: none;
+    vertical-align: top;
+    --claude-card: "";
+    --claude-card-icon: var(--claude-file-glyph);
+    --claude-card-meta: var(--claude-file-meta);
+    --claude-card-wash: color-mix(in oklab, var(--claude-file-wash) var(--file-card-wash-rest), transparent);
+    --claude-sheet-lit: var(--file-sheet-lit);
+    transition:
+        --claude-card-wash var(--motion-base) var(--ease-out),
+        border-color var(--motion-base) var(--ease-out);
+}
+
+/* Like Claude's blocks the card starts 4px left of the text and runs to
+   the column's edge, so its paragraph drops the text's inset and the room
+   it leaves on the right. (Reaching out of the paragraph instead, with a
+   negative margin and a wider box, breaks clicking into the card: WebKit
+   then puts the caret at the top of the document.) */
+#write p:not(li > p):has(> .md-link:only-child:not(.md-expand) > a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) {
+    padding-inline: 0;
+}
+
+/* Claude's file block opens 16px under the text before it, and its cards
+   stand 8px apart */
+#write p:not(li > p):has(> .md-link:only-child:not(.md-expand) > a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])):not(:first-child) {
+    margin-block-start: 16px;
+}
+
+#write p:not(li > p):has(> .md-link:only-child:not(.md-expand) > a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) + p:not(li > p):has(> .md-link:only-child:not(.md-expand) > a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) {
+    margin-block-start: 8px;
+}
+
+/* Under the pointer (these only change what the card's parts read) */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand):hover {
+    --claude-card-edge: var(--file-card-edge-hover);
+    --claude-card-wash: color-mix(in oklab, var(--claude-file-wash) var(--file-card-wash-hover), transparent);
+    --claude-sheet-lift: -2px;
+    --claude-sheet-lit: var(--file-sheet-lit-hover);
+    --claude-sheet-angle: 200deg;
+    --claude-sheet-reach: 70%;
+    --claude-sheet-glow: var(--motion-slow);
+    --claude-under-shown: 0.7;
+    --claude-under-shift: -2px;
+    --claude-under-turn: -4deg;
+    --claude-under-move: var(--motion-slow) var(--ease-out);
+    --claude-under-fade: var(--motion-snap) var(--ease-out);
+}
+
+/* The two sheets, in the 56px slot on the card's middle: the sheet stands
+   10px into it, 72px tall. The one behind is hidden until the pointer
+   comes: it turns 4 degrees about a point 62px down its middle and moves
+   2px left, at 70% */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand)::before,
+#write p:not(li > p) > .md-link:only-child:not(.md-expand)::after {
+    content: var(--claude-card, none);
+    position: absolute;
+    top: calc(50% - 19px);
+    left: 20px;
+    box-sizing: border-box;
+    width: 56px;
+    height: 72px;
+    border: 0.5px solid var(--claude-file-edge);
+    border-radius: 6px;
+    background-color: var(--claude-file-sheet);
+}
+
+#write p:not(li > p) > .md-link:only-child:not(.md-expand)::before {
+    background-image: linear-gradient(165deg, rgb(255 255 255 / var(--file-sheet-lit)) 0%, transparent 55%);
+    box-shadow: var(--file-sheet-gloss), 0 1px 2px rgb(0 0 0 / 5%);
+    opacity: var(--claude-under-shown, 0);
+    transform: translateX(var(--claude-under-shift, 0px)) translateY(62px) rotate(var(--claude-under-turn, 0deg)) translateY(-62px);
+    transform-origin: 50% 0;
+    transition:
+        transform var(--claude-under-move, var(--motion-base) var(--ease-snap)),
+        opacity var(--claude-under-fade, var(--motion-base) var(--ease-out));
+}
+
+/* The sheet itself; its light swings in Claude's slow time */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand)::after {
+    background-image: linear-gradient(var(--claude-sheet-angle), rgb(255 255 255 / var(--claude-sheet-lit)) 0%, transparent var(--claude-sheet-reach));
+    box-shadow: var(--file-sheet-gloss), var(--file-sheet-shadow);
+    translate: 0 var(--claude-sheet-lift, 0px);
+    transition:
+        translate var(--motion-base) var(--ease-out),
+        --claude-sheet-lit var(--claude-sheet-glow, var(--motion-base)) var(--ease-out),
+        --claude-sheet-angle var(--claude-sheet-glow, var(--motion-base)) var(--ease-out),
+        --claude-sheet-reach var(--claude-sheet-glow, var(--motion-base)) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #write p:not(li > p) > .md-link:only-child:not(.md-expand)::before {
+        display: none;
+    }
+}
+
+/* The name; the extra 17px under it keeps the second line's place, so the
+   two lines sit together on the middle of the card. The text inside cuts
+   itself short: clipping the link would clip the icon too, which WebKit
+   clips with it though it is placed by the card */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand):has(> a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) > a {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    padding: 4px 0 17px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    text-decoration-line: none;
+    white-space: nowrap;
+}
+
+#write p:not(li > p) > .md-link:only-child:not(.md-expand):has(> a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) > a > * {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* The icon, a 20px slot on the sheet 27px down its height less the 18px
+   Claude keeps at its foot, rising with it */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand) > a::before {
+    content: var(--claude-card-icon, none);
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 2px);
+    left: 38px;
+    width: 20px;
+    height: 20px;
+    color: var(--claude-file-ink);
+    font-family: var(--claude-file-glyph-font, FontAwesome);
+    font-size: var(--claude-file-glyph-size);
+    font-weight: normal;
+    line-height: 20px;
+    text-align: center;
+    translate: 0 var(--claude-sheet-lift, 0px);
+    transition: translate var(--motion-base) var(--ease-out);
+}
+
+/* The second line, 2px under the name */
+#write p:not(li > p) > .md-link:only-child:not(.md-expand) > a::after {
+    content: var(--claude-card-meta, none);
+    position: absolute;
+    top: 38.5px;
+    right: 16px;
+    left: 96px;
+    overflow: hidden;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* In a window under 640px wide (Claude's max-sm) the name and the second
+   line may each take two lines; the second line joins the flow under the
+   name and the card grows round them */
+@media (max-width: 639.98px) {
+    #write p:not(li > p) > .md-link:only-child:not(.md-expand):has(> a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) > a {
+        flex-direction: column;
+        gap: 2px;
+        padding-block-end: 0;
+        white-space: normal;
+    }
+
+    #write p:not(li > p) > .md-link:only-child:not(.md-expand):has(> a:is(
+    [href$=".pdf" i], [href$=".doc" i], [href$=".docx" i], [href$=".rtf" i], [href$=".odt" i], [href$=".pages" i],
+    [href$=".txt" i], [href$=".md" i], [href$=".markdown" i], [href$=".log" i], [href$=".rst" i], [href$=".tex" i],
+    [href$=".epub" i], [href$=".mobi" i], [href$=".xls" i], [href$=".xlsx" i], [href$=".csv" i], [href$=".tsv" i],
+    [href$=".ods" i], [href$=".numbers" i], [href$=".db" i], [href$=".jsonl" i], [href$=".parquet" i], [href$=".sqlite" i],
+    [href$=".sqlite3" i], [href$=".ppt" i], [href$=".pptx" i], [href$=".odp" i], [href$=".key" i], [href$=".zip" i],
+    [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i], [href$=".bz2" i],
+    [href$=".xz" i], [href$=".dmg" i], [href$=".mp3" i], [href$=".wav" i], [href$=".m4a" i], [href$=".aac" i],
+    [href$=".flac" i], [href$=".ogg" i], [href$=".oga" i], [href$=".opus" i], [href$=".wma" i], [href$=".aiff" i],
+    [href$=".mp4" i], [href$=".mov" i], [href$=".m4v" i], [href$=".avi" i], [href$=".mkv" i], [href$=".webm" i],
+    [href$=".ogv" i], [href$=".3gp" i], [href$=".png" i], [href$=".jpg" i], [href$=".jpeg" i], [href$=".gif" i],
+    [href$=".webp" i], [href$=".svg" i], [href$=".bmp" i], [href$=".ico" i], [href$=".heic" i], [href$=".tif" i],
+    [href$=".tiff" i], [href$=".psd" i], [href$=".ai" i], [href$=".sketch" i], [href$=".fig" i], [href$=".mermaid" i],
+    [href$=".mmd" i], [href$=".html" i], [href$=".htm" i], [href$=".xhtml" i], [href$=".js" i], [href$=".jsx" i],
+    [href$=".gs" i], [href$=".ts" i], [href$=".tsx" i], [href$=".py" i], [href$=".rb" i], [href$=".go" i],
+    [href$=".rs" i], [href$=".c" i], [href$=".cpp" i], [href$=".h" i], [href$=".hpp" i], [href$=".java" i],
+    [href$=".kt" i], [href$=".swift" i], [href$=".sh" i], [href$=".bash" i], [href$=".zsh" i], [href$=".json" i],
+    [href$=".yaml" i], [href$=".yml" i], [href$=".toml" i], [href$=".xml" i], [href$=".css" i], [href$=".scss" i],
+    [href$=".sql" i], [href$=".graphql" i], [href$=".proto" i], [href$=".lua" i], [href$=".r" i], [href$=".cs" i],
+    [href$=".vue" i], [href$=".pl" i], [href$=".php" i]):not([href^="http:" i], [href^="https:" i])) > a > * {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow-wrap: break-word;
+    }
+
+    #write p:not(li > p) > .md-link:only-child:not(.md-expand) > a::after {
+        display: -webkit-box;
+        position: static;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
 }
 
 #write sup.md-footnote {
