@@ -5482,6 +5482,17 @@ content::after,
         --text-stop: 0px;
     }
 
+    /* Print the colours as they are. Printing straight from the editor on
+       Windows and Linux (Chromium) drops every background unless asked, and
+       Typora asks only for exports (.typora-export *), so the dark theme came
+       out as light text on white paper. */
+    *,
+    *::before,
+    *::after {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
     html,
     body,
     content,
