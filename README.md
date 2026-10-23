@@ -85,6 +85,8 @@ Code in HTML exports stays on one line and scrolls, as it does in the editor. In
 
 Some parts of Typora on macOS are drawn by the system, so they keep the system look: right-click menus, the menus in the title bar, confirmation dialogs, the window's title bar buttons, the thickness of the text cursor and the Settings window.
 
+Clicking a picture in a document does not open a larger view of it, as it does in Claude. A theme can only change how Typora looks, while a viewer that opens, zooms and closes needs a script, which a theme cannot add. Plugins that add such a viewer change Typora's own files, so they are not part of this theme.
+
 ## Customization
 
 Typora loads two optional files from the theme folder after the theme, so you can adjust it without editing the theme files:
