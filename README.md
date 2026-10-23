@@ -83,22 +83,22 @@ Code in HTML exports stays on one line and scrolls, as it does in the editor. In
 
 ## Questions you may have
 
-**Why do some parts of Typora keep the system look?**
+**Why do some parts of Typora keep the system look?**\
 On macOS they are drawn by the system, not by the page a theme can style: right-click menus, the menus in the title bar, confirmation dialogs, the window's title bar buttons, the thickness of the text cursor and the Settings window.
 
-**Why does clicking a picture not open a larger view, as in Claude?**
+**Why does clicking a picture not open a larger view, as in Claude?**\
 A theme can only change how Typora looks, while a viewer that opens, zooms and closes needs a script, which a theme cannot add. Plugins that add such a viewer change Typora's own files, so they are not part of this theme.
 
-**Why is an unticked subtask crossed out?**
+**Why is an unticked subtask crossed out?**\
 Claude does the same: once a task is ticked, the whole item greys and is crossed out, the tasks under it included. The subtask's own box stays unticked.
 
-**Why does Esc not close the block type menu of the floating toolbar?**
+**Why does Esc not close the block type menu of the floating toolbar?**\
 The menu is Typora's, and Esc does not close it with Typora's own themes either. Click outside it, or click the button again.
 
-**Why is only the first part of a long web address a link?**
+**Why is only the first part of a long web address a link?**\
 For an address typed without link syntax, Typora decides where it ends, and it stops before Chinese characters in it (in `?query=中文`, for example). Typora's own themes show the same.
 
-**Why does a file card differ a little from Claude's?**
+**Why does a file card differ a little from Claude's?**\
 A theme cannot read the file or change the text, so the card shows the link's text as its name (Claude shows the file's name), has no preview of pictures or PDFs and no download button; Command-click (Ctrl-click on Windows and Linux) opens the file. For a kind of file the theme does not know, the second line reads only 文件 (file), without the extension Claude adds. Links to a place in the document or to a part of a file stay links, where Claude's replies show them as plain text.
 
 ## Customization
