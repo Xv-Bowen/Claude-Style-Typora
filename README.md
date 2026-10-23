@@ -48,7 +48,7 @@ Typora keeps themes in memory while it runs. After you replace the files with a 
 | Math | Formulas set at the same size as in Claude |
 | Alerts | GitHub alerts (note, tip, important, warning, caution) drawn the way Claude shows them in a document: a coloured rule with a coloured title and icon above the text |
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
-| File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Web links stay links, and exports keep the plain link |
+| File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links, and exports keep the plain link |
 | Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus |
 | Floating toolbar | The look of Claude's review bar: its buttons, menus and submenus open and behave the way Claude's do, and the heading levels sit in a submenu of Paragraph |
 | Find and quick open | The find and replace bar; quick open shows an icon on each row, and search results mark their matches in bold, as Claude's search does |
