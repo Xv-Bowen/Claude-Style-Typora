@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in the Claude desktop app. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, a file linked on its own becomes the card Claude shows for a file it shares, and Typora's own interface (sidebar, menus, floating toolbar, find bar, dialogs) takes on Claude's look as well.
+A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in Claude. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, a file linked on its own becomes the card Claude shows for a file it shares, and Typora's own interface (sidebar, menus, floating toolbar, find bar, dialogs) takes on Claude's look as well.
 
 Claude Style is an independent theme. It is not made, endorsed or supported by Anthropic, and it contains no fonts, icons or other files from Anthropic. Claude is a trademark of Anthropic.
 
@@ -27,6 +27,10 @@ Files linked in paragraphs of their own, in the light and the dark theme (in the
 ## Compatibility
 
 Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Windows and Linux.
+
+## Which version of the desktop app it follows
+
+The desktop app's interface changes over time. Every Claude Style 1.x release follows the desktop app as it looked in October 2026 (version 3.1623). The next major version, 2.0, is kept for the desktop app's new interface and interactions: once the desktop app switches to them, 2.0 will follow the new look. The 1.x releases stay on the Releases page, so the current look can always be downloaded.
 
 ## Installation
 

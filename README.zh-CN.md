@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-一套浅色、一套深色的 [Typora](https://typora.io) 主题，让文档读起来像 Claude 桌面应用里的一篇回复。正文、代码和表格照着 Claude 的聊天界面来排，提示框照 Claude 打开文档时的样子，单独成段的文件链接显示成 Claude 分享文件时的卡片，Typora 自己的界面（侧栏、菜单、浮动工具栏、查找栏、对话框）也一起换上了 Claude 的样子。
+一套浅色、一套深色的 [Typora](https://typora.io) 主题，让文档读起来像 Claude 里的一篇回复。正文、代码和表格照着 Claude 的聊天界面来排，提示框照 Claude 打开文档时的样子，单独成段的文件链接显示成 Claude 分享文件时的卡片，Typora 自己的界面（侧栏、菜单、浮动工具栏、查找栏、对话框）也一起换上了 Claude 的样子。
 
 Claude Style 是独立制作的主题，不是 Anthropic 出品，也没有得到 Anthropic 的认可或支持；主题里不含 Anthropic 的字体、图标或其他文件。Claude 是 Anthropic 的商标。
 
@@ -27,6 +27,10 @@ Claude Style 是独立制作的主题，不是 Anthropic 出品，也没有得�
 ## 适用环境
 
 Claude Style 在 Mac 上精心设计，在 macOS、Windows 和 Linux 上全面测试。
+
+## 照的是哪一版桌面应用
+
+桌面应用的界面会更新。Claude Style 1.x 各版照的都是 2026 年 10 月的桌面应用（3.1623 版）。下一个大版本 2.0 留给桌面应用的新界面和交互：桌面应用换上新界面后，2.0 会照新的样子来做。1.x 的各个发布会一直留在发布页上，想用现在这个样子的人随时能下载。
 
 ## 安装
 
