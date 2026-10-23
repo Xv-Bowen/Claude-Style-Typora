@@ -26,7 +26,7 @@ Claude Style 是独立制作的主题，不是 Anthropic 出品，也没有得�
 
 ## 适用环境
 
-Claude Style 在 Mac 上设计，在 macOS、Windows 和 Linux 上测试过。
+Claude Style 在 Mac 上精心设计，在 macOS、Windows 和 Linux 上全面测试。
 
 ## 安装
 

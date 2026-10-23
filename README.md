@@ -26,7 +26,7 @@ Files linked in paragraphs of their own, in the light and the dark theme (the po
 
 ## Compatibility
 
-Claude Style is designed on the Mac and tested on macOS, Windows and Linux.
+Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Windows and Linux.
 
 ## Installation
 
