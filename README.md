@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in the Claude desktop app. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, and Typora's own interface (sidebar, menus, find bar, dialogs) takes on Claude's look as well.
+A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in the Claude desktop app. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, a file linked on its own becomes the card Claude shows for a file it shares, and Typora's own interface (sidebar, menus, floating toolbar, find bar, dialogs) takes on Claude's look as well.
 
 Claude Style is an independent theme. It is not made, endorsed or supported by Anthropic, and it contains no fonts, icons or other files from Anthropic. Claude is a trademark of Anthropic.
 
@@ -15,6 +15,14 @@ Claude Style is an independent theme. It is not made, endorsed or supported by A
 ### Claude Style Dark
 
 ![Claude Style Dark](images/preview-dark.png)
+
+### File cards
+
+Files linked in paragraphs of their own, in the light and the dark theme (the pointer is over the second card):
+
+![File cards, light](images/file-cards-light.png)
+
+![File cards, dark](images/file-cards-dark.png)
 
 ## Compatibility
 
@@ -35,13 +43,18 @@ Typora keeps themes in memory while it runs. After you replace the files with a 
 
 | Area | What you get |
 | --- | --- |
-| Reading | Claude's text size, line spacing and heading scale; quiet links, quotes, lists and tables |
+| Reading | Claude's text size, line spacing and heading scale; quiet links, quotes, lists and tables; keycaps, task lists and footnotes as in Claude |
 | Code | Claude's code card with a language label and Claude's syntax colours; inline code as Claude's small code chip |
 | Math | Formulas set at the same size as in Claude |
 | Alerts | GitHub alerts (note, tip, important, warning, caution) drawn the way Claude shows them in a document: a coloured rule with a coloured title and icon above the text |
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
 | File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Web links stay links, and exports keep the plain link |
-| Typora interface | Sidebar with file tree, outline and search; menus, find and replace, quick open, dialogs, notifications, the floating toolbar and file preview |
+| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus |
+| Floating toolbar | The look of Claude's review bar: its buttons, menus and submenus open and behave the way Claude's do, and the heading levels sit in a submenu of Paragraph |
+| Find and quick open | The find and replace bar; quick open shows an icon on each row, and search results mark their matches in bold, as Claude's search does |
+| Dialogs and notices | Dialogs, notifications and tooltips in Claude's look |
+| Outline window | The floating outline window as the outline card of a Claude document |
+| File preview | The header and the Open with button of Claude's document panel |
 | Modes | Source mode as a plain code view; focus mode dims the other blocks in Claude's quiet colours |
 | Motion | Only what moves in Claude moves; everything else changes at once |
 | Export | HTML and PDF use the same styles as the editor |
@@ -60,7 +73,7 @@ No font is bundled or downloaded. The Anthropic typefaces are not distributed wi
 
 ### Icons
 
-Every icon in the interface is one Typora already ships: its own icon font, Font Awesome and Ionicons. The theme sets their colour, size and place. Where Claude shows an icon but Typora draws none (the sidebar's folder menu, the floating toolbar's menus, quick open), the theme adds the one Typora uses for the same thing elsewhere. It also draws a few simple strokes itself (the tick in menus, the arrow of a submenu and the close cross), and it contains no icon files. Claude's icons belong to Anthropic and cannot be shared with a theme, so this theme does not use them.
+Every icon in the interface is one Typora already ships: its own icon font, Font Awesome and Ionicons. The theme sets their colour, size and place. Where Claude shows an icon but Typora draws none (the sidebar's folder menu, the floating toolbar's menus, quick open, file cards), the theme adds one of Typora's own icons for the same thing. It also draws a few simple strokes itself (the tick in menus, the arrow of a submenu and the close cross), and it contains no icon files. Claude's icons belong to Anthropic and cannot be shared with a theme, so this theme does not use them.
 
 ### Printing and PDF
 
