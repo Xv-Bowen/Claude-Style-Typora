@@ -30,7 +30,7 @@ Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Wi
 
 ## Which version of the desktop app it follows
 
-The desktop app's interface changes over time. Every Claude Style 1.x release follows the desktop app as it looked in October 2026 (version 3.1623). The next major version, 2.0, is kept for the desktop app's new interface and interactions: once the desktop app switches to them, 2.0 will follow the new look. From now on, 1.x will only get patch releases that fix problems; its look will not change in any big way. The 1.x releases stay on the Releases page, so the current look can always be downloaded.
+The desktop app's interface changes over time. Every Claude Style 1.x release follows the desktop app as it looked in October 2026 (version 3.1623). The next major version, 2.0, is kept for the desktop app's new interface and interactions: once the desktop app switches to them, 2.0 will follow the new look. 1.x will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as patch releases, with no big changes to its look. The 1.x releases stay on the Releases page, so the current look can always be downloaded.
 
 ## Installation
 
