@@ -1339,6 +1339,11 @@ img::selection {
     opacity: 1;
 }
 
+#write .md-resouce-error-mark {
+    display: flex;
+    align-items: center;
+}
+
 #write .md-mathblock-panel .code-tooltip {
     border-radius: 0;
     background: transparent;
@@ -1771,6 +1776,16 @@ titlebar,
     min-height: 26px;
     color: var(--text-muted);
     line-height: 26px;
+}
+
+.file-node-icon.fa-folder::before {
+    position: relative;
+    top: 0.5px;
+}
+
+.file-node-open-state .fa::before {
+    position: relative;
+    top: -0.5px;
 }
 
 .file-tree-node.file-not-editable > .file-node-content,
@@ -2272,8 +2287,8 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
 
 #new-file-from-sidebar-menu::before { content: "\e90f"; font-family: typora-icon; font-size: 12px; }
 #search-from-sidebar-menu::before { content: "\f1d9"; font-family: Ionicons; font-size: 16px; }
-:is(#reveal-folder-from-sidebar-menu, #open-folder-from-sidebar-menu)::before { content: "\f114"; font-family: FontAwesome; }
-#refresh-from-sidebar-menu::before { content: "\f1d4"; font-family: Ionicons; font-size: 20.5px; }
+:is(#reveal-folder-from-sidebar-menu, #open-folder-from-sidebar-menu)::before { content: "\f114"; font-family: FontAwesome; position: relative; top: 0.75px; }
+#refresh-from-sidebar-menu::before { content: "\f1d4"; font-family: Ionicons; font-size: 20.5px; position: relative; top: 0.5px; }
 
 #search-from-sidebar-menu::after {
     content: "\21E7\2318 F";
@@ -2339,6 +2354,11 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
     width: 16px;
     margin-right: 0;
     text-align: center;
+}
+
+#sidebar-files-menu .folder-menu-item .fa-folder-o::before {
+    position: relative;
+    top: 0.75px;
 }
 
 .sidebar-folder-right-icon {
@@ -2663,6 +2683,7 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
     width: 16px;
     height: 16px;
     margin-block-start: 2px;
+    position: relative;
     margin-inline-end: 8px;
     vertical-align: top;
     font-size: 13px;
@@ -2672,15 +2693,16 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
     text-align: center;
 }
 
+.ty-editor-toolbar-menu-item[data-style^="header"] .tmi-label::before { content: "\f1dc"; font-family: FontAwesome; }
 .ty-editor-toolbar-menu-item[data-style="paragraph"] .tmi-label::before { content: "\f1dd"; font-family: FontAwesome; font-size: 14px; }
-.ty-editor-toolbar-menu-item[data-style="table"] .tmi-label::before { content: "\f0ce"; font-family: FontAwesome; }
+.ty-editor-toolbar-menu-item[data-style="table"] .tmi-label::before { content: "\f0ce"; font-family: FontAwesome; top: 0.75px; }
 .ty-editor-toolbar-menu-item[data-style="fences"] .tmi-label::before { content: "\f1c9"; font-family: FontAwesome; font-size: 12px; }
-.ty-editor-toolbar-menu-item[data-style="math_block"] .tmi-label::before { content: "\f12b"; font-family: FontAwesome; font-size: 14px; }
-.ty-editor-toolbar-menu-item:is([data-style="alert"], [data-style="alert:warning"]) .tmi-label::before { content: "\f071"; font-family: FontAwesome; font-size: 12px; }
+.ty-editor-toolbar-menu-item[data-style="math_block"] .tmi-label::before { content: "\f12b"; font-family: FontAwesome; font-size: 14px; top: 0.5px; }
+.ty-editor-toolbar-menu-item:is([data-style="alert"], [data-style="alert:warning"]) .tmi-label::before { content: "\f071"; font-family: FontAwesome; font-size: 12px; top: 0.75px; }
 .ty-editor-toolbar-menu-item[data-style="hr"] .tmi-label::before { content: "\f208"; font-family: Ionicons; font-size: 16px; }
 .ty-editor-toolbar-menu-item[data-style="alert:note"] .tmi-label::before { content: "\e607"; font-family: typora-icon; font-size: 14.5px; }
 .ty-editor-toolbar-menu-item[data-style="alert:tip"] .tmi-label::before { content: "\e606"; font-family: typora-icon; font-size: 14.5px; }
-.ty-editor-toolbar-menu-item[data-style="alert:important"] .tmi-label::before { content: "\f0e5"; font-family: FontAwesome; font-size: 12px; }
+.ty-editor-toolbar-menu-item[data-style="alert:important"] .tmi-label::before { content: "\f0e5"; font-family: FontAwesome; font-size: 12px; top: -0.75px; }
 .ty-editor-toolbar-menu-item[data-style="alert:caution"] .tmi-label::before { content: "\f06a"; font-family: FontAwesome; font-size: 14px; }
 .ty-editor-toolbar-menu-item[data-action^="copy-as-"] .tmi-label::before { content: "\e934"; font-family: typora-icon; }
 .ty-editor-toolbar-menu-item[data-action="paste-as-plain"] .tmi-label::before { content: "\e936"; font-family: typora-icon; }
@@ -2697,7 +2719,7 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
 .ty-editor-toolbar-menu-item[data-action="source-mode"] .tmi-icon:empty::before { content: "\f121"; font-family: FontAwesome; font-size: 12px; }
 .ty-editor-toolbar-menu-item[data-action="insert-p-before"] .tmi-icon:empty::before { content: "\f10e"; font-family: Ionicons; font-size: 17.5px; }
 .ty-editor-toolbar-menu-item[data-action="insert-p-after"] .tmi-icon:empty::before { content: "\f105"; font-family: Ionicons; font-size: 17.5px; }
-.ty-editor-toolbar-menu-item[data-action="copy-paste-as"] .tmi-icon:empty::before { content: "\e60c"; font-family: typora-icon; font-size: 14.5px; }
+.ty-editor-toolbar-menu-item[data-action="copy-paste-as"] .tmi-icon:empty::before { content: "\e60c"; font-family: typora-icon; font-size: 14.5px; position: relative; top: 0.5px; }
 .ty-editor-toolbar-menu-item[data-action="clear-style"] .tmi-icon:empty::before { content: "\f12d"; font-family: FontAwesome; font-size: 11.5px; }
 .ty-editor-toolbar-menu-item[data-action="hide-toolbar"] .tmi-icon:empty::before { content: "\f070"; font-family: FontAwesome; font-size: 12px; }
 
@@ -2738,10 +2760,6 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
 
     .ty-editor-toolbar-menu > [data-style="header6"]::before {
         bottom: -6px;
-    }
-
-    .ty-editor-toolbar-menu > [data-style^="header"] .tmi-label::before {
-        display: none;
     }
 
     .ty-editor-toolbar-menu:has(> [data-style="header1"]) > [data-style^="header"] .tmi-icon:empty {
@@ -3335,6 +3353,7 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 
 .typora-quick-open-item[data-is-dir="true"]::before {
     content: "\f07b";
+    margin-top: -9.5px;
     font-size: 16px;
 }
 
@@ -4432,6 +4451,16 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     margin: 0;
     border: 0;
 }
+
+#ty-preview-open-menu li:not(.separator, :has(> img))::before {
+    flex: none;
+    width: 16px;
+    font: normal 13px/16px FontAwesome;
+    text-align: center;
+}
+
+#ty-preview-open-menu li:first-child:not(:has(> img))::before { content: "\f0f6"; font-size: 12px; }
+#ty-preview-open-menu li:last-child:not(.separator, :has(> img))::before { content: "\f114"; position: relative; top: 0.75px; }
 
 #ty-preview-open-menu li > span {
     min-width: 0;
