@@ -34,6 +34,8 @@
     --row-hover: rgb(255 255 255 / 7.5%);
     --row-selected: rgb(255 255 255 / 15%);
     --item-hover: rgb(255 255 255 / 7.5%);
+    --pressed-fill: #032042;
+    --pressed-ink: #6da7ec;
     --segment-thumb: rgb(255 255 255 / 10%);
     --danger-item-hover: rgb(208 59 59);
     --danger-item-hover-text: #ffffff;
@@ -614,7 +616,7 @@ img::selection {
     --claude-file-glyph-font: Ionicons;
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand):has(> a[href]:is(
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) {
     display: inline-flex;
@@ -625,7 +627,7 @@ img::selection {
     width: 100%;
     max-width: 520px;
     min-height: 71px;
-    padding: 6px 16px 8px 96px;
+    padding: 0;
     overflow: hidden;
     border: 0.5px solid var(--claude-card-edge, var(--line-strong));
     border-radius: 10px;
@@ -646,27 +648,28 @@ img::selection {
         border-color var(--motion-base) var(--ease-out);
 }
 
-#write p:not(li p):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
+#write p:not(li p):not(:has(img)):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) {
     padding-inline: 0;
+    container: claude-file-card / inline-size;
 }
 
-#write p:not(li p):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
+#write p:not(li p):not(:has(img)):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])):not(:first-child) {
     margin-block-start: 16px;
 }
 
-#write p:not(li p):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
+#write p:not(li p):not(:has(img)):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
-    [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) + p:not(li p):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
+    [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) + p:not(li p):not(:has(img)):has(> .md-link:only-child:not(.md-expand) > a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) {
     margin-block-start: 8px;
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand):hover {
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):hover {
     --claude-card-edge: var(--file-card-edge-hover);
     --claude-card-wash: color-mix(in oklab, var(--claude-file-wash) var(--file-card-wash-hover), transparent);
     --claude-sheet-lift: -2px;
@@ -681,8 +684,8 @@ img::selection {
     --claude-under-fade: var(--motion-snap) var(--ease-out);
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand)::before,
-#write p:not(li p) > .md-link:only-child:not(.md-expand)::after {
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::before,
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::after {
     content: var(--claude-card, none);
     position: absolute;
     top: calc(50% - 19px);
@@ -695,7 +698,7 @@ img::selection {
     background-color: var(--claude-file-sheet);
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand)::before {
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::before {
     background-image: linear-gradient(165deg, rgb(255 255 255 / var(--file-sheet-lit)) 0%, transparent 55%);
     box-shadow: var(--file-sheet-gloss), 0 1px 2px rgb(0 0 0 / 5%);
     opacity: var(--claude-under-shown, 0);
@@ -706,7 +709,7 @@ img::selection {
         opacity var(--claude-under-fade, var(--motion-base) var(--ease-out));
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand)::after {
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::after {
     background-image: linear-gradient(var(--claude-sheet-angle), rgb(255 255 255 / var(--claude-sheet-lit)) 0%, transparent var(--claude-sheet-reach));
     box-shadow: var(--file-sheet-gloss), var(--file-sheet-shadow);
     translate: 0 var(--claude-sheet-lift, 0px);
@@ -718,18 +721,20 @@ img::selection {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #write p:not(li p) > .md-link:only-child:not(.md-expand)::before {
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::before {
         display: none;
     }
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand):has(> a[href]:is(
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a {
     display: flex;
     flex: 1;
+    align-self: stretch;
+    align-items: center;
     min-width: 0;
-    padding: 4px 0 17px;
+    padding: 10px 16px 25px 96px;
     color: var(--text-primary);
     font-size: 14px;
     font-weight: 400;
@@ -738,7 +743,7 @@ img::selection {
     white-space: nowrap;
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand):has(> a[href]:is(
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a > * {
     min-width: 0;
@@ -746,7 +751,7 @@ img::selection {
     text-overflow: ellipsis;
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand) > a::before {
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::before {
     content: var(--claude-card-icon, none);
     position: absolute;
     z-index: 1;
@@ -764,7 +769,7 @@ img::selection {
     transition: translate var(--motion-base) var(--ease-out);
 }
 
-#write p:not(li p) > .md-link:only-child:not(.md-expand) > a::after {
+#write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::after {
     content: var(--claude-card-meta, none);
     position: absolute;
     top: 38.5px;
@@ -779,16 +784,18 @@ img::selection {
 }
 
 @media (max-width: 639.98px) {
-    #write p:not(li p) > .md-link:only-child:not(.md-expand):has(> a[href]:is(
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a {
         flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
         gap: 2px;
-        padding-block-end: 0;
+        padding-block: 10px 8px;
         white-space: normal;
     }
 
-    #write p:not(li p) > .md-link:only-child:not(.md-expand):has(> a[href]:is(
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
     :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
     [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a > * {
         display: -webkit-box;
@@ -797,13 +804,58 @@ img::selection {
         overflow-wrap: break-word;
     }
 
-    #write p:not(li p) > .md-link:only-child:not(.md-expand) > a::after {
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::after {
         display: -webkit-box;
         position: static;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         white-space: normal;
         overflow-wrap: break-word;
+    }
+}
+
+@container claude-file-card (max-width: 359.98px) {
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
+    :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
+    [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a {
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        gap: 2px;
+        padding-block: 10px 8px;
+        white-space: normal;
+    }
+
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
+    :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
+    [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a > * {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow-wrap: break-word;
+    }
+
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::after {
+        display: -webkit-box;
+        position: static;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+}
+
+@container claude-file-card (max-width: 239.98px) {
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::before,
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img))::after,
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::before {
+        display: none;
+    }
+
+    #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)):has(> a[href]:is(
+    :not([href*=":"]), [href^="file:" i], [href*=":%5C" i], [href*=":/"]:not([href*="://"])):not(
+    [href=""], [href^="//"], [href^="www." i], [href*="#"], [href*="?"], [href$="/"], [href$="%5C" i])) > a {
+        padding-inline-start: 16px;
     }
 }
 
@@ -1054,7 +1106,7 @@ img::selection {
     line-height: inherit;
 }
 
-#write .md-fences :is(.CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-gutters, .CodeMirror-lines) {
+#write .md-fences :is(.CodeMirror-scroll, .CodeMirror-sizer, .CodeMirror-lines) {
     background: transparent;
 }
 
@@ -1074,6 +1126,10 @@ img::selection {
     border: 0;
 }
 
+#write .md-fences .CodeMirror-gutters {
+    background: var(--surface-fence);
+}
+
 #write .md-fences .CodeMirror-linenumber {
     min-width: 3ch;
     padding: 0;
@@ -1081,12 +1137,12 @@ img::selection {
 }
 
 @media screen {
-    .typora-export #write .md-fences:not([lang=""]) .CodeMirror pre.CodeMirror-line,
-    .typora-export #write .md-fences.mock-cm:not([lang=""]) {
+    .typora-export:not(.for-image) #write .md-fences:not([lang=""]) .CodeMirror pre.CodeMirror-line,
+    .typora-export:not(.for-image) #write .md-fences.mock-cm:not([lang=""]) {
         white-space: pre;
     }
 
-    .typora-export #write .md-fences.mock-cm:not([lang=""]) {
+    .typora-export:not(.for-image) #write .md-fences.mock-cm:not([lang=""]) {
         overflow-x: auto;
     }
 }
@@ -1497,6 +1553,16 @@ img::selection {
     font-family: var(--mermaid-font-family) !important;
 }
 
+body > [id^="dexport-mermaid-"] :is(text, tspan, .label, .nodeLabel, .edgeLabel, .messageText, .noteText, text.actor, .loopText, .labelText) {
+    font-family: var(--mermaid-font-family) !important;
+}
+
+#write .md-diagram-panel :is(.nodeLabel, .edgeLabel, .label) p,
+body > [id^="dexport-mermaid-"] :is(.nodeLabel, .edgeLabel, .label) p {
+    margin: 0;
+    padding: 0;
+}
+
 #write .md-diagram-panel :is(.edgeLabel, .edgeLabel p, .edgeLabel .label span) {
     background-color: transparent;
 }
@@ -1543,6 +1609,10 @@ titlebar,
     font-variation-settings: var(--axis-regular);
 }
 
+body:not(.html-for-mac) #typora-sidebar {
+    contain: style;
+}
+
 @property --claude-list-fade {
     syntax: "<length>";
     inherits: false;
@@ -1556,6 +1626,15 @@ titlebar,
 
 #sidebar-content,
 #outline-content {
+    -webkit-mask-image: linear-gradient(transparent 0, #000 var(--claude-list-fade));
+    mask-image: linear-gradient(transparent 0, #000 var(--claude-list-fade));
+    animation: claude-list-fade linear both;
+    animation-duration: auto;
+    animation-timeline: scroll(self block);
+    animation-range: 0 12px;
+}
+
+body:not(.html-for-mac) #file-library {
     -webkit-mask-image: linear-gradient(transparent 0, #000 var(--claude-list-fade));
     mask-image: linear-gradient(transparent 0, #000 var(--claude-list-fade));
     animation: claude-list-fade linear both;
@@ -1745,6 +1824,10 @@ titlebar,
     opacity: 0;
 }
 
+body:not(.html-for-mac) #sidebar-search-btn::after {
+    content: "Ctrl+Shift+F";
+}
+
 #sidebar-search-btn:hover {
     background: var(--button-hover);
     box-shadow: var(--button-ring);
@@ -1798,10 +1881,14 @@ titlebar,
 #ty-sidebar-search-tabs #filesearch-word-option-btn { right: 26px; }
 #ty-sidebar-search-tabs #filesearch-case-option-btn { right: 48px; }
 
-.ty-sidebar-search-panel .searchpanel-search-option-btn.select,
 .ty-sidebar-search-panel .searchpanel-search-option-btn:hover {
-    background: var(--row-selected);
+    background: var(--item-hover);
     color: var(--text-primary);
+}
+
+.ty-sidebar-search-panel .searchpanel-search-option-btn.select {
+    background: var(--pressed-fill);
+    color: var(--pressed-ink);
 }
 
 #file-library-tree {
@@ -1859,7 +1946,8 @@ titlebar,
 }
 
 .file-node-icon {
-    width: 13px;
+    width: 24px;
+    margin-inline-end: 4px;
     text-align: center;
 }
 
@@ -1886,11 +1974,6 @@ titlebar,
 .file-list-item.file-not-editable.active,
 .file-list-item.file-not-editable:not(.active):not(.select) {
     opacity: 1;
-}
-
-.file-tree-node.file-not-editable > .file-node-content,
-.file-list-item.file-not-editable .file-list-item-file-name {
-    color: var(--text-muted);
 }
 
 .file-tree-rename-input {
@@ -2670,6 +2753,10 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
     line-height: 16px;
 }
 
+body:not(.html-for-mac) #search-from-sidebar-menu::after {
+    content: "Ctrl+Shift+F";
+}
+
 #sidebar-files-menu > .show + .menuitem-group-label.show {
     position: relative;
     margin-block-start: 4px;
@@ -2793,6 +2880,18 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
     font-size: 13px;
     line-height: 19px;
     text-decoration: none;
+}
+
+.dropdown-menu > li > a > .ty-menu-shortcut {
+    flex: none;
+    float: none;
+    margin-inline-start: auto;
+    padding-inline-start: 12px;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 16px;
+    opacity: 1;
 }
 
 .auto-suggest-container :is(.ty-emoji-icon, .ty-file-icon) {
@@ -3490,6 +3589,10 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
     }
 }
 
+body:not(.html-for-mac) .md-f-tooltip {
+    z-index: 41;
+}
+
 @position-try --claude-tip-bottom {
     position-area: bottom span-all;
     margin: var(--claude-tip-gap) var(--claude-tip-room) calc(var(--claude-tip-room) + 1px);
@@ -3644,10 +3747,14 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 #md-searchpanel .btn:hover,
-#md-searchpanel .searchpanel-search-option-btn:hover,
-#md-searchpanel .searchpanel-search-option-btn.select {
+#md-searchpanel .searchpanel-search-option-btn:hover {
     background: var(--item-hover);
     color: var(--text-primary);
+}
+
+#md-searchpanel .searchpanel-search-option-btn.active {
+    background: var(--pressed-fill);
+    color: var(--pressed-ink);
 }
 
 #md-searchpanel .search-type-selection {
@@ -3866,13 +3973,18 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 .ty-quick-open-category-title {
-    height: auto;
-    margin-top: 0;
-    padding: 12px 14px 8px;
+    box-sizing: border-box;
+    height: 20px;
+    margin: 0;
+    padding: 0 14px;
     color: var(--text-muted);
     font-size: 12px;
-    line-height: 17px;
+    line-height: 20px;
     opacity: 1;
+}
+
+.ty-quick-open-category.ty-has-prev .ty-quick-open-category-title {
+    line-height: 19px;
 }
 
 .typora-quick-open-item {
@@ -4328,16 +4440,28 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     padding-top: 0;
 }
 
+#md-notification {
+    --claude-notice-text: 34px;
+}
+
 #md-notification::before,
 .mac-seamless-mode #md-notification::before {
     top: 50%;
+    left: 12px;
+    width: 16px;
     padding-top: 0;
     color: var(--text-muted);
+    text-align: center;
     transform: translateY(-50%);
 }
 
 #md-notification p {
+    padding-left: var(--claude-notice-text);
     font-size: 13px;
+}
+
+#md-notification .ty-enter-mode-warning-header + div {
+    padding-left: var(--claude-notice-text) !important;
 }
 
 #md-notification .md-notification-detail {
@@ -4859,6 +4983,24 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     transition: box-shadow 60ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+#write .md-fences .code-tooltip {
+    max-width: 100%;
+}
+
+#write .md-fences .code-tooltip .ty-input {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#write .md-fences .code-tooltip .ty-input:focus {
+    height: auto;
+    min-height: 24px;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
 #write .md-fences .code-tooltip :is(.ty-input, input):focus {
     box-shadow: var(--focus-ring);
 }
@@ -4955,7 +5097,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 #ty-preview-pill .ty-preview-btn:hover::before,
-#ty-preview:has(> #ty-preview-open-menu.open) #ty-preview-open-caret::before {
+#ty-preview:has(#ty-preview-open-menu.open) #ty-preview-open-caret::before {
     box-shadow: inset 0 0 0 100px var(--button-hover);
 }
 
@@ -5124,6 +5266,11 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
+.for-image,
+.for-image * {
+    scrollbar-width: none;
+}
+
 content,
 #typora-source,
 .typora-export {
@@ -5169,6 +5316,11 @@ content::after,
         color-mix(in srgb, var(--surface-page) 50%, transparent) 40%,
         color-mix(in srgb, var(--surface-page) 15%, transparent) 70%,
         transparent);
+}
+
+body:not(.html-for-mac).typora-sourceview-on #toggle-sourceview-btn {
+    background: var(--pressed-fill);
+    color: var(--pressed-ink);
 }
 
 .cm-s-typora-default {

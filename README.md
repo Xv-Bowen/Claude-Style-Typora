@@ -88,7 +88,13 @@ Code in HTML exports stays on one line and scrolls, as it does in the editor. In
 ## Questions you may have
 
 **Why do some parts of Typora keep the system look?**\
-On macOS they are drawn by the system, not by the page a theme can style: right-click menus, the menus in the title bar, confirmation dialogs, the window's title bar buttons, the thickness of the text cursor and the Settings window.
+On macOS they are drawn by the system, not by the page a theme can style: right-click menus, the menus in the title bar, confirmation dialogs, the window's title bar buttons, window tabs, the tooltip that shows a link's title, the thickness of the text cursor and the Settings window.
+
+**Why is the file name in the title bar not centred over the page when the sidebar is open?**\
+The name is drawn by the macOS title bar, not by the page a theme can style. With the sidebar open, Typora asks the title bar to centre the name over the space beside the sidebar, but on macOS 27 with Typora 1.14.10 the title bar does not do so, with Typora's own themes too.
+
+**Why does the sidebar not show the desktop through it, as macOS's Liquid Glass does?**\
+On the Mac, Typora's window is opaque: when a theme makes the background see-through, the window shows black or white behind it, not the desktop. So a theme cannot give Typora macOS's Liquid Glass look.
 
 **Why does clicking a picture not open a larger view, as in Claude?**\
 A theme can only change how Typora looks, while a viewer that opens, zooms and closes needs a script, which a theme cannot add. Plugins that add such a viewer change Typora's own files, so they are not part of this theme.
@@ -98,6 +104,15 @@ Claude does the same: once a task is ticked, the whole item greys and is crossed
 
 **Why does Esc not close the block type menu of the floating toolbar?**\
 The menu is Typora's, and Esc does not close it with Typora's own themes either. Click outside it, or click the button again.
+
+**Why does the floating toolbar show "Paragraph" in English at first?**\
+Typora builds the toolbar before it loads its interface language; click in the text and it reads 段落 (paragraph). Typora's own themes show the same.
+
+**Why does the quick open list jump several rows when I press the down arrow?**\
+That is how Typora scrolls it: when the chosen row reaches the bottom of the list, Typora scrolls it straight to the top; with the up arrow it scrolls one row at a time. A theme cannot change this, and Typora's own themes do the same. The chosen row always stays in view.
+
+**Why does the caret before the top folder not fold it?**\
+Typora does not let the top folder fold and draws no caret for it. The theme draws one only so the folder lines up with the folders under it; clicking it does nothing.
 
 **Why is only the first part of a long web address a link?**\
 For an address typed without link syntax, Typora decides where it ends, and it stops before Chinese characters in it (in `?query=中文`, for example). Typora's own themes show the same.
