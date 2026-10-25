@@ -116,6 +116,8 @@
     --primary-fill: #0b0b0b;
     --primary-text: #ffffff;
     --backdrop: rgb(0 0 0 / 40%);
+    --keycap-ink: #6d6b67;
+    --keycap-line: rgb(109 107 103 / 18%);
 
     --mermaid-theme: claude;
     --node-fill: #f0f0eb;
@@ -1570,10 +1572,11 @@ titlebar,
     position: relative;
     isolation: isolate;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0;
+    gap: 8px 0;
     width: auto;
-    height: 28px;
+    height: auto;
     margin: 0;
     padding: 0;
     border: 0;
@@ -1584,28 +1587,31 @@ titlebar,
 .sidebar-tabs::after {
     content: "";
     position: absolute;
-    inset: 0 32px;
+    top: 0;
+    right: 0;
+    left: 32px;
     z-index: -1;
+    height: 28px;
     border-radius: 7px;
     background: var(--tint);
     pointer-events: none;
+}
+
+.sidebar-tab {
+    height: 26px;
 }
 
 #switch-sidebar-icon {
     margin-inline-end: 9px;
 }
 
-#sidebar-search-btn {
-    margin-inline-start: 9px;
-}
-
 .sidebar-tabs::before {
     content: "";
     position: absolute;
     top: 1px;
-    bottom: 1px;
     left: 33px;
-    width: calc((100% - 66px) / 2);
+    width: calc((100% - 34px) / 2);
+    height: 26px;
     border-radius: 6px;
     background: var(--segment-thumb);
     box-shadow: inset 0 0 0 1px var(--line), 0 1px 2px rgb(0 0 0 / 5%);
@@ -1626,7 +1632,7 @@ titlebar,
 }
 
 .sidebar-tabs:has(#sidepanel-segmented-input-files:empty)::before {
-    width: calc(100% - 66px);
+    width: calc(100% - 34px);
     transform: none;
 }
 
@@ -1683,7 +1689,70 @@ titlebar,
 }
 
 #sidebar-search-btn {
-    margin-top: 0;
+    order: 3;
+    flex: 0 0 calc(100% - 4px);
+    justify-content: flex-start;
+    text-align: start;
+    gap: 4px;
+    height: 26px;
+    margin: 0 2px;
+    padding: 0 2px;
+    border-radius: 6px;
+    background: var(--surface-field);
+    box-shadow: var(--field-ring);
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 19.5px;
+    transition: background-color var(--motion-fast) var(--ease-out);
+}
+
+#sidebar-search-btn > .ion-ios7-search-strong::before {
+    min-width: 0;
+}
+
+#sidebar-search-btn > span {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-inline-start: 2px;
+    font-size: 16px;
+}
+
+#sidebar-search-btn::before {
+    content: attr(ty-hint);
+    order: 1;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#sidebar-search-btn::after {
+    content: "⇧⌘F";
+    order: 2;
+    height: 17px;
+    margin-inline-end: 2.5px;
+    padding: 0 3px;
+    border: 1px solid var(--keycap-line);
+    border-radius: 4px;
+    color: var(--keycap-ink);
+    font-size: 11px;
+    line-height: 15px;
+    opacity: 0;
+}
+
+#sidebar-search-btn:hover {
+    background: var(--button-hover);
+    box-shadow: var(--button-ring);
+    color: var(--text-muted);
+}
+
+#sidebar-search-btn:hover::after {
+    opacity: 1;
 }
 
 #ty-sidebar-search-tabs {
@@ -1767,6 +1836,17 @@ titlebar,
     vertical-align: top;
 }
 
+#typora-sidebar:not(.ty-no-mount-folder) #file-library::before {
+    content: "项目列表";
+    display: block;
+    box-sizing: border-box;
+    height: 34px;
+    padding: 12px 1px 4px 18px;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 16px;
+}
+
 .file-tree-node.active > .file-node-content {
     color: var(--text-primary);
 }
@@ -1778,6 +1858,11 @@ titlebar,
     line-height: 26px;
 }
 
+.file-node-icon {
+    width: 13px;
+    text-align: center;
+}
+
 .file-node-icon.fa-folder::before {
     position: relative;
     top: 0.5px;
@@ -1786,6 +1871,15 @@ titlebar,
 .file-node-open-state .fa::before {
     position: relative;
     top: -0.5px;
+}
+
+.file-node-root > .file-node-content::before {
+    content: "\f0d7";
+    float: left;
+    width: 8px;
+    color: var(--text-muted);
+    font: normal 13px/26px FontAwesome;
+    text-indent: -4px;
 }
 
 .file-tree-node.file-not-editable > .file-node-content,
@@ -2016,6 +2110,215 @@ titlebar,
     outline: none;
 }
 
+#typora-sidebar {
+    --claude-cp-cap: 25vh;
+    --claude-search-top: max(calc(var(--title-bar-height, 28px) + 16px),
+                             min(var(--claude-cp-cap),
+                                 max(calc(var(--title-bar-height, 28px) + 32px),
+                                     calc((100vh - 494px + var(--title-bar-height, 28px)) / 2))));
+}
+
+@media (max-width: 1023px) {
+    #typora-sidebar {
+        --claude-cp-cap: 15vh;
+    }
+}
+
+@media (max-width: 639px) {
+    #typora-sidebar {
+        --claude-search-top: calc(var(--title-bar-height, 28px) + 16px);
+    }
+}
+
+#typora-sidebar.active-tab-files.ty-show-search {
+    z-index: 1000;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .sidebar-tabs {
+    display: flex;
+}
+
+#typora-sidebar.active-tab-files.ty-on-search #file-library {
+    display: block !important;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #sidebar-content {
+    -webkit-mask: none;
+    mask: none;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search {
+    position: fixed;
+    top: var(--claude-search-top);
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 672px;
+    max-width: calc(100vw - 32px);
+    height: auto;
+    z-index: 10;
+    max-height: min(494px, calc(100vh - var(--claude-search-top) - 16px));
+    padding-top: 64px;
+    overflow: hidden;
+    translate: -50% 0;
+    border: 0.5px solid var(--line-strong);
+    border-radius: 20px;
+    background: var(--surface-raised);
+    box-shadow: var(--search-shadow), 0 0 0 100vmax var(--backdrop);
+    color: var(--text-primary);
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs {
+    position: fixed;
+    top: calc(var(--claude-search-top) + 0.5px);
+    left: 50%;
+    z-index: 11;
+    gap: 8px;
+    width: 671px;
+    max-width: calc(100vw - 33px);
+    height: 64px;
+    padding: 17.6px 10px 14.4px 24px;
+    translate: -50% 0;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search-input {
+    flex: 1;
+    order: 0;
+    min-width: 0;
+    height: 32px;
+    padding: 6px 70px 6px 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search-input:focus {
+    box-shadow: none;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-back-btn {
+    order: 1;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    color: var(--text-primary);
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-back-btn:hover {
+    background: var(--item-hover);
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-back-btn .ty-left-arrow::before {
+    content: "\f129";
+    font-family: Ionicons;
+    font-size: 16px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs .searchpanel-search-option-btn { top: 24.5px; }
+#typora-sidebar.active-tab-files.ty-show-search #filesearch-regexp-option-btn { right: 54px; }
+#typora-sidebar.active-tab-files.ty-show-search #filesearch-word-option-btn { right: 76px; }
+#typora-sidebar.active-tab-files.ty-show-search #filesearch-case-option-btn { right: 98px; }
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search-result {
+    flex: 0 1 auto;
+    min-height: 0;
+    padding: 10px;
+    border-block-start: 0.5px solid var(--line);
+    overflow-y: auto;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item + .ty-search-item {
+    margin-block-start: 4px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 36px;
+    padding: 8px 12px 8px 40px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary > div:not([class]) {
+    display: contents !important;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-collapse-icon {
+    top: 8px;
+    left: 12px;
+    width: 20px;
+    margin: 0;
+    padding: 0;
+    line-height: 20px;
+    text-align: center;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary .file-list-item-file-name {
+    flex: none;
+    max-width: 60%;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary .file-list-item-parent-loc {
+    order: 1;
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 16px;
+    text-align: right;
+    opacity: 1;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary .file-list-item-right {
+    order: 2;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary .file-list-item-count {
+    margin: 0;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-line {
+    min-height: 36px;
+    padding: 8px 12px 8px 40px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search :is(.ty-search-item-line:hover, .ty-search-item-line.active, .ty-search-item-line.select),
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item:is(.active, .select) > .ty-search-item-summary,
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-item-summary:hover {
+    background: var(--item-hover);
+    box-shadow: none;
+    color: var(--text-primary);
+}
+
+#typora-sidebar.active-tab-files.ty-show-search .ty-search-result-error-message {
+    padding: 12px 14px 8px;
+    font-size: 12px;
+    line-height: 17px;
+}
+
+body:has(content :focus) #typora-sidebar.active-tab-files.ty-show-search :is(#ty-sidebar-search-tabs, #file-library-search) {
+    opacity: 0;
+    pointer-events: none;
+}
+
 #outline-content {
     padding: 4px 8px 8px;
 }
@@ -2179,6 +2482,73 @@ titlebar,
     flex: 0 1 auto;
     min-width: 0;
     margin-inline-end: auto;
+}
+
+.mac-seamless-mode #typora-sidebar.active-tab-files #ty-sidebar-footer {
+    display: block !important;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files:not(.ty-on-search):hover #ty-sidebar-footer,
+.mac-seamless-mode #typora-sidebar.active-tab-files #ty-sidebar-footer.show-sidebar-footer-context,
+.mac-seamless-mode #typora-sidebar.active-tab-files.ty-no-mount-folder.ty-show-search #ty-sidebar-footer {
+    visibility: visible;
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files:has(#sidebar-new-file-btn:not(.hide)) .sidebar-osx-tab {
+    padding-block-end: 38px;
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:not(.hide) {
+    position: fixed;
+    top: 98px;
+    left: 8px;
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+    width: calc(var(--sidebar-width, 270px) - 16px);
+    height: 26px;
+    padding: 0 2px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 19.5px;
+    text-align: start;
+    visibility: visible;
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn::after {
+    content: attr(ty-hint);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn .ty-icon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin: 0 3px 0 7px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--text-muted) 15%, transparent);
+    font-size: 8px;
+    line-height: 18px;
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:hover {
+    background: var(--row-hover);
+    color: var(--text-secondary);
+}
+
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:hover .ty-icon {
+    background: color-mix(in srgb, var(--text-muted) 25%, transparent);
+    color: var(--text-primary);
 }
 
 #sidebar-menu-btn > .sidebar-footer-item {
@@ -3167,12 +3537,30 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 #md-searchpanel {
-    border-block-end: 0.5px solid var(--line);
-    background: var(--surface-page);
-    box-shadow: none;
-    color: var(--text-secondary);
+    top: calc(var(--title-bar-height, 28px) + 12px);
+    right: 12px;
+    left: auto;
+    width: 400px;
+    max-width: calc(100vw - 24px);
+    max-height: none;
+    padding: 8px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--surface-raised);
+    box-shadow: var(--menu-shadow);
+    color: var(--text-primary);
     font-family: var(--font-ui);
     font-size: 13px;
+    line-height: 19px;
+}
+
+.mac-seamless-mode #md-searchpanel {
+    padding-top: 8px;
+    max-height: none;
+}
+
+.on-search-panel-open content {
+    top: 0;
 }
 
 #md-searchpanel:is(.searchpanel-replace-mode, .searchpanel-msg-mode),
@@ -3182,22 +3570,51 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
     transition-delay: 0s;
 }
 
+#searchpanel-search-group {
+    gap: 2px;
+}
+
+#searchpanel-search-group > :last-child {
+    flex: none !important;
+}
+
+#md-searchpanel:not(.searchpanel-replace-mode) .ty-replace-panel-row,
+#md-searchpanel:not(.searchpanel-msg-mode) #searchpanel-msg {
+    display: none !important;
+}
+
+#md-searchpanel .ty-search-panel-row {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    padding: 0;
+}
+
+#md-searchpanel .ty-search-panel-row.ty-replace-panel-row {
+    margin-top: 4px;
+}
+
 #md-searchpanel .form-control {
-    height: 26px;
+    height: 24px;
     padding: 0 8px;
     border: 0;
     border-radius: 6px;
-    background: var(--surface-field);
-    box-shadow: var(--field-ring);
+    background: none;
+    box-shadow: none;
     color: var(--text-primary);
     font-family: var(--font-ui);
     font-size: 13px;
+    line-height: 19px;
     transition: box-shadow 60ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #md-searchpanel .form-control:focus {
     outline: none;
-    box-shadow: var(--focus-ring);
+    box-shadow: inset 0 0 0 1px var(--surface-raised), var(--focus-ring);
+}
+
+#search-panel-input {
+    padding-right: 84px;
 }
 
 #md-searchpanel .form-control::placeholder,
@@ -3206,44 +3623,153 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 #md-searchpanel .input-group-addon {
+    width: auto;
     border: 0;
     background: none;
     color: var(--text-secondary);
 }
 
 #md-searchpanel .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
     border: 0;
     border-radius: 6px;
     background: none;
     box-shadow: none;
     color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 24px;
 }
 
 #md-searchpanel .btn:hover,
 #md-searchpanel .searchpanel-search-option-btn:hover,
 #md-searchpanel .searchpanel-search-option-btn.select {
-    background: var(--row-hover);
+    background: var(--item-hover);
     color: var(--text-primary);
 }
 
+#md-searchpanel .search-type-selection {
+    width: auto;
+    padding: 0 6px;
+}
+
+#md-searchpanel .search-type-selection label {
+    margin: 0;
+    font-weight: 400;
+}
+
+#md-searchpanel .fa-sort-desc {
+    top: -3.25px;
+}
+
+#md-searchpanel .fa-sort-asc {
+    top: 2.5px;
+}
+
+#md-searchpanel :is(#search-panel-prev, #search-panel-next),
+#md-searchpanel .input-group-addon.close-btn {
+    width: 24px;
+    padding: 0 !important;
+    color: var(--text-primary);
+}
+
+#md-searchpanel .input-group-addon.close-btn .ion-close-round {
+    padding: 0;
+}
+
+#md-searchpanel :is(#search-panel-prev, #search-panel-next) {
+    margin-right: 1px;
+}
+
+#md-searchpanel #search-panel-status {
+    display: inline-flex;
+    align-items: center;
+    order: -1;
+    min-width: 0;
+    max-width: 120px;
+    height: 24px;
+    padding: 0 !important;
+    margin-left: 6px;
+    overflow: hidden;
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 15px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+#search-panel-status::after {
+    content: "";
+    flex: none;
+    width: 1px;
+    height: 16px;
+    margin-left: 8px;
+    background: var(--line);
+}
+
+#md-searchpanel:has(#search-panel-input:focus, #search-panel-prev:hover) #search-panel-status::after {
+    opacity: 0;
+}
+
+#search-panel-status .error-message {
+    overflow: hidden;
+    color: inherit;
+    text-overflow: ellipsis;
+}
+
+#search-panel-status .error-message:not([ty-hint]) {
+    font-size: 0;
+}
+
+#search-panel-status .error-message:not([ty-hint])::before {
+    content: "0 / 0";
+    font-size: 12px;
+}
+
+#md-searchpanel:has(#search-panel-status:empty, #search-panel-status .error-message:not([ty-hint])) :is(#search-panel-prev, #search-panel-next) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+#search-panel-replaceall-btn,
+#search-panel-replace-btn {
+    padding: 0 8px !important;
+}
+
+#md-searchpanel .ty-replace-panel-row > .input-group-addon:not(.btn) {
+    display: none;
+}
+
 #md-searchpanel .searchpanel-search-option-btn {
+    top: 3px;
+    margin-top: 0;
     border-radius: 6px;
     color: var(--text-muted);
 }
 
-#search-panel-status {
-    color: var(--text-muted);
+#searchpanel-regexp-option-btn svg {
+    position: relative;
+    top: -1px;
 }
 
-#search-panel-status .error-message {
-    color: var(--text-danger);
+#searchpanel-msg {
+    margin: 4px 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
 }
 
 #searchpanel-msg .alert {
+    margin: 0;
+    padding: 2px 8px;
     border: 0;
     border-radius: 6px;
     background: var(--warning-wash);
     color: var(--warning-ink);
+    font-size: 13px;
+    line-height: 20px;
 }
 
 #searchpanel-msg .searchpanel-msg-btn {
@@ -3279,11 +3805,16 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 #md-searchpanel .input-group-addon.close-btn {
-    color: var(--text-secondary);
     opacity: 1;
 }
 
-#typora-quick-open {
+#typora-quick-open,
+.mac-seamless-mode #typora-quick-open {
+    --claude-cp-cap: 25vh;
+    top: max(calc(var(--title-bar-height, 28px) + 16px),
+             min(var(--claude-cp-cap),
+                 max(calc(var(--title-bar-height, 28px) + 32px),
+                     calc((100vh - 392px + var(--title-bar-height, 28px)) / 2))));
     width: 672px;
     max-width: calc(100vw - 32px);
     margin-left: 0;
@@ -3292,8 +3823,21 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
     border: 0.5px solid var(--line-strong);
     border-radius: 20px;
     background: var(--surface-raised);
-    box-shadow: var(--search-shadow);
+    box-shadow: var(--search-shadow), 0 0 0 100vmax var(--backdrop);
     color: var(--text-primary);
+}
+
+@media (max-width: 1023px) {
+    #typora-quick-open {
+        --claude-cp-cap: 15vh;
+    }
+}
+
+@media (max-width: 639px) {
+    #typora-quick-open,
+    .mac-seamless-mode #typora-quick-open {
+        top: calc(var(--title-bar-height, 28px) + 16px);
+    }
 }
 
 #typora-quick-open-input {
@@ -3333,8 +3877,13 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 
 .typora-quick-open-item {
     position: relative;
-    min-height: 36px;
-    padding: 8px 12px 8px 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 36px;
+    min-height: 0;
+    margin-bottom: 4px;
+    padding: 0 12px 0 40px;
     border-radius: 8px;
     color: var(--text-secondary);
 }
@@ -3364,14 +3913,28 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 .typora-quick-open-item-title {
+    flex: none;
+    max-width: 60%;
+    max-height: none;
+    overflow: hidden;
     font-size: 14px;
     line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .typora-quick-open-item-path {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
     color: var(--text-muted);
     font-size: 12px;
     line-height: 16px;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     opacity: 1;
 }
 
