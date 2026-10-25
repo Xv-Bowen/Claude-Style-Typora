@@ -2314,7 +2314,7 @@ titlebar,
     line-height: 17px;
 }
 
-body:has(content :focus) #typora-sidebar.active-tab-files.ty-show-search :is(#ty-sidebar-search-tabs, #file-library-search) {
+body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.ty-show-search :is(#ty-sidebar-search-tabs, #file-library-search) {
     opacity: 0;
     pointer-events: none;
 }
