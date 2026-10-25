@@ -2174,6 +2174,11 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     opacity: 1;
 }
 
+.file-tree-node.active > .file-node-content .file-node-title-ext-part,
+.file-list-item.active .file-list-item-file-ext-part {
+    color: var(--text-secondary);
+}
+
 #file-library-list-children {
     padding: 4px 8px 8px;
 }
