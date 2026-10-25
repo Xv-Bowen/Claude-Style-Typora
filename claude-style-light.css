@@ -2061,7 +2061,8 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     display: block;
     box-sizing: border-box;
     height: 34px;
-    padding: 12px 1px 4px 18px;
+    margin-block: 8.5px -3px;
+    padding: 13px 1px 5px 18px;
     color: var(--text-muted);
     font-size: 12px;
     line-height: 16px;
