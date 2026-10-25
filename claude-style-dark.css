@@ -120,6 +120,9 @@
     --backdrop: rgb(0 0 0 / 50%);
     --keycap-ink: #a5a49a;
     --keycap-line: rgb(165 164 154 / 22%);
+    --on-content-fill: rgb(0 0 0 / 55%);
+    --on-content-hover: rgb(0 0 0 / 65%);
+    --on-content-ring: transparent;
 
     --mermaid-theme: claude;
     --node-fill: #151515;
@@ -990,6 +993,136 @@ img::selection {
 #write img {
     max-width: 100%;
     height: auto;
+}
+
+@media screen {
+    #write .md-image.md-img-loaded.md-expand {
+        position: fixed;
+        inset: 40px;
+        z-index: 10000;
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        padding: 0;
+        anchor-name: --claude-image-preview;
+        animation: claude-image-preview-in var(--motion-base) var(--ease-out);
+    }
+
+    #write .md-image.md-img-loaded.md-expand > img {
+        display: block;
+        width: auto;
+        max-width: min(90vw, 100vw - 80px);
+        height: auto;
+        max-height: min(90vh - 2rem, 100vh - 80px);
+        margin: 0;
+        border: 0;
+        border-radius: 6px;
+        background-color: var(--surface-page);
+        box-shadow:
+            0 4px 32px rgb(0 0 0 / 30%),
+            0 0 0 0.5px rgb(0 0 0 / 25%),
+            0 0 0 100vmax rgb(0 0 0 / 62.5%);
+    }
+
+    #write .md-image.md-img-loaded.md-expand > .md-meta {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        opacity: 0;
+        caret-color: transparent;
+    }
+
+    #write .md-image.md-img-loaded.md-expand::before,
+    #write .md-image.md-img-loaded.md-expand::after {
+        position: absolute;
+        top: 0;
+        left: calc(100% + 6px);
+        box-sizing: border-box;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+
+    #write .md-image.md-img-loaded.md-expand::before {
+        content: "";
+    }
+
+    #write .md-image.md-img-loaded.md-expand::after {
+        content: "\f129";
+        color: #ffffff;
+        font: normal 16px/32px Ionicons;
+        text-align: center;
+    }
+
+    @supports (anchor-name: --claude-image-preview) {
+        #write :has(> .md-image.md-img-loaded.md-expand)::after {
+            content: "";
+            position: fixed;
+            position-anchor: --claude-image-preview;
+            top: anchor(top);
+            left: calc(anchor(right) + 6px);
+            z-index: 10001;
+            width: 32px;
+            height: 32px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #write :has(> .md-image.md-img-loaded.md-expand):hover:not(:has(> .md-image:hover)) > .md-image::before {
+            background: rgb(255 255 255 / 15%);
+        }
+    }
+}
+
+@media screen and (max-width: 639.98px) {
+    #write .md-image.md-img-loaded.md-expand {
+        inset: 16px;
+    }
+
+    #write .md-image.md-img-loaded.md-expand > img {
+        max-width: min(90vw, 100vw - 32px);
+        max-height: min(90vh - 2rem, 100vh - 32px);
+    }
+
+    #write .md-image.md-img-loaded.md-expand::before,
+    #write .md-image.md-img-loaded.md-expand::after {
+        top: 6px;
+        left: auto;
+        right: 6px;
+    }
+
+    #write .md-image.md-img-loaded.md-expand::before {
+        background: var(--on-content-fill);
+        box-shadow: inset 0 0 0 1px var(--on-content-ring);
+    }
+
+    #write .md-image.md-img-loaded.md-expand::after {
+        color: var(--text-primary);
+    }
+
+    @supports (anchor-name: --claude-image-preview) {
+        #write :has(> .md-image.md-img-loaded.md-expand)::after {
+            top: calc(anchor(top) + 6px);
+            right: calc(anchor(right) + 6px);
+            left: auto;
+        }
+
+        #write :has(> .md-image.md-img-loaded.md-expand):hover:not(:has(> .md-image:hover)) > .md-image::before {
+            background: var(--on-content-hover);
+        }
+    }
+}
+
+@keyframes claude-image-preview-in {
+    from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #write .md-image.md-img-loaded.md-expand {
+        animation: none;
+    }
 }
 
 #write .footnotes {
@@ -2198,7 +2331,8 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     --claude-search-top: max(calc(var(--title-bar-height, 28px) + 16px),
                              min(var(--claude-cp-cap),
                                  max(calc(var(--title-bar-height, 28px) + 32px),
-                                     calc((100vh - 494px + var(--title-bar-height, 28px)) / 2))));
+                                     calc((100vh - 584px + var(--title-bar-height, 28px)) / 2))));
+    --claude-search-h: min(584px, calc(100vh - var(--claude-search-top) - 32px));
 }
 
 @media (max-width: 1023px) {
@@ -2238,9 +2372,8 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     flex-direction: column;
     width: 672px;
     max-width: calc(100vw - 32px);
-    height: auto;
+    height: var(--claude-search-h);
     z-index: 10;
-    max-height: min(494px, calc(100vh - var(--claude-search-top) - 16px));
     padding-top: 64px;
     overflow: hidden;
     translate: -50% 0;
@@ -2300,13 +2433,56 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     font-size: 16px;
 }
 
-#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs .searchpanel-search-option-btn { top: 24.5px; }
 #typora-sidebar.active-tab-files.ty-show-search #filesearch-regexp-option-btn { right: 54px; }
 #typora-sidebar.active-tab-files.ty-show-search #filesearch-word-option-btn { right: 76px; }
 #typora-sidebar.active-tab-files.ty-show-search #filesearch-case-option-btn { right: 98px; }
 
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs .searchpanel-search-option-btn {
+    display: inline-block;
+    top: calc(var(--claude-search-h) - 30px);
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs .searchpanel-search-option-btn:not(:hover, .select) {
+    color: var(--text-muted);
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-regexp-option-btn { right: 16px; }
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-word-option-btn { right: 38px; }
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-case-option-btn { right: 60px; }
+
+#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #file-library-search-input {
+    padding-right: 0;
+}
+
+@media (min-width: 480px) {
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-regexp-option-btn { right: 84px; }
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-word-option-btn { right: 206px; }
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-case-option-btn { right: 316px; }
+
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs .searchpanel-search-option-btn::after {
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 8px);
+        margin-top: -10px;
+        color: var(--text-muted);
+        font-family: var(--font-ui);
+        font-size: 12px;
+        line-height: 20px;
+        white-space: nowrap;
+    }
+
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-case-option-btn::after { content: "区分大小写"; }
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-word-option-btn::after { content: "查找整个单词"; }
+    #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs #filesearch-regexp-option-btn::after { content: "正则表达式"; }
+
+    body:has(#typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-tabs .searchpanel-search-option-btn:hover) #ty-tooltip {
+        display: none;
+    }
+}
+
 #typora-sidebar.active-tab-files.ty-show-search #file-library-search-result {
-    flex: 0 1 auto;
+    display: block;
+    flex: 1 1 auto;
     min-height: 0;
     padding: 10px;
     border-block-start: 0.5px solid var(--line);
@@ -2395,6 +2571,56 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     padding: 12px 14px 8px;
     font-size: 12px;
     line-height: 17px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search::after {
+    content: "选择";
+    flex: none;
+    padding: 10px 16px 10px 20px;
+    border-block-start: 0.5px solid var(--line);
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 20px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search::before,
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search-result::before {
+    content: "↑";
+    position: absolute;
+    bottom: 11px;
+    left: 52px;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--keycap-line);
+    border-radius: 4px;
+    color: var(--keycap-ink);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search #file-library-search-result::before {
+    content: "↓";
+    position: fixed;
+    left: 72px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search:has(#file-library-search-input:placeholder-shown) #file-library-search::after {
+    content: "关闭";
+}
+
+#typora-sidebar.active-tab-files.ty-show-search:has(#file-library-search-input:placeholder-shown) #file-library-search::before {
+    content: "Esc";
+    width: auto;
+    min-width: 18px;
+    padding: 0 3px;
+}
+
+#typora-sidebar.active-tab-files.ty-show-search:has(#file-library-search-input:placeholder-shown) #file-library-search-result::before {
+    content: none;
 }
 
 body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.ty-show-search :is(#ty-sidebar-search-tabs, #file-library-search) {
@@ -3921,7 +4147,7 @@ body:not(.html-for-mac) .md-f-tooltip {
     top: max(calc(var(--title-bar-height, 28px) + 16px),
              min(var(--claude-cp-cap),
                  max(calc(var(--title-bar-height, 28px) + 32px),
-                     calc((100vh - 392px + var(--title-bar-height, 28px)) / 2))));
+                     calc((100vh - 414px + var(--title-bar-height, 28px)) / 2))));
     width: 672px;
     max-width: calc(100vw - 32px);
     margin-left: 0;
@@ -3970,6 +4196,56 @@ body:not(.html-for-mac) .md-f-tooltip {
 
 .typora-quick-open-list {
     padding: 10px;
+}
+
+#typora-quick-open::after {
+    content: "选择";
+    display: block;
+    padding: 10px 16px 10px 20px;
+    border-block-start: 0.5px solid var(--line);
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 20px;
+    text-align: start;
+}
+
+#typora-quick-open::before,
+#typora-quick-open-input::after {
+    content: "↑";
+    position: absolute;
+    bottom: 11px;
+    left: 52px;
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--keycap-line);
+    border-radius: 4px;
+    color: var(--keycap-ink);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+#typora-quick-open-input::after {
+    content: "↓";
+    left: 72px;
+}
+
+#typora-quick-open:has(#typora-quick-open-input input:placeholder-shown)::after {
+    content: "关闭";
+}
+
+#typora-quick-open:has(#typora-quick-open-input input:placeholder-shown)::before {
+    content: "Esc";
+    width: auto;
+    min-width: 18px;
+    padding: 0 3px;
+}
+
+#typora-quick-open:has(#typora-quick-open-input input:placeholder-shown) #typora-quick-open-input::after {
+    content: none;
 }
 
 .ty-quick-open-category-title {
