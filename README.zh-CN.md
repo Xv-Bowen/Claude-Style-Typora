@@ -119,6 +119,30 @@ HTML 导出里的代码和编辑器里一样保持一行、可以横向滚动；
 
 安装脚本只在 Typora 自己的页面文件里加一行，从主题文件夹加载 `claude-style-enhance.js`，改之前先备份这个文件。Typora 每次更新都会换回它自己的文件，所以更新 Typora 后要再运行一次安装脚本。
 
+#### 不用安装脚本
+
+安装脚本只做两件事，也可以自己做，或者交给你用的 AI 工具去做。先退出 Typora，备份要改的页面文件：
+
+1. 把 `claude-style-enhance.js` 复制进 Typora 的主题文件夹（**设置 → 外观 → 打开主题文件夹** 打开的那个）。
+2. 在 Typora 自己的页面文件里，紧接着下面写的那一行，加上一行：
+
+- **macOS**：页面文件是 `/Applications/Typora.app/Contents/Resources/TypeMark/index.html`。在 `<script src="./appsrc/main.js" aria-hidden="true" defer></script>` 后面加：
+
+  ```html
+  <script src="file:///Users/你的用户名/Library/Application%20Support/abnerworks.Typora/themes/claude-style-enhance.js" defer data-claude-style-enhance></script>
+  ```
+
+  "你的用户名"换成你的用户文件夹的名字；这是一个网址，空格写成 `%20`，用户名里有中文等字符时也要照网址编码。macOS 不让改这个文件时，在 **系统设置 → 隐私与安全性 → App 管理** 里允许你用来改它的程序。
+- **Windows 和 Linux**：页面文件是 Typora 文件夹里的 `resources/window.html`（Windows 上常在 `C:\Program Files\Typora`，Linux 上常在 `/usr/share/typora` 或 `/opt/typora`）。在 `<script src="./appsrc/window/frame.js" defer="defer"></script>` 后面加（有的版本写的是 `./app/window/frame.js`）：
+
+  ```html
+  <script src="typora://app/userData/themes/claude-style-enhance.js" defer data-claude-style-enhance></script>
+  ```
+
+  Typora 1.4 以前的版本把 `typora://app/userData` 换成 `typora://userData`。Windows 上要存成不带 BOM 的 UTF-8，否则 Typora 打开是空白窗口。
+
+Typora 更新后要再加一次这一行。卸载时删掉这一行和主题文件夹里的 `claude-style-enhance.js`。
+
 ### 导出 HTML 和 PDF
 
 导出的文件里不带装好的脚本。想让导出的 HTML 和 PDF 也画文件卡片，把解压出来的 `claude-style-export-head.txt` 的全部内容粘进 Typora 的导出设置（不装脚本也能用）：

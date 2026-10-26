@@ -119,6 +119,30 @@ Then open Typora and choose Claude Style Light or Claude Style Dark.
 
 The installer adds only one line to Typora's own page file, which loads `claude-style-enhance.js` from the theme folder, and keeps a copy of that file first. Every Typora update puts Typora's own file back, so run the installer again after updating Typora.
 
+#### Without the installer
+
+The installer does only two things, which you can also do yourself or hand to an AI tool you use. Quit Typora first, and keep a copy of the page file you are about to change:
+
+1. Copy `claude-style-enhance.js` into Typora's theme folder (the one **Settings → Appearance → Open Theme Folder** opens).
+2. In Typora's own page file, add one line right after the line named below:
+
+- **macOS**: the page file is `/Applications/Typora.app/Contents/Resources/TypeMark/index.html`. After `<script src="./appsrc/main.js" aria-hidden="true" defer></script>`, add:
+
+  ```html
+  <script src="file:///Users/your-user-name/Library/Application%20Support/abnerworks.Typora/themes/claude-style-enhance.js" defer data-claude-style-enhance></script>
+  ```
+
+  Put the name of your user folder in place of `your-user-name`. This is a web address: write spaces as `%20`, and encode any other characters the way web addresses do. If macOS does not let you change the file, allow the program you change it with in **System Settings → Privacy & Security → App Management**.
+- **Windows and Linux**: the page file is `resources/window.html` in Typora's folder (on Windows often `C:\Program Files\Typora`, on Linux often `/usr/share/typora` or `/opt/typora`). After `<script src="./appsrc/window/frame.js" defer="defer"></script>` (`./app/window/frame.js` in some versions), add:
+
+  ```html
+  <script src="typora://app/userData/themes/claude-style-enhance.js" defer data-claude-style-enhance></script>
+  ```
+
+  Before Typora 1.4, write `typora://userData` in place of `typora://app/userData`. On Windows, save the file as UTF-8 without a byte order mark, or Typora opens a blank window.
+
+After a Typora update, add the line again. To uninstall, delete the line and `claude-style-enhance.js` from the theme folder.
+
 ### Exporting HTML and PDF
 
 Exported files do not include the installed script. For exported HTML and PDF to draw file cards too, paste the whole content of the unzipped `claude-style-export-head.txt` into Typora's export settings (this works without installing the script):
