@@ -16,6 +16,7 @@
     --surface-sunken: #f9f9f7;
     --surface-raised: #ffffff;
     --surface-fence: rgb(255 255 255 / 50%);
+    --surface-fence-on-page: color-mix(in srgb, #ffffff 50%, var(--surface-page));
     --surface-field: rgb(255 255 255 / 50%);
 
     --text-primary: #0b0b0b;
@@ -1261,7 +1262,7 @@ img::selection {
 }
 
 #write .md-fences .CodeMirror-gutters {
-    background: var(--surface-fence);
+    background: var(--surface-fence-on-page);
 }
 
 #write .md-fences .CodeMirror-linenumber {
@@ -3865,7 +3866,7 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 body:not(.html-for-mac) .md-f-tooltip {
-    z-index: 41;
+    z-index: 10000;
 }
 
 @position-try --claude-tip-bottom {
@@ -5610,6 +5611,10 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 
 .for-image,
 .for-image * {
+    scrollbar-width: none;
+}
+
+:root:has(> body.for-image) {
     scrollbar-width: none;
 }
 
