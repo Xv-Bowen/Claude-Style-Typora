@@ -1,5 +1,5 @@
 /*
- * Claude Style Enhance 0.1.0 for Typora
+ * Claude Style Enhance 0.1.1 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
@@ -477,6 +477,7 @@ ${card}::after {
   function onPress(event) {
     pressed = void 0;
     if (event.button !== 0 || event.detail > 1 || event.altKey || event.metaKey || event.ctrlKey || event.shiftKey) return;
+    if (typoraFile()?.isReadonlyMode === true) return;
     const held = heldAt(event.target);
     if (held === void 0 || !claudeStyleIsOn()) return;
     stop(event);
@@ -1707,7 +1708,7 @@ html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
     });
   }
 
-  var VERSION = "0.1.0";
+  var VERSION = "0.1.1";
   function whenTyporaIsReady(start) {
     let tries = 0;
     const wait = () => {
@@ -1747,7 +1748,7 @@ html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
 })();
 
 /*
- * End of Claude Style Enhance 0.1.0 for Typora
+ * End of Claude Style Enhance 0.1.1 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen

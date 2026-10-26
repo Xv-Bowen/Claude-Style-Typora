@@ -1,5 +1,5 @@
 #!/bin/bash
-# Claude Style Enhance 0.1.0 for Typora: installer for Linux
+# Claude Style Enhance 0.1.1 for Typora: installer for Linux
 # https://github.com/Xv-Bowen/Claude-Style-Typora
 # Written by Xv-Bowen (https://github.com/Xv-Bowen)
 # Copyright (c) 2026 Xv-Bowen

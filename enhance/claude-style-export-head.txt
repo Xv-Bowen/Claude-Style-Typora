@@ -1,6 +1,6 @@
 <script>
 /*
- * Claude Style Enhance 0.1.0 for Typora: HTML export
+ * Claude Style Enhance 0.1.1 for Typora: HTML export
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
@@ -168,7 +168,7 @@ ${o}.claude-style-copied::before {
 `;function Re(e){let t=/^url\(["']?data:image\/svg\+xml(;base64)?,(.*?)["']?\)$/s.exec(e.trim());if(t?.[2]!==void 0)try{return t[1]!==void 0?atob(t[2]):decodeURIComponent(t[2])}catch{return}}function V(e){for(let t of e.querySelectorAll(`.${f}`))t.remove();for(let t of e.querySelectorAll("p > .md-link")){let n=t.querySelector(":scope > a");if(n===null||getComputedStyle(t).getPropertyValue("--claude-card").trim()==="")continue;let o=getComputedStyle(n,"::before"),r=o.content==="none"?void 0:Re(o.webkitMaskImage||o.getPropertyValue("mask-image"));if(r===void 0)continue;let[i="20px",c=i]=(o.webkitMaskSize||"20px").split(" "),s=document.createElement("span");s.className=f,s.setAttribute("aria-hidden","true"),s.style.cssText=`top: ${o.top}; left: ${o.left}; width: ${o.width}; height: ${o.height}; color: ${o.color}; translate: ${o.translate};`,s.innerHTML=r;let a=s.querySelector("svg");a!==null&&(a.setAttribute("width",i),a.setAttribute("height",c),n.append(s))}}function Te(e){for(let t of e.querySelectorAll("p")){if(t.closest("li")!==null||t.children.length!==1)continue;let n=t.firstElementChild;if(!(n instanceof HTMLAnchorElement)||!n.hasAttribute("href")||!Array.from(t.childNodes).every(i=>i===n||i.nodeType===Node.TEXT_NODE&&(i.textContent??"").trim()===""))continue;let r=document.createElement("span");r.className="md-link",r.setAttribute("md-inline","link"),n.replaceWith(r),r.append(n)}}function Y(){let e=document.querySelector("#write");e===null||!p()||(Z(),Te(e),ke(),d("claude-style-enhance-export-print",Ze),W(Ie),F(),q(()=>V(e)),D(),B(),V(e))}document.documentElement.dataset.claudeStyleExport===void 0&&(document.documentElement.dataset.claudeStyleExport="",document.readyState==="loading"?document.addEventListener("DOMContentLoaded",Y):Y());})();
 
 /*
- * End of Claude Style Enhance 0.1.0 for Typora: HTML export
+ * End of Claude Style Enhance 0.1.1 for Typora: HTML export
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
