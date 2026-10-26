@@ -54,9 +54,9 @@ To keep the 1.x look, download the latest 1.x release from the [Releases page](h
 | Math | Formulas set at the same size as in Claude |
 | Alerts | GitHub alerts (note, tip, important, warning, caution) drawn the way Claude shows them in a document: a coloured line down the left side and a coloured title with its icon on the first line |
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
-| File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links. HTML and PDF exports draw no cards: file links are plain links there |
+| File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links. HTML and PDF exports draw no cards: file links are plain links there (with the [enhancement script](#enhancement-script-optional)'s export snippet, exports draw them too) |
 | Pictures | When the text cursor moves onto a picture (click it, or reach it with the arrow keys), the picture is shown enlarged in the middle of the window with the rest of the window dimmed and a close button at its top right, as Claude shows a picture. Clicking the close button or anywhere in the text, or leaving with the arrow keys, closes it |
-| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to |
+| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to, and follows Typora's language with the enhancement script) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to (with the enhancement script they follow Typora's language) |
 | Floating toolbar | The look of Claude's review bar: its buttons, menus and submenus open and behave the way Claude's do, and the heading levels sit in a submenu of Paragraph |
 | Find and quick open | The find and replace bar is a card at the top right of the page, as Claude's find bar is; when nothing matches it reads 0 / 0. Quick open stands where Claude's search does, with the rest of the window dimmed, one line for each result: its icon, its name and, on the right, its folder; search results mark their matches in bold, as Claude's search does; at its foot it names the keys that work there, as the sidebar search does |
 | Dialogs and notices | Dialogs, notifications and tooltips in Claude's look |
@@ -64,7 +64,7 @@ To keep the 1.x look, download the latest 1.x release from the [Releases page](h
 | File preview | The header and the Open with button drawn as in Claude's document panel |
 | Modes | Source mode as a plain code view; focus mode dims the other blocks to Claude's muted text colour |
 | Motion | Only what moves in Claude moves; everything else changes at once |
-| Export | HTML and PDF use the same styles as the editor (file cards are drawn in the editor only) |
+| Export | HTML and PDF use the same styles as the editor (file cards are drawn in the editor only, and in exports too with the enhancement script's export snippet) |
 
 ### Fonts
 
@@ -88,6 +88,50 @@ Printing and PDF export follow the theme you are using: the light theme prints o
 
 Code in HTML exports stays on one line and scrolls, as it does in the editor. In print and PDF, long code lines wrap, because paper cannot scroll.
 
+## Enhancement script (optional)
+
+A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. Without it, the theme works as it does now and nothing changes; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. It is made for Claude Style 2.0 and later.
+
+With the script:
+
+- **Pictures**: click a picture, or reach it with the arrow keys, and it opens enlarged in the middle of the window, growing from where it sits in the text. Zoom with the scroll wheel or by pinching on the trackpad, drag it once it is zoomed in, and double-click to switch between fitting the window and its actual size. The close button at the picture's top right or Esc closes it, and the text stays where it was.
+- **Clicks**: a single click on a file card or an inline formula no longer shows its Markdown; to edit it, double-click, or click while holding ⌥ (Alt on Windows and Linux).
+- **File cards**: a card shows the file's name without its extension, with `_` and `-` as spaces (`Q3_report-final.pptx` reads "Q3 report final"); for a kind of file the theme does not know, the second line names the extension too; cards for pictures show a thumbnail.
+- **Copying code**: pointing at a code card shows a copy button at its top right.
+- **Read-only**: a read-only button in the sidebar's footer, the same switch as View → Readonly Mode; while it is on, a read-only label shows at the top right of the page.
+- **Sidebar search**: it searches as you type, half a second after you stop, without Return; Esc closes it wherever the cursor is.
+- **Arrow keys**: in the sidebar search results and in quick open, ↑ and ↓ scroll one row at a time instead of jumping several rows.
+- **Floating toolbar**: Esc closes the block type menu, and the English "Paragraph" the toolbar shows at first soon changes to Typora's interface language.
+- **Outline**: the outline marks the section you are reading.
+- **Top folder**: clicking the top folder's row folds and unfolds it, and Typora remembers it after a restart.
+- **Interface words**: the Chinese words the theme writes into the interface (项目列表, the keys named at the foot of the search card and of quick open, the three search switches) follow the language Typora is set to; in Simplified Chinese they stay as they are.
+- **Export**: exported HTML and PDF draw file cards too, with their icons and thumbnails, and code cards in HTML get the copy button. This takes a snippet pasted into Typora's export settings; see [Exporting HTML and PDF](#exporting-html-and-pdf) below.
+
+### Installing the script
+
+Install the theme first (see [Installation](#installation)), then download `claude-style-enhance.zip` from the [latest release](https://github.com/Xv-Bowen/claude-style-typora/releases/latest) and unzip it. Quit Typora before installing.
+
+- **macOS**: open Terminal, type `bash` and a space, drag the unzipped `install-mac.sh` into the Terminal window and press Return. If Typora is not in the Applications folder, add a space and the path to Typora.app at the end. If Terminal says "macOS does not let this terminal change Typora", allow Terminal in **System Settings → Privacy & Security → App Management** and run it again.
+- **Windows**: right-click `install-windows.ps1` and choose Run with PowerShell. If Typora is in a folder only an administrator can change, it asks for an administrator.
+- **Linux**: in a terminal, go to the unzipped folder and run `sudo bash install-linux.sh`. If Typora is not found, add `--path` and Typora's folder at the end.
+
+Then open Typora and choose Claude Style Light or Claude Style Dark.
+
+The installer adds only one line to Typora's own page file, which loads `claude-style-enhance.js` from the theme folder, and keeps a copy of that file first. Every Typora update puts Typora's own file back, so run the installer again after updating Typora.
+
+### Exporting HTML and PDF
+
+Exported files do not include the installed script. For exported HTML and PDF to draw file cards too, paste the whole content of the unzipped `claude-style-export-head.txt` into Typora's export settings (this works without installing the script):
+
+- HTML: **Settings → Export → HTML**, into **Append in `<head />`**.
+- PDF: **Settings → Export → PDF**, into **Append Extra Content (HTML)**.
+
+The snippet takes effect when the exported page uses Claude Style.
+
+### Uninstalling the script
+
+Quit Typora and run `uninstall-mac.sh`, `uninstall-windows.ps1` or `uninstall-linux.sh` from the same folder, the way you ran the installer. It takes the line out of Typora's page file and deletes the script from the theme folder; remove the snippet from the export settings yourself.
+
 ## Questions you may have
 
 **Why do some parts of Typora keep the system look?**\
@@ -100,31 +144,31 @@ The name is drawn by the macOS title bar, not by the page a theme can style. Wit
 On the Mac, Typora's window is opaque: when a theme makes the background see-through, the window shows black or white behind it, not the desktop. So a theme cannot give Typora macOS's Liquid Glass look.
 
 **Why can an enlarged picture not be zoomed or downloaded, as in Claude?**\
-A theme can only change how Typora looks, while zooming and downloading need a script, which a theme cannot add. What a theme can use is a state Typora sets itself: when the text cursor is on a picture, Typora opens the picture's source, and the theme then shows the picture enlarged and hides the source; when the cursor leaves, the large view closes. So while the large view is open the cursor is still in the source, and typing changes how the picture is written; to change a picture's path or description, use source mode. Plugins that add a full viewer change Typora's own files, so they are not part of this theme.
+A theme can only change how Typora looks, while zooming and downloading need a script, which a theme cannot add. What a theme can use is a state Typora sets itself: when the text cursor is on a picture, Typora opens the picture's source, and the theme then shows the picture enlarged and hides the source; when the cursor leaves, the large view closes. So while the large view is open the cursor is still in the source, and typing changes how the picture is written; to change a picture's path or description, use source mode. The optional [enhancement script](#enhancement-script-optional) opens pictures in a viewer of their own, which zooms and drags; the viewer has no download button.
 
 **Why is an unticked subtask crossed out?**\
 Claude does the same: once a task is ticked, the whole item greys and is crossed out, the tasks under it included. The subtask's own box stays unticked.
 
 **Why does Esc not close the block type menu of the floating toolbar?**\
-The menu is Typora's, and Esc does not close it with Typora's own themes either. Click outside it, or click the button again.
+The menu is Typora's, and Esc does not close it with Typora's own themes either. Click outside it, or click the button again. With the [enhancement script](#enhancement-script-optional), Esc closes the menu.
 
 **Why does the floating toolbar show "Paragraph" in English at first?**\
-Typora builds the toolbar before it loads its interface language; click in the text and it reads 段落 (paragraph). Typora's own themes show the same.
+Typora builds the toolbar before it loads its interface language; click in the text and it reads 段落 (paragraph). Typora's own themes show the same. With the enhancement script, it soon changes to 段落 by itself.
 
 **Why does the quick open list jump several rows when I press the down arrow?**\
-That is how Typora scrolls it: when the chosen row reaches the bottom of the list, Typora scrolls it straight to the top; with the up arrow it scrolls one row at a time. A theme cannot change this, and Typora's own themes do the same. The chosen row always stays in view.
+That is how Typora scrolls it: when the chosen row reaches the bottom of the list, Typora scrolls it straight to the top; with the up arrow it scrolls one row at a time. A theme cannot change this, and Typora's own themes do the same. The chosen row always stays in view. With the enhancement script, the down arrow scrolls one row at a time too.
 
 **Why does the sidebar search only show results after I press Return, and why does Esc sometimes not close it?**\
-Both are how Typora works: its sidebar search starts when you press Return, and Esc closes the search only while the cursor is in the search field. A theme cannot change keys or how searching works. To find files by name as you type, use Open Quickly in the File menu. When the cursor is not in the field, click the close button at the top right of the card, or press ⇧⌘F again (Ctrl+Shift+F on Windows and Linux), which puts the cursor back in the field.
+Both are how Typora works: its sidebar search starts when you press Return, and Esc closes the search only while the cursor is in the search field. A theme cannot change keys or how searching works. To find files by name as you type, use Open Quickly in the File menu. When the cursor is not in the field, click the close button at the top right of the card, or press ⇧⌘F again (Ctrl+Shift+F on Windows and Linux), which puts the cursor back in the field. With the enhancement script, it searches as you type, and Esc closes it wherever the cursor is.
 
 **Why does the caret before the top folder not fold it?**\
-Typora does not let the top folder fold and draws no caret for it. The theme draws one only so the folder lines up with the folders under it; clicking it does nothing.
+Typora does not let the top folder fold and draws no caret for it. The theme draws one only so the folder lines up with the folders under it; clicking it does nothing. With the enhancement script, clicking the top folder's row folds it.
 
 **Why is only the first part of a long web address a link?**\
 For an address typed without link syntax, Typora decides where it ends, and it stops before Chinese characters in it (in `?query=中文`, for example). Typora's own themes show the same.
 
 **Why does a file card differ a little from Claude's?**\
-A theme cannot read the file or change the text a link shows, so the card shows the link's text as its name (Claude shows the file's name), has no preview of pictures or PDFs and no download button; Command-click (Ctrl-click on Windows and Linux) opens the file. For a kind of file the theme does not know, the second line reads only 文件 (file), without the extension Claude adds. Links to a place in the document or to a part of a file stay links, where Claude's replies show them as plain text.
+A theme cannot read the file or change the text a link shows, so the card shows the link's text as its name (Claude shows the file's name), has no preview of pictures or PDFs and no download button; Command-click (Ctrl-click on Windows and Linux) opens the file. For a kind of file the theme does not know, the second line reads only 文件 (file), without the extension Claude adds. Links to a place in the document or to a part of a file stay links, where Claude's replies show them as plain text. With the enhancement script, the card shows the file's name, names the extension for kinds it does not know, and shows a thumbnail for pictures; PDFs still have no preview, and there is no download button.
 
 **Why are there two theme files rather than one that follows the system?**\
 Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
