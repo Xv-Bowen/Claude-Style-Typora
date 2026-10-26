@@ -28,9 +28,6 @@
   function claudeStyleIsOn() {
     return rootValue("--surface-fence") !== "";
   }
-  function hasClaudeIcon(name) {
-    return rootValue(name) !== "";
-  }
 
   var listeners = [];
   function onThemeChange(listener) {
@@ -40,7 +37,6 @@
     const root3 = document.documentElement.classList;
     const on = claudeStyleIsOn();
     root3.toggle("claude-style-enhance-on", on);
-    root3.toggle("claude-style-enhance-claude-icons", on && hasClaudeIcon("--ci20-v2-Copy"));
   }
   function watchTheme() {
     mark();
@@ -496,6 +492,7 @@ ${card}::after {
   }
 
   var ON2 = "html.claude-style-enhance-on #write pre.md-fences";
+  var iconRules = "";
   var CSS2 = `
 #write pre.md-fences > .claude-style-copy {
     display: none;
@@ -580,19 +577,7 @@ ${ON2} .claude-style-copy-button.claude-style-copied::before {
     content: "\\f00c";
     font-family: FontAwesome;
 }
-
-html.claude-style-enhance-claude-icons #write pre.md-fences .claude-style-copy-button::before {
-    content: "";
-    background-color: currentColor;
-    -webkit-mask: var(--ci20-v2-Copy) center / 20px 20px no-repeat;
-    mask: var(--ci20-v2-Copy) center / 20px 20px no-repeat;
-}
-
-html.claude-style-enhance-claude-icons #write pre.md-fences .claude-style-copy-button.claude-style-copied::before {
-    -webkit-mask-image: var(--ci20-v2-Check);
-    mask-image: var(--ci20-v2-Check);
-}
-
+` + iconRules + `
 ${ON2} .claude-style-copy-status {
     position: absolute;
     width: 1px;
@@ -724,6 +709,7 @@ ${ON2} .claude-style-copy-status {
   var FOLDED = "claude-style-folded";
   var KEY = "claude-style-enhance.folded-roots";
   var ON3 = "html.claude-style-enhance-on";
+  var iconRules2 = "";
   var CSS3 = `
 ${ON3} .file-node-root.${FOLDED} > .file-node-children {
     display: none;
@@ -733,12 +719,7 @@ ${ON3} .file-node-root.${FOLDED} > .file-node-content::before {
     content: "\\f0da";
     text-indent: 0;
 }
-
-${ON3}.claude-style-enhance-claude-icons .file-node-root.${FOLDED} > .file-node-content::before {
-    content: "";
-    -webkit-mask-image: var(--ci-v2-CaretRight);
-}
-`;
+` + iconRules2;
   function stored() {
     try {
       const value = JSON.parse(localStorage.getItem(KEY) ?? "[]");
@@ -1144,6 +1125,7 @@ html.claude-style-enhance-on #write :has(> .md-image.md-img-loaded.md-expand)::a
     }
 }
 `;
+  var iconRules3 = "";
   var VIEW_CSS = `
 #claude-style-viewer {
     --claude-style-viewer-max-width: min(90vw, 100vw - 80px);
@@ -1248,16 +1230,7 @@ html.claude-style-enhance-on #write :has(> .md-image.md-img-loaded.md-expand)::a
     content: "\\f129";
     font: normal 16px/28px Ionicons;
 }
-
-html.claude-style-enhance-claude-icons #claude-style-viewer .claude-style-viewer-close::before {
-    content: "";
-    width: 20px;
-    height: 20px;
-    background-color: currentColor;
-    -webkit-mask: var(--ci20-v2-X) center / 20px 20px no-repeat;
-    mask: var(--ci20-v2-X) center / 20px 20px no-repeat;
-}
-
+` + iconRules3 + `
 @media (max-width: 639.98px) {
     #claude-style-viewer {
         --claude-style-viewer-max-width: min(90vw, 100vw - 32px);
