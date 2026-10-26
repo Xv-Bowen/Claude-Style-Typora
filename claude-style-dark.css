@@ -1978,6 +1978,11 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
     content: none;
 }
 
+body:has(#sidebar-search-btn:hover) #ty-tooltip,
+body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar-new-file-btn:not(.hide):hover) #ty-tooltip {
+    display: none;
+}
+
 #ty-sidebar-search-tabs {
     align-items: center;
     gap: 4px;
