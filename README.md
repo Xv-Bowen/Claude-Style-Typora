@@ -30,7 +30,7 @@ Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Wi
 
 ## Which version of the desktop app it follows
 
-The desktop app's interface changes over time. Every Claude Style 1.x release follows the desktop app as it looked in October 2026 (version 3.1623). The desktop app has since introduced a new interface, but so far it has been poorly received, with many users unhappy with it, so work on a 2.0 that follows the new interface is on hold. If the new interface becomes much more widely accepted, 2.0 will be developed to follow it. Meanwhile, another approach is being considered: keeping 1.x as the base and bringing in some parts of the new interface. The 1.x releases stay on the Releases page, so the current look can always be downloaded.
+The desktop app's interface changes over time. Every release of the Claude Style 1.1 series follows the desktop app as it looked in October 2026 (version 3.1623). The 1.2 series follows the new interface that came after it. The releases of the 1.1 series stay on the Releases page, so this look can always be downloaded.
 
 ## Installation
 
@@ -127,8 +127,11 @@ A theme cannot read the file or change the text a link shows, so the card shows 
 **Why are there two theme files rather than one that follows the system?**\
 Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
 
-**Will 1.x still get updates?**\
-Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as patch releases. A 2.0 that follows the desktop app's new interface is on hold for now, and bringing some parts of the new interface into 1.x is being considered; see [Which version of the desktop app it follows](#which-version-of-the-desktop-app-it-follows).
+**Will the 1.1 series still get updates?**\
+Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as new releases of the 1.1 series, from the `1.1` branch. The 1.2 series follows the desktop app's new interface; see [Which version of the desktop app it follows](#which-version-of-the-desktop-app-it-follows).
+
+**Why did the version numbers change?**\
+Since 26 October 2026, the second number tells which interface of the desktop app a release follows: the 1.1 series follows the earlier interface and the 1.2 series the new one, and the third number counts the releases in order. The releases once numbered 1.0.0 to 1.3.9 are now 1.1.0 to 1.1.15, and 2.0.0 and 2.1.0 are now 1.2.0 and 1.2.1. The files of every release are unchanged.
 
 ## Customization
 
