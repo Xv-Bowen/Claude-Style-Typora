@@ -30,7 +30,7 @@ Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Wi
 
 ## Which version of the desktop app it follows
 
-The desktop app's interface changes over time. Every Claude Style 1.x release follows the desktop app as it looked in October 2026 (version 3.1623). The desktop app has since introduced a new interface, but so far it has been poorly received, with many users unhappy with it, so work on a 2.0 that follows the new interface is on hold. If the new interface becomes much more widely accepted, 2.0 will be developed to follow it. Meanwhile, another approach is being considered: keeping 1.x as the base and bringing in some parts of the new interface. The 1.x releases stay on the Releases page, so the current look can always be downloaded.
+The desktop app's interface changes over time. Claude Style 1.x follows the desktop app as of October 2026 (version 3.1623); 2.0 follows the new interface that came after it (version 3.6556): sizes, spacing, corners, type and layout and icons follow the new interface, and the colours stay those of 1.x. Only one colour follows the new interface: in the sidebar, file names and their extensions, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text. Tables, the border around inline code and file cards keep the look of 1.x; see [Questions you may have](#questions-you-may-have) for why. The 1.x releases stay on the Releases page for anyone who wants the earlier look.
 
 ## Installation
 
@@ -43,6 +43,8 @@ To switch between light and dark with the system appearance, turn on **Use separ
 
 Typora keeps themes in memory while it runs. After you replace the files with a newer version, quit and reopen Typora; switching themes from the menu does not make Typora read the theme files again.
 
+To keep the 1.x look, download the latest 1.x release from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
+
 ## What it covers
 
 | Area | What you get |
@@ -54,7 +56,7 @@ Typora keeps themes in memory while it runs. After you replace the files with a 
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
 | File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links. HTML and PDF exports draw no cards: file links are plain links there |
 | Pictures | When the text cursor moves onto a picture (click it, or reach it with the arrow keys), the picture is shown enlarged in the middle of the window with the rest of the window dimmed and a close button at its top right, as Claude shows a picture. Clicking the close button or anywhere in the text, or leaving with the arrow keys, closes it |
-| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a search field and a New row, as at the top of Claude's sidebar (they read 搜索 and 新建 in Chinese, Search and New in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to |
+| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to |
 | Floating toolbar | The look of Claude's review bar: its buttons, menus and submenus open and behave the way Claude's do, and the heading levels sit in a submenu of Paragraph |
 | Find and quick open | The find and replace bar is a card at the top right of the page, as Claude's find bar is; when nothing matches it reads 0 / 0. Quick open stands where Claude's search does, with the rest of the window dimmed, one line for each result: its icon, its name and, on the right, its folder; search results mark their matches in bold, as Claude's search does; at its foot it names the keys that work there, as the sidebar search does |
 | Dialogs and notices | Dialogs, notifications and tooltips in Claude's look |
@@ -127,8 +129,17 @@ A theme cannot read the file or change the text a link shows, so the card shows 
 **Why are there two theme files rather than one that follows the system?**\
 Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
 
+**Why do tables in 2.0 look as they did in 1.x?**\
+2.0 takes most of its styles from the desktop app's new interface, but tables keep the look of 1.x. The new interface's tables drop the outer border, the rounded corners and the header's fill, and separate the rows with a few lines only; with its border and header fill, the 1.x table makes rows and columns easier to follow, so it was not changed.
+
+**Why is inline code in 2.0 still red, with a thin border?**\
+2.0 takes its styles from the new interface and keeps all the colours of 1.x, so inline code is still red. The new interface also drops the thin border around inline code; the border sets code apart from the text more clearly, so Claude Style keeps it, as in 1.x.
+
+**Why do file cards in 2.0 look as they did in 1.x?**\
+The new interface turned the card for a shared file into a single row with a small icon block on the left; the 1.x card, coloured by the kind of file, makes a file easier to recognise at a glance, so it was not changed.
+
 **Will 1.x still get updates?**\
-Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as patch releases. A 2.0 that follows the desktop app's new interface is on hold for now, and bringing some parts of the new interface into 1.x is being considered; see [Which version of the desktop app it follows](#which-version-of-the-desktop-app-it-follows).
+Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as 1.x patch releases, from the `1.x` branch. The 1.x releases stay on the Releases page.
 
 ## Customization
 

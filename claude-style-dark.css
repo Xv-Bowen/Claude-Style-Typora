@@ -111,7 +111,7 @@
     --panel-shadow: 0 0 0 1px var(--line), 0 1px 2px rgb(11 11 11 / 6%), 0 2px 8px rgb(0 0 0 / 24%);
     --panel-title: rgb(255 255 255 / 70%);
     --search-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
-    --dialog-shadow: inset 0 0 0 1px var(--line), 0 4px 8px rgb(11 11 11 / 8%), 0 12px 28px -2px rgb(0 0 0 / 24%);
+    --dialog-shadow: inset 0 0 0 1px var(--line), 0 1px 2px rgb(11 11 11 / 8%), 0 2px 8px rgb(0 0 0 / 24%);
     --input-ring: inset 0 0 0 1px var(--line);
     --button-hover: rgb(255 255 255 / 14%);
     --primary-hover: #e1e0d9;
@@ -147,6 +147,7 @@
     --axis-bold: "GRAD" 0, "wght" 560;
     --axis-semibold: "GRAD" 0, "wght" 540;
     --axis-heading: "GRAD" 0, "wght" 480;
+    --axis-control: "GRAD" 0, "wght" 395;
 
     --syntax-text: hsl(220 15% 93%);
     --syntax-comment: hsl(220 10% 55%);
@@ -241,7 +242,7 @@ img::selection {
     padding: 36px 36px 96px;
     font-family: var(--font-text);
     font-size: 1rem;
-    line-height: 1.5rem;
+    line-height: 1.375rem;
     font-weight: 400;
     font-variation-settings: var(--axis-regular);
     color: var(--text-primary);
@@ -261,8 +262,8 @@ img::selection {
 #write :is(h1, h2, h3, h4, h5, h6) {
     margin-block: calc(var(--flow) * var(--heading-space, 1.667)) 0;
     font-family: var(--font-text);
-    font-weight: 520;
-    font-variation-settings: var(--axis-heading);
+    font-weight: 580;
+    font-variation-settings: var(--axis-semibold);
     color: var(--text-primary);
 }
 
@@ -275,11 +276,11 @@ img::selection {
     margin-block-start: 0;
 }
 
-#write h1 { --heading-space: 2.5; font-size: 1.375em; line-height: 1.25; }
-#write h2 { --heading-space: 2; font-size: 1.125em; line-height: 1.3; }
-#write h3 { font-size: 1em; line-height: 1.3; }
-#write h4 { font-size: 0.875em; line-height: 1.3; }
-#write :is(h5, h6) { font-size: 0.875em; line-height: 1.3; color: var(--text-secondary); }
+#write h1 { --heading-space: 2.5; font-size: 1.125em; line-height: 1.5625rem; }
+#write h2 { --heading-space: 2; font-size: 1em; line-height: 1.375rem; }
+#write h3 { font-size: 1em; line-height: 1.375rem; }
+#write h4 { font-size: 1em; line-height: 1.375rem; }
+#write :is(h5, h6) { font-size: 1em; line-height: 1.375rem; color: var(--text-secondary); }
 
 #write :is(h1, h2, h3, h4, h5, h6) + * {
     margin-block-start: calc(var(--flow) * 0.667);
@@ -322,8 +323,8 @@ img::selection {
 }
 
 #write :is(strong, b) {
-    font-weight: 600;
-    font-variation-settings: var(--axis-bold);
+    font-weight: 501;
+    font-variation-settings: var(--axis-medium);
 }
 
 #write :is(em, i) {
@@ -914,7 +915,7 @@ img::selection {
 #write .md-task-list-item > input[type="checkbox"] {
     width: 13px;
     height: 13px;
-    margin: calc(0.82em - 6.5px) 0 0 -22px;
+    margin: calc(0.82em - 7.5px) 0 0 -22px;
     accent-color: var(--accent);
 }
 
@@ -1039,8 +1040,8 @@ img::selection {
         top: 0;
         left: calc(100% + 6px);
         box-sizing: border-box;
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 8px;
         pointer-events: none;
     }
@@ -1052,7 +1053,7 @@ img::selection {
     #write .md-image.md-img-loaded.md-expand::after {
         content: "\f129";
         color: #ffffff;
-        font: normal 16px/32px Ionicons;
+        font: normal 16px/28px Ionicons;
         text-align: center;
     }
 
@@ -1064,8 +1065,8 @@ img::selection {
             top: anchor(top);
             left: calc(anchor(right) + 6px);
             z-index: 10001;
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             margin: 0;
             padding: 0;
         }
@@ -1178,9 +1179,9 @@ img::selection {
 }
 
 #write code {
-    padding: 0.0625em 0.25em;
+    padding: 1px 4px;
     border: 0.5px solid var(--line);
-    border-radius: 0.4em;
+    border-radius: 4px;
     background: var(--tint);
     color: var(--text-code);
     font-family: var(--font-code);
@@ -1366,6 +1367,10 @@ img::selection {
     height: 16px;
     margin: 0;
     fill: currentColor;
+}
+
+#write .md-alert-text-warning svg {
+    translate: 0 0.5px;
 }
 
 #write .md-alert-text > svg {
@@ -1737,8 +1742,8 @@ titlebar,
     box-shadow: none;
     color: var(--text-secondary);
     font-family: var(--font-ui);
-    font-size: 13px;
-    line-height: 19.5px;
+    font-size: 14px;
+    line-height: 20px;
     font-variation-settings: var(--axis-regular);
 }
 
@@ -1777,7 +1782,7 @@ body:not(.html-for-mac) #file-library {
 }
 
 .sidebar-osx-tab {
-    padding: 8px 8px 4px;
+    padding: 8px 8px 2px;
 }
 
 .sidebar-tabs {
@@ -1801,7 +1806,7 @@ body:not(.html-for-mac) #file-library {
     position: absolute;
     top: 0;
     right: 0;
-    left: 32px;
+    left: 36px;
     z-index: -1;
     height: 28px;
     border-radius: 7px;
@@ -1821,8 +1826,8 @@ body:not(.html-for-mac) #file-library {
     content: "";
     position: absolute;
     top: 1px;
-    left: 33px;
-    width: calc((100% - 34px) / 2);
+    left: 37px;
+    width: calc((100% - 38px) / 2);
     height: 26px;
     border-radius: 6px;
     background: var(--segment-thumb);
@@ -1844,7 +1849,7 @@ body:not(.html-for-mac) #file-library {
 }
 
 .sidebar-tabs:has(#sidepanel-segmented-input-files:empty)::before {
-    width: calc(100% - 34px);
+    width: calc(100% - 38px);
     transform: none;
 }
 
@@ -1858,8 +1863,10 @@ body:not(.html-for-mac) #file-library {
     margin-block: 1px;
     border-radius: 6px;
     color: var(--text-muted);
-    font-size: 13px;
-    line-height: 19.5px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
     text-transform: none;
     opacity: 1;
 }
@@ -1880,11 +1887,12 @@ body:not(.html-for-mac) #file-library {
     flex: none;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
     color: var(--text-secondary);
-    line-height: 24px;
+    font-size: 16.25px;
+    line-height: 28px;
     opacity: 1;
     transition:
         background-color var(--motion-fast) var(--ease-out),
@@ -1902,19 +1910,21 @@ body:not(.html-for-mac) #file-library {
 
 #sidebar-search-btn {
     order: 3;
-    flex: 0 0 calc(100% - 4px);
+    flex: 0 0 100%;
     justify-content: flex-start;
     text-align: start;
     gap: 4px;
-    height: 26px;
-    margin: 0 2px;
+    height: 32px;
+    margin: 0;
     padding: 0 2px;
-    border-radius: 6px;
-    background: var(--surface-field);
-    box-shadow: var(--field-ring);
-    color: var(--text-muted);
-    font-size: 13px;
-    line-height: 19.5px;
+    border-radius: 8px;
+    background: none;
+    box-shadow: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
     transition: background-color var(--motion-fast) var(--ease-out);
 }
 
@@ -1927,10 +1937,10 @@ body:not(.html-for-mac) #file-library {
     flex: none;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     margin-inline-start: 2px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 #sidebar-search-btn::before {
@@ -1949,25 +1959,24 @@ body:not(.html-for-mac) #file-library {
 #sidebar-search-btn::after {
     content: "⇧⌘F";
     order: 2;
-    height: 17px;
-    margin-inline-end: 2.5px;
-    padding: 0 3px;
-    border: 1px solid var(--keycap-line);
-    border-radius: 4px;
-    color: var(--keycap-ink);
-    font-size: 11px;
-    line-height: 15px;
+    margin-inline: 4px calc(8px - 0.15em);
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.15em;
     opacity: 0;
 }
 
 body:not(.html-for-mac) #sidebar-search-btn::after {
     content: "Ctrl+Shift+F";
+    margin-inline-end: 8px;
+    letter-spacing: normal;
 }
 
 #sidebar-search-btn:hover {
-    background: var(--button-hover);
-    box-shadow: var(--button-ring);
-    color: var(--text-muted);
+    background: var(--row-hover);
+    box-shadow: none;
+    color: var(--text-primary);
 }
 
 #sidebar-search-btn:hover::after {
@@ -1992,17 +2001,17 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 
 #file-library-search-input,
 .ty-show-search #file-library-search-input {
-    height: 26px;
+    height: 28px;
     margin: 0;
     padding: 0 76px 0 8px;
     animation: none;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--surface-field);
     box-shadow: var(--field-ring);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
     transition: box-shadow 60ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2021,7 +2030,7 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     opacity: 1;
 }
 
-#ty-sidebar-search-tabs .searchpanel-search-option-btn { top: 5px; }
+#ty-sidebar-search-tabs .searchpanel-search-option-btn { top: 6px; }
 #ty-sidebar-search-tabs #filesearch-regexp-option-btn { right: 4px; }
 #ty-sidebar-search-tabs #filesearch-word-option-btn { right: 26px; }
 #ty-sidebar-search-tabs #filesearch-case-option-btn { right: 48px; }
@@ -2040,12 +2049,16 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     padding: 4px 8px 8px;
 }
 
+#typora-sidebar.ty-no-mount-folder :is(#file-library-tree, #file-library-list-children) {
+    padding-top: 0;
+}
+
 .file-node-background {
     left: 8px;
     width: calc(100% - 16px);
-    height: 26px;
+    height: 32px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .file-tree-node.active > .file-node-background {
@@ -2058,10 +2071,10 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 }
 
 .file-node-content {
-    margin-block-end: 1.5px;
+    margin-block-end: 2px;
     padding-block: 0;
-    color: var(--text-secondary);
-    line-height: 26px;
+    color: var(--text-primary);
+    line-height: 32px;
 }
 
 .file-node-title {
@@ -2072,12 +2085,14 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     content: "项目列表";
     display: block;
     box-sizing: border-box;
-    height: 34px;
-    margin-block: 8.5px -3px;
-    padding: 13px 1px 5px 18px;
-    color: var(--text-muted);
+    height: 44px;
+    margin-block: 6px -2px;
+    padding: 18px 4px 6px 18px;
+    color: var(--text-primary);
     font-size: 12px;
-    line-height: 16px;
+    line-height: 20px;
+    font-weight: 520;
+    font-variation-settings: var(--axis-heading);
 }
 
 .file-tree-node.active > .file-node-content {
@@ -2086,20 +2101,32 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 
 .file-node-icon,
 .file-node-open-state {
-    min-height: 26px;
+    min-height: 32px;
     color: var(--text-muted);
-    line-height: 26px;
+    line-height: 32px;
 }
 
 .file-node-icon {
-    width: 24px;
+    font-size: 16.25px;
+}
+
+.file-node-open-state {
+    font-size: calc(13px * 14 / 12);
+}
+
+.file-node-icon {
+    width: 28px;
     margin-inline-end: 4px;
     text-align: center;
 }
 
-.file-node-icon.fa-folder::before {
+.file-node-icon::before {
     position: relative;
-    top: 0.5px;
+    top: 0.25px;
+}
+
+.file-node-icon.fa-folder::before {
+    top: 0.75px;
 }
 
 .file-node-open-state .fa::before {
@@ -2112,7 +2139,9 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     float: left;
     width: 8px;
     color: var(--text-muted);
-    font: normal 13px/26px FontAwesome;
+    position: relative;
+    top: -0.25px;
+    font: normal calc(13px * 14 / 12)/32px FontAwesome;
     text-indent: -4px;
 }
 
@@ -2124,15 +2153,15 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 
 .file-tree-rename-input {
     width: 100%;
-    height: 26px;
+    height: 32px;
     padding: 0 8px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--surface-field);
     box-shadow: var(--field-ring);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .file-tree-rename-input:focus {
@@ -2141,7 +2170,7 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 }
 
 .blink-area {
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: var(--mark);
     animation: none;
 }
@@ -2149,8 +2178,8 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 #file-library-list .oversize-list-template {
     color: var(--text-secondary);
     font-family: var(--font-ui);
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 #file-library-list[data-state] .oversize-list-template,
@@ -2164,7 +2193,7 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 
 .sidebar-content.on-drop::after {
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     box-shadow: var(--focus-ring);
 }
 
@@ -2176,7 +2205,7 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 #file-library-tree:empty::after,
 #outline-content:empty::after {
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 14px;
     opacity: 1;
 }
 
@@ -2186,9 +2215,8 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     opacity: 1;
 }
 
-.file-tree-node.active > .file-node-content .file-node-title-ext-part,
-.file-list-item.active .file-list-item-file-ext-part {
-    color: var(--text-secondary);
+#file-library :is(.file-node-title-ext-part, .file-list-item-file-ext-part) {
+    color: var(--text-primary);
 }
 
 #file-library-list-children {
@@ -2199,8 +2227,8 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     margin-block-end: 2px;
     padding: 6px 8px;
     border: 0;
-    border-radius: 6px;
-    color: var(--text-secondary);
+    border-radius: 8px;
+    color: var(--text-primary);
     opacity: 1;
 }
 
@@ -2219,9 +2247,9 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 
 .file-list-item-file-name {
     color: var(--text-primary);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: inherit;
-    line-height: 19.5px;
+    line-height: 20px;
 }
 
 .file-list-item-summary,
@@ -2435,8 +2463,9 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 #typora-sidebar.active-tab-files.ty-show-search #ty-sidebar-search-back-btn {
     order: 1;
     flex: none;
-    width: 32px;
-    height: 32px;
+    align-self: center;
+    width: 28px;
+    height: 28px;
     border-radius: 8px;
     color: var(--text-primary);
 }
@@ -2503,7 +2532,7 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     flex: 1 1 auto;
     min-height: 0;
     padding: 10px;
-    border-block-start: 0.5px solid var(--line);
+    border-block-start: 1px solid var(--line);
     overflow-y: auto;
 }
 
@@ -2595,7 +2624,7 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     content: "选择";
     flex: none;
     padding: 10px 16px 10px 20px;
-    border-block-start: 0.5px solid var(--line);
+    border-block-start: 1px solid var(--line);
     color: var(--text-muted);
     font-family: var(--font-ui);
     font-size: 12px;
@@ -2647,19 +2676,23 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 }
 
 #outline-content {
-    padding: 4px 8px 8px;
+    padding: 0 8px 8px;
+}
+
+#typora-sidebar.ty-show-outline-filter #outline-content {
+    padding-top: 6px;
 }
 
 #outline-content .outline-item {
-    margin-block: 0 1.5px;
+    margin-block: 0 2px;
 }
 
 .outline-item {
-    min-height: 26px;
-    padding-block: 3.25px;
-    border-radius: 6px;
-    color: var(--text-secondary);
-    line-height: 19.5px;
+    min-height: 32px;
+    padding-block: 6px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    line-height: 20px;
 }
 
 .outline-item:hover {
@@ -2694,7 +2727,7 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 }
 
 .typora-export-sidebar {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .typora-export-show-outline .outline-item-active > .outline-item .outline-label {
@@ -2748,29 +2781,30 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     border-block-start: 0.5px solid var(--line);
     background: var(--surface-sidebar);
     color: var(--text-secondary);
-    font-size: 13px;
-    line-height: 19.5px;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 #ty-sidebar-footer > div {
     align-items: center;
-    gap: 3px;
+    gap: 6px;
 }
 
 .sidebar-footer .sidebar-footer-item,
 .html-for-mac .sidebar-footer .sidebar-footer-item {
     box-sizing: border-box;
-    height: 24px;
+    height: 28px;
     padding-block: 0;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 28px;
 }
 
 #sidebar-new-file-btn,
 #unpin-outline-btn,
 #switch-file-list-btn {
-    width: 24px;
+    width: 28px;
+    font-size: 16.25px;
     padding-inline: 0;
     text-align: center;
     transition:
@@ -2785,7 +2819,7 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 
 .sidebar-footer-item:hover,
 .footer-item:hover {
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--row-hover);
     color: var(--text-primary);
 }
@@ -2793,8 +2827,8 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 :is(#sidebar-new-file-btn, #unpin-outline-btn, #switch-file-list-btn) .ty-icon {
     top: 0 !important;
     display: inline-block;
-    height: 24px;
-    line-height: 24px;
+    height: 28px;
+    line-height: 28px;
     vertical-align: top;
 }
 
@@ -2821,24 +2855,26 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     visibility: hidden;
 }
 
-.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files:has(#sidebar-new-file-btn:not(.hide)) .sidebar-osx-tab {
-    padding-block-end: 38px;
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files:has(#sidebar-new-file-btn:not(.hide)) #sidebar-search-btn {
+    margin-block-start: 34px;
 }
 
 .mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:not(.hide) {
     position: fixed;
-    top: 98px;
+    top: 64px;
     left: 8px;
     display: flex !important;
     align-items: center;
     gap: 4px;
     width: calc(var(--sidebar-width, 270px) - 16px);
-    height: 26px;
+    height: 32px;
     padding: 0 2px;
-    border-radius: 6px;
-    color: var(--text-secondary);
-    font-size: 13px;
-    line-height: 19.5px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
     text-align: start;
     visibility: visible;
 }
@@ -2860,13 +2896,11 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     flex: none;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
-    margin: 0 3px 0 7px;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--text-muted) 15%, transparent);
-    font-size: 8px;
-    line-height: 18px;
+    width: 28px;
+    height: 28px;
+    margin: 0 0 0 2px;
+    font-size: 11.5px;
+    line-height: 28px;
 }
 
 .mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:hover {
@@ -2874,18 +2908,15 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     color: var(--text-primary);
 }
 
-.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:hover .ty-icon {
-    background: color-mix(in srgb, var(--text-muted) 25%, transparent);
-    color: var(--text-primary);
-}
-
 #sidebar-menu-btn > .sidebar-footer-item {
     align-items: center;
     gap: 4px;
     max-width: 100%;
-    height: 28px;
+    height: 32px;
     padding-inline: 8px;
-    line-height: 19.5px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
 }
 
 #sidebar-menu-btn > .sidebar-footer-item:hover,
@@ -2894,17 +2925,30 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     color: inherit;
 }
 
+@property --claude-name-fade {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@keyframes claude-name-fade {
+    from, to { --claude-name-fade: 12px; }
+}
+
 #sidebar-menu-btn .sidebar-footer-main-item-label {
     flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
-    padding-inline-end: 12px;
-    color: var(--text-secondary);
+    padding-inline-end: 2px;
+    color: var(--text-primary);
     text-align: start;
     text-overflow: clip;
     white-space: nowrap;
-    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 12px), transparent);
-    mask-image: linear-gradient(90deg, #000 calc(100% - 12px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 2px - var(--claude-name-fade)), transparent calc(100% - 2px));
+    mask-image: linear-gradient(90deg, #000 calc(100% - 2px - var(--claude-name-fade)), transparent calc(100% - 2px));
+    animation: claude-name-fade linear both;
+    animation-duration: auto;
+    animation-timeline: scroll(self inline);
 }
 
 #sidebar-menu-btn .footer-btn {
@@ -2918,12 +2962,12 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 }
 
 #sidebar-files-menu {
-    padding: 4px;
+    padding: 6px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 14px;
     background: var(--surface-raised);
     box-shadow: var(--menu-shadow);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #sidebar-menu-btn > .sidebar-footer-item {
@@ -2964,29 +3008,29 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
 }
 
 #sidebar-files-menu.dropdown-menu > li {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #sidebar-files-menu.dropdown-menu > li > a {
     align-items: center;
-    line-height: 19px;
+    line-height: 20px;
 }
 
 :is(#new-file-from-sidebar-menu, #search-from-sidebar-menu, #reveal-folder-from-sidebar-menu,
     #open-folder-from-sidebar-menu, #refresh-from-sidebar-menu)::before {
     flex: none;
-    width: 16px;
-    font-size: 13px;
+    width: 20px;
+    font-size: 16.25px;
     font-style: normal;
     font-weight: normal;
-    line-height: 16px;
+    line-height: 20px;
     text-align: center;
 }
 
-#new-file-from-sidebar-menu::before { content: "\e90f"; font-family: typora-icon; font-size: 12px; }
-#search-from-sidebar-menu::before { content: "\f1d9"; font-family: Ionicons; font-size: 16px; }
-:is(#reveal-folder-from-sidebar-menu, #open-folder-from-sidebar-menu)::before { content: "\f114"; font-family: FontAwesome; position: relative; top: 0.75px; }
-#refresh-from-sidebar-menu::before { content: "\f1d4"; font-family: Ionicons; font-size: 20.5px; position: relative; top: 0.5px; }
+#new-file-from-sidebar-menu::before { content: "\e90f"; font-family: typora-icon; font-size: 15px; }
+#search-from-sidebar-menu::before { content: "\f1d9"; font-family: Ionicons; font-size: 20px; }
+:is(#reveal-folder-from-sidebar-menu, #open-folder-from-sidebar-menu)::before { content: "\f114"; font-family: FontAwesome; position: relative; top: 0.9375px; }
+#refresh-from-sidebar-menu::before { content: "\f1d4"; font-family: Ionicons; font-size: 25.625px; position: relative; top: 0.625px; }
 
 #search-from-sidebar-menu::after {
     content: "\21E7\2318 F";
@@ -2994,8 +3038,8 @@ body:has(.sidebar-footer.show-sidebar-footer-context) #typora-sidebar-resizer {
     margin-inline-start: auto;
     padding-inline-start: 12px;
     color: var(--text-muted);
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 17px;
 }
 
 body:not(.html-for-mac) #search-from-sidebar-menu::after {
@@ -3013,8 +3057,8 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     content: "";
     position: absolute;
     top: 0;
-    right: 8px;
-    left: 8px;
+    right: 10px;
+    left: 10px;
     height: 1px;
     background: var(--line);
 }
@@ -3053,14 +3097,15 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
 }
 
 #sidebar-files-menu .folder-menu-item .fa-folder-o {
-    width: 16px;
+    width: 20px;
     margin-right: 0;
+    font-size: 16.25px;
     text-align: center;
 }
 
 #sidebar-files-menu .folder-menu-item .fa-folder-o::before {
     position: relative;
-    top: 0.75px;
+    top: 0.9375px;
 }
 
 .sidebar-folder-right-icon {
@@ -3081,28 +3126,29 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     content: "";
     top: 50%;
     right: 4px;
-    width: 16px;
-    height: 16px;
-    margin-top: -8px;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
     color: inherit;
     background-color: var(--accent);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.75 8.25 2.75 2.75 5.75-6' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m4.6875 10.3125 3.4375 3.4375 7.1875-7.5' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 
 .dropdown-menu,
 .auto-suggest-container,
 .popover,
 .ty-editor-toolbar-menu {
-    padding: 4px;
+    padding: 6px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 14px;
     background: var(--surface-raised);
     box-shadow: var(--menu-shadow);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
-    line-height: 19px;
-    font-variation-settings: var(--axis-regular);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
     filter: none;
 }
 
@@ -3117,13 +3163,13 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
 .ty-editor-toolbar-menu-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    min-height: 24px;
-    padding: 2.5px 8px;
-    border-radius: 6px;
+    gap: 8px;
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: 8px;
     color: var(--text-primary);
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 20px;
     text-decoration: none;
 }
 
@@ -3134,14 +3180,14 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     padding-inline-start: 12px;
     color: var(--text-muted);
     font-family: inherit;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 13px;
+    line-height: 17px;
     opacity: 1;
 }
 
 .auto-suggest-container :is(.ty-emoji-icon, .ty-file-icon) {
     flex: none;
-    width: 16px;
+    width: 20px;
     padding: 0;
     text-align: center;
 }
@@ -3169,24 +3215,9 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
 .dropdown-menu .divider,
 .ty-editor-toolbar-menu-divider {
     height: 1px;
-    margin: 4px 8px;
+    margin: 4px 10px;
     border: 0;
     background: var(--line);
-}
-
-.ty-editor-toolbar-menu {
-    border-radius: 12px;
-    font-size: 14px;
-    line-height: 20px;
-}
-
-.ty-editor-toolbar-menu-item {
-    gap: 8px;
-    min-height: 32px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 20px;
 }
 
 .ty-editor-toolbar-menu-item .tmi-label {
@@ -3195,14 +3226,14 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     text-overflow: ellipsis;
 }
 
-.ty-editor-toolbar-menu-divider {
-    margin-inline: 10px;
-}
-
 .ty-editor-toolbar-menu-item .tmi-icon {
     align-items: center;
-    width: 16px;
+    width: 20px;
     opacity: 1;
+}
+
+.ty-editor-toolbar-menu-item .tmi-icon .ty-icon {
+    font-size: 16.25px;
 }
 
 .ty-editor-toolbar-menu-item .tmi-extra {
@@ -3215,11 +3246,11 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
 
 .ty-editor-toolbar-menu-item .tmi-extra .fa-caret-right {
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     margin-inline-end: -4px;
     background-color: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6.25 3.75 10.75 8l-4.5 4.25' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7.8125 4.6875 13.4375 10l-5.625 5.3125' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 
 .ty-editor-toolbar-menu-item .tmi-extra .fa-caret-right::before {
@@ -3236,9 +3267,9 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
 }
 
 .ty-editor-toolbar-menu-item.has-sub {
-    margin-inline: -8px;
-    border-inline: 8px solid transparent;
-    border-radius: 16px / 8px;
+    margin-inline: -10px;
+    border-inline: 10px solid transparent;
+    border-radius: 18px / 8px;
     background-clip: padding-box;
     anchor-name: --claude-submenu-opener;
 }
@@ -3379,10 +3410,10 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
 
 .ty-editor-toolbar-menu-item .tmi-check {
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     background-color: var(--accent);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.75 8.25 2.75 2.75 5.75-6' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m4.6875 10.3125 3.4375 3.4375 7.1875-7.5' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 
 .ty-editor-toolbar-menu-item .tmi-check::before {
@@ -3394,52 +3425,51 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     [data-style^="alert:"], [data-action^="copy-as-"], [data-action="paste-as-plain"]) .tmi-label::before {
     content: "";
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-block-start: 2px;
+    width: 20px;
+    height: 20px;
     position: relative;
     margin-inline-end: 8px;
     vertical-align: top;
-    font-size: 13px;
+    font-size: 16.25px;
     font-style: normal;
     font-weight: normal;
-    line-height: 16px;
+    line-height: 20px;
     text-align: center;
 }
 
 .ty-editor-toolbar-menu-item[data-style^="header"] .tmi-label::before { content: "\f1dc"; font-family: FontAwesome; }
-.ty-editor-toolbar-menu-item[data-style="paragraph"] .tmi-label::before { content: "\f1dd"; font-family: FontAwesome; font-size: 14px; }
-.ty-editor-toolbar-menu-item[data-style="table"] .tmi-label::before { content: "\f0ce"; font-family: FontAwesome; top: 0.75px; }
-.ty-editor-toolbar-menu-item[data-style="fences"] .tmi-label::before { content: "\f1c9"; font-family: FontAwesome; font-size: 12px; }
-.ty-editor-toolbar-menu-item[data-style="math_block"] .tmi-label::before { content: "\f12b"; font-family: FontAwesome; font-size: 14px; top: 0.5px; }
-.ty-editor-toolbar-menu-item:is([data-style="alert"], [data-style="alert:warning"]) .tmi-label::before { content: "\f071"; font-family: FontAwesome; font-size: 12px; top: 0.75px; }
-.ty-editor-toolbar-menu-item[data-style="hr"] .tmi-label::before { content: "\f208"; font-family: Ionicons; font-size: 16px; }
-.ty-editor-toolbar-menu-item[data-style="alert:note"] .tmi-label::before { content: "\e607"; font-family: typora-icon; font-size: 14.5px; }
-.ty-editor-toolbar-menu-item[data-style="alert:tip"] .tmi-label::before { content: "\e606"; font-family: typora-icon; font-size: 14.5px; }
-.ty-editor-toolbar-menu-item[data-style="alert:important"] .tmi-label::before { content: "\f0e5"; font-family: FontAwesome; font-size: 12px; top: -0.75px; }
-.ty-editor-toolbar-menu-item[data-style="alert:caution"] .tmi-label::before { content: "\f06a"; font-family: FontAwesome; font-size: 14px; }
+.ty-editor-toolbar-menu-item[data-style="paragraph"] .tmi-label::before { content: "\f1dd"; font-family: FontAwesome; font-size: 17.5px; }
+.ty-editor-toolbar-menu-item[data-style="table"] .tmi-label::before { content: "\f0ce"; font-family: FontAwesome; top: 0.9375px; }
+.ty-editor-toolbar-menu-item[data-style="fences"] .tmi-label::before { content: "\f1c9"; font-family: FontAwesome; font-size: 15px; top: 0.5px; }
+.ty-editor-toolbar-menu-item[data-style="math_block"] .tmi-label::before { content: "\f12b"; font-family: FontAwesome; font-size: 17.5px; top: 0.625px; }
+.ty-editor-toolbar-menu-item:is([data-style="alert"], [data-style="alert:warning"]) .tmi-label::before { content: "\f071"; font-family: FontAwesome; font-size: 15px; top: 0.9375px; }
+.ty-editor-toolbar-menu-item[data-style="hr"] .tmi-label::before { content: "\f208"; font-family: Ionicons; font-size: 20px; }
+.ty-editor-toolbar-menu-item[data-style="alert:note"] .tmi-label::before { content: "\e607"; font-family: typora-icon; font-size: 18.125px; }
+.ty-editor-toolbar-menu-item[data-style="alert:tip"] .tmi-label::before { content: "\e606"; font-family: typora-icon; font-size: 18.125px; }
+.ty-editor-toolbar-menu-item[data-style="alert:important"] .tmi-label::before { content: "\f0e5"; font-family: FontAwesome; font-size: 15px; top: -0.9375px; }
+.ty-editor-toolbar-menu-item[data-style="alert:caution"] .tmi-label::before { content: "\f06a"; font-family: FontAwesome; font-size: 17.5px; }
 .ty-editor-toolbar-menu-item[data-action^="copy-as-"] .tmi-label::before { content: "\e934"; font-family: typora-icon; }
 .ty-editor-toolbar-menu-item[data-action="paste-as-plain"] .tmi-label::before { content: "\e936"; font-family: typora-icon; }
 
 .ty-editor-toolbar-menu-item:is([data-action="source-mode"], [data-action="insert-p-before"],
     [data-action="insert-p-after"], [data-action="copy-paste-as"], [data-action="clear-style"],
     [data-action="hide-toolbar"]) .tmi-icon:empty::before {
-    font-size: 13px;
+    font-size: 16.25px;
     font-style: normal;
     font-weight: normal;
     line-height: 1;
 }
 
-.ty-editor-toolbar-menu-item[data-action="source-mode"] .tmi-icon:empty::before { content: "\f121"; font-family: FontAwesome; font-size: 12px; }
-.ty-editor-toolbar-menu-item[data-action="insert-p-before"] .tmi-icon:empty::before { content: "\f10e"; font-family: Ionicons; font-size: 17.5px; }
-.ty-editor-toolbar-menu-item[data-action="insert-p-after"] .tmi-icon:empty::before { content: "\f105"; font-family: Ionicons; font-size: 17.5px; }
-.ty-editor-toolbar-menu-item[data-action="copy-paste-as"] .tmi-icon:empty::before { content: "\e60c"; font-family: typora-icon; font-size: 14.5px; position: relative; top: 0.5px; }
-.ty-editor-toolbar-menu-item[data-action="clear-style"] .tmi-icon:empty::before { content: "\f12d"; font-family: FontAwesome; font-size: 11.5px; }
-.ty-editor-toolbar-menu-item[data-action="hide-toolbar"] .tmi-icon:empty::before { content: "\f070"; font-family: FontAwesome; font-size: 12px; }
+.ty-editor-toolbar-menu-item[data-action="source-mode"] .tmi-icon:empty::before { content: "\f121"; font-family: FontAwesome; font-size: 15px; }
+.ty-editor-toolbar-menu-item[data-action="insert-p-before"] .tmi-icon:empty::before { content: "\f10e"; font-family: Ionicons; font-size: 21.875px; }
+.ty-editor-toolbar-menu-item[data-action="insert-p-after"] .tmi-icon:empty::before { content: "\f105"; font-family: Ionicons; font-size: 21.875px; }
+.ty-editor-toolbar-menu-item[data-action="copy-paste-as"] .tmi-icon:empty::before { content: "\e60c"; font-family: typora-icon; font-size: 18.125px; position: relative; top: 0.625px; }
+.ty-editor-toolbar-menu-item[data-action="clear-style"] .tmi-icon:empty::before { content: "\f12d"; font-family: FontAwesome; font-size: 14.375px; position: relative; top: 0.5px; }
+.ty-editor-toolbar-menu-item[data-action="hide-toolbar"] .tmi-icon:empty::before { content: "\f070"; font-family: FontAwesome; font-size: 15px; position: relative; top: -0.5px; }
 
 @supports (position-area: right) {
     .ty-editor-toolbar-menu:has(> [data-style="header1"]) {
-        --claude-heading-row: 32px;
+        --claude-heading-row: 28px;
     }
 
     .ty-editor-toolbar-menu > [data-style="header6"] + .ty-editor-toolbar-menu-divider {
@@ -3450,8 +3480,8 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
         display: none;
         position: fixed;
         z-index: 2;
-        min-width: 120px;
-        max-width: 312px;
+        min-width: 116px;
+        max-width: 308px;
         height: var(--claude-heading-row);
         margin: 0;
         font-variant-numeric: tabular-nums;
@@ -3464,16 +3494,16 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     .ty-editor-toolbar-menu > [data-style^="header"]::before {
         content: "";
         position: absolute;
-        inset: 0 -6px;
+        inset: 0 -8px;
         z-index: -1;
     }
 
     .ty-editor-toolbar-menu > [data-style="header1"]::before {
-        top: -6px;
+        top: -8px;
     }
 
     .ty-editor-toolbar-menu > [data-style="header6"]::before {
-        bottom: -6px;
+        bottom: -8px;
     }
 
     .ty-editor-toolbar-menu:has(> [data-style="header1"]) > [data-style^="header"] .tmi-icon:empty {
@@ -3488,7 +3518,7 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
         anchor-name: --claude-heading-1;
         position-anchor: --claude-heading-opener;
         position-area: right span-bottom;
-        margin: 4px calc(4px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 4px + var(--claude-menu-room)) 10px;
+        margin: 6px calc(6px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 6px + var(--claude-menu-room)) 14px;
         position-try-fallbacks:
             --claude-heading-right-end, --claude-heading-left-start, --claude-heading-left-end,
             --claude-heading-bottom-start, --claude-heading-top-start,
@@ -3512,11 +3542,11 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
         display: none;
         position: fixed;
         z-index: 1;
-        top: calc(anchor(--claude-heading-1 top) - 4px);
-        right: calc(anchor(--claude-heading-1 right) - 4px);
-        left: calc(anchor(--claude-heading-1 left) - 4px);
-        height: calc(6 * var(--claude-heading-row) + 8px);
-        border-radius: 12px;
+        top: calc(anchor(--claude-heading-1 top) - 6px);
+        right: calc(anchor(--claude-heading-1 right) - 6px);
+        left: calc(anchor(--claude-heading-1 left) - 6px);
+        height: calc(6 * var(--claude-heading-row) + 12px);
+        border-radius: 14px;
         background: var(--surface-raised);
         box-shadow: var(--menu-shadow);
         pointer-events: none;
@@ -3539,7 +3569,7 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     .ty-editor-toolbar-menu:has(> [data-style="header1"]) > [data-style="paragraph"]::before {
         content: "";
         position: absolute;
-        inset: 0 -4px;
+        inset: 0 -6px;
     }
 
     .ty-editor-toolbar-menu:has(> [data-style="header1"]) > [data-style="paragraph"] .tmi-extra {
@@ -3550,47 +3580,47 @@ body:not(.html-for-mac) #search-from-sidebar-menu::after {
     .ty-editor-toolbar-menu:has(> [data-style="header1"]) > [data-style="paragraph"] .tmi-extra::after {
         content: "";
         display: block;
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         margin-inline-end: -4px;
         background-color: currentColor;
-        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6.25 3.75 10.75 8l-4.5 4.25' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7.8125 4.6875 13.4375 10l-5.625 5.3125' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
     }
 }
 
 @position-try --claude-heading-right-end {
     position-area: right span-top;
-    margin: calc(var(--claude-menu-room-top) + 4px) calc(4px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 4px) 10px;
+    margin: calc(var(--claude-menu-room-top) + 6px) calc(6px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 6px) 14px;
 }
 
 @position-try --claude-heading-left-start {
     position-area: left span-bottom;
-    margin: 4px 10px calc(5 * var(--claude-heading-row) + 4px + var(--claude-menu-room)) calc(4px + var(--claude-menu-room));
+    margin: 6px 14px calc(5 * var(--claude-heading-row) + 6px + var(--claude-menu-room)) calc(6px + var(--claude-menu-room));
 }
 
 @position-try --claude-heading-left-end {
     position-area: left span-top;
-    margin: calc(var(--claude-menu-room-top) + 4px) 10px calc(5 * var(--claude-heading-row) + 4px) calc(4px + var(--claude-menu-room));
+    margin: calc(var(--claude-menu-room-top) + 6px) 14px calc(5 * var(--claude-heading-row) + 6px) calc(6px + var(--claude-menu-room));
 }
 
 @position-try --claude-heading-bottom-start {
     position-area: bottom span-right;
-    margin: 6px calc(4px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 4px + var(--claude-menu-room)) 0;
+    margin: 8px calc(6px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 6px + var(--claude-menu-room)) 0;
 }
 
 @position-try --claude-heading-top-start {
     position-area: top span-right;
-    margin: calc(var(--claude-menu-room-top) + 4px) calc(4px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 6px) 0;
+    margin: calc(var(--claude-menu-room-top) + 6px) calc(6px + var(--claude-menu-room)) calc(5 * var(--claude-heading-row) + 8px) 0;
 }
 
 @position-try --claude-heading-bottom-end {
     position-area: bottom span-left;
-    margin: 6px 0 calc(5 * var(--claude-heading-row) + 4px + var(--claude-menu-room)) calc(4px + var(--claude-menu-room));
+    margin: 8px 0 calc(5 * var(--claude-heading-row) + 6px + var(--claude-menu-room)) calc(6px + var(--claude-menu-room));
 }
 
 @position-try --claude-heading-top-end {
     position-area: top span-left;
-    margin: calc(var(--claude-menu-room-top) + 4px) 0 calc(5 * var(--claude-heading-row) + 6px) calc(4px + var(--claude-menu-room));
+    margin: calc(var(--claude-menu-room-top) + 6px) 0 calc(5 * var(--claude-heading-row) + 8px) calc(6px + var(--claude-menu-room));
 }
 
 body:has(> .ty-editor-toolbar-submenu > [data-style^="alert:"]) .ty-editor-toolbar-menu > [data-style="alert"],
@@ -3614,10 +3644,10 @@ body:has(> .ty-editor-toolbar-submenu > [data-style="ul"]) .ty-editor-toolbar-me
 }
 
 .dropdown-menu .menuitem-group-label {
-    padding: 4px 8px;
+    padding: 4px 10px;
     color: var(--text-muted);
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 13px;
+    line-height: 17px;
     font-weight: 500;
     font-variation-settings: var(--axis-medium);
 }
@@ -4166,7 +4196,7 @@ body:not(.html-for-mac) .md-f-tooltip {
     top: max(calc(var(--title-bar-height, 28px) + 16px),
              min(var(--claude-cp-cap),
                  max(calc(var(--title-bar-height, 28px) + 32px),
-                     calc((100vh - 414px + var(--title-bar-height, 28px)) / 2))));
+                     calc((100vh - 415px + var(--title-bar-height, 28px)) / 2))));
     width: 672px;
     max-width: calc(100vw - 32px);
     margin-left: 0;
@@ -4194,7 +4224,7 @@ body:not(.html-for-mac) .md-f-tooltip {
 
 #typora-quick-open-input {
     padding: 17.6px 10px 14.4px 24px;
-    border-block-end: 0.5px solid var(--line);
+    border-block-end: 1px solid var(--line);
 }
 
 #typora-quick-open-input input {
@@ -4221,7 +4251,7 @@ body:not(.html-for-mac) .md-f-tooltip {
     content: "选择";
     display: block;
     padding: 10px 16px 10px 20px;
-    border-block-start: 0.5px solid var(--line);
+    border-block-start: 1px solid var(--line);
     color: var(--text-muted);
     font-family: var(--font-ui);
     font-size: 12px;
@@ -4494,34 +4524,40 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 
 .modal-content {
     border: 0;
-    border-radius: 10px;
+    border-radius: 12px;
     background: var(--surface-raised);
     box-shadow: var(--dialog-shadow);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 20px;
 }
 
-.modal-header,
 .modal-footer {
     border: 0;
 }
 
 .modal-header {
-    padding: 26px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0 8px 0 16px;
+    border: 0;
+    border-block-end: 1px solid var(--line);
 }
 
 .modal-body {
-    padding: 8px 20px 0;
+    padding: 16px 16px 0;
 }
 
 :is(.ty-dialog-no-title .modal-body, .modal-body.ty-dialog-no-title) {
-    padding-top: 20px;
+    padding-top: 16px;
 }
 
 .modal-footer {
-    padding: 20px;
+    padding: 20px 16px 16px;
 }
 
 .modal-footer .btn + .btn {
@@ -4533,35 +4569,37 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 .modal-title {
-    margin-top: -4px;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
     font-family: var(--font-ui);
-    font-size: 20px;
-    line-height: 25px;
-    font-weight: 580;
-    font-variation-settings: var(--axis-semibold);
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 520;
+    font-variation-settings: var(--axis-heading);
 }
 
 .modal label {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     font-variation-settings: var(--axis-medium);
 }
 
 .modal :is(input.form-control, textarea.form-control, select.form-control) {
-    min-height: 24px;
+    min-height: 28px;
     padding: 0 8px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--surface-field);
     box-shadow: var(--input-ring);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
+    font-size: 14px;
     transition: box-shadow 60ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal :is(input.form-control, select.form-control) {
-    height: 24px;
+    height: 28px;
 }
 
 .modal textarea.form-control {
@@ -4587,14 +4625,14 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     background: none;
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     font-variation-settings: var(--axis-medium);
-    line-height: 13px;
+    line-height: 14px;
 }
 
 .modal .input-group .form-control {
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 #common-dialog .checkbox label {
@@ -4603,7 +4641,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     gap: 6px;
     padding: 0;
     color: var(--text-secondary);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -4614,12 +4652,15 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 .modal .close {
-    width: 24px;
-    height: 24px;
-    margin: -6px -6px 0 0;
+    order: 1;
+    flex: none;
+    float: none;
+    width: 28px;
+    height: 28px;
+    margin: 0;
     padding: 0;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background: transparent;
     color: var(--text-primary);
     font-size: 0;
@@ -4631,11 +4672,11 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 .modal .close::before {
     content: "";
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     margin: 4px;
     background-color: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 4.5l7 7M11.5 4.5l-7 7' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.625 5.625l8.75 8.75M14.375 5.625l-8.75 8.75' fill='none' stroke='%23000' stroke-width='1.25' stroke-linecap='round'/%3E%3C/svg%3E") center / 20px no-repeat;
 }
 
 .modal .close:is(:hover, :focus) {
@@ -4647,8 +4688,8 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 #ty-oversize-body {
     color: var(--text-secondary);
     font-family: var(--font-ui);
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 #ty-oversize-body .ty-oversize-modal > div {
@@ -4660,15 +4701,15 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 #ty-oversize-body .btn {
-    height: 24px;
-    padding: 0 8px;
+    height: 28px;
+    padding: 0 9px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--button-fill);
     box-shadow: var(--button-ring);
     color: var(--text-primary);
-    font-size: 13px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 28px;
 }
 
 #ty-oversize-body .btn:hover {
@@ -4677,16 +4718,16 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 
 .modal .btn,
 #common-dialog .btn {
-    height: 24px;
-    padding: 0 8px;
+    height: 28px;
+    padding: 0 9px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--button-fill);
     box-shadow: var(--button-ring);
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 28px;
     transition: background-color var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) var(--ease-out);
 }
 
@@ -5050,7 +5091,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     height: 28px;
     padding: 0;
     border: 0;
-    border-radius: 7px;
+    border-radius: 8px;
     background: transparent;
     box-shadow: none;
     color: var(--text-secondary);
@@ -5200,12 +5241,12 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 .md-image-btn {
-    height: 24px;
-    padding: 0 8px;
-    border-radius: 6px;
+    height: 28px;
+    padding: 0 9px;
+    border-radius: 8px;
     background: var(--button-fill);
     box-shadow: var(--button-ring);
-    line-height: 24px;
+    line-height: 28px;
 }
 
 .md-image-btn:is(:hover, .selected) {
@@ -5215,7 +5256,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 .md-image-btn::before {
     color: var(--text-primary);
     font-family: var(--font-ui);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .md-image-input-src-btn {
@@ -5317,7 +5358,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 
 #ty-preview-banner {
     box-sizing: border-box;
-    min-height: 40px;
+    min-height: 44px;
     padding: 0 8px;
     border: 0;
     background: var(--surface-raised);
@@ -5331,8 +5372,10 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 
 #ty-preview-name {
     color: var(--panel-title);
-    font-size: 13px;
-    line-height: 17px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
     opacity: 1;
 }
 
@@ -5340,7 +5383,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     position: relative;
     overflow: visible;
     border: 0;
-    border-radius: 7px;
+    border-radius: 8px;
     background: none;
     box-shadow: none;
     backdrop-filter: none;
@@ -5378,13 +5421,13 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 #ty-preview-pill .ty-preview-btn:first-child {
-    border-start-start-radius: 7px;
-    border-end-start-radius: 7px;
+    border-start-start-radius: 8px;
+    border-end-start-radius: 8px;
 }
 
 #ty-preview-pill .ty-preview-btn:last-child {
-    border-start-end-radius: 7px;
-    border-end-end-radius: 7px;
+    border-start-end-radius: 8px;
+    border-end-end-radius: 8px;
 }
 
 #ty-preview-pill .ty-preview-btn:is(:hover, :active) {
@@ -5428,9 +5471,9 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 #ty-preview-open-menu {
     min-width: 128px;
     max-width: 320px;
-    padding: 4px;
+    padding: 6px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 14px;
     background: var(--surface-raised);
     box-shadow: var(--menu-shadow);
     color: var(--text-primary);
@@ -5438,29 +5481,33 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 }
 
 #ty-preview-open-menu li {
-    gap: 6px;
-    min-height: 24px;
-    padding: 2.5px 8px;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 19px;
+    gap: 8px;
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 435;
+    font-variation-settings: var(--axis-control);
 }
 
 #ty-preview-open-menu li img {
     flex: none;
+    width: 20px;
+    height: 20px;
     margin: 0;
     border: 0;
 }
 
 #ty-preview-open-menu li:not(.separator, :has(> img))::before {
     flex: none;
-    width: 16px;
-    font: normal 13px/16px FontAwesome;
+    width: 20px;
+    font: normal 16.25px/20px FontAwesome;
     text-align: center;
 }
 
-#ty-preview-open-menu li:first-child:not(:has(> img))::before { content: "\f0f6"; font-size: 12px; }
-#ty-preview-open-menu li:last-child:not(.separator, :has(> img))::before { content: "\f114"; position: relative; top: 0.75px; }
+#ty-preview-open-menu li:first-child:not(:has(> img))::before { content: "\f0f6"; font-size: 15px; position: relative; top: 0.5px; }
+#ty-preview-open-menu li:last-child:not(.separator, :has(> img))::before { content: "\f114"; position: relative; top: 0.9375px; }
 
 #ty-preview-open-menu li > span {
     min-width: 0;
@@ -5474,7 +5521,7 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
 
 #ty-preview-open-menu li.separator {
     min-height: 0;
-    margin: 4px 8px;
+    margin: 4px 10px;
     padding: 0;
     border-block-start: 1px solid var(--line);
     border-radius: 0;
