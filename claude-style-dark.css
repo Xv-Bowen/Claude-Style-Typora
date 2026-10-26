@@ -1943,6 +1943,9 @@ body:not(.html-for-mac) #file-library {
     white-space: nowrap;
 }
 
+#sidebar-search-btn[ty-hint="查找"]::before { content: "搜索"; }
+#sidebar-search-btn[ty-hint="Filter"]::before { content: "Search"; }
+
 #sidebar-search-btn::after {
     content: "⇧⌘F";
     order: 2;
@@ -1969,6 +1972,10 @@ body:not(.html-for-mac) #sidebar-search-btn::after {
 
 #sidebar-search-btn:hover::after {
     opacity: 1;
+}
+
+#typora-sidebar.active-tab-outline #sidebar-search-btn::after {
+    content: none;
 }
 
 #ty-sidebar-search-tabs {
@@ -2802,13 +2809,11 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 .mac-seamless-mode #typora-sidebar.active-tab-files #ty-sidebar-footer {
     display: block !important;
     opacity: 1;
-    visibility: hidden;
+    visibility: visible;
 }
 
-.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files:not(.ty-on-search):hover #ty-sidebar-footer,
-.mac-seamless-mode #typora-sidebar.active-tab-files #ty-sidebar-footer.show-sidebar-footer-context,
-.mac-seamless-mode #typora-sidebar.active-tab-files.ty-no-mount-folder.ty-show-search #ty-sidebar-footer {
-    visibility: visible;
+.mac-seamless-mode #typora-sidebar.active-tab-files.ty-on-search:not(.ty-no-mount-folder) #ty-sidebar-footer:not(.show-sidebar-footer-context) {
+    visibility: hidden;
 }
 
 .mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files:has(#sidebar-new-file-btn:not(.hide)) .sidebar-osx-tab {
@@ -2842,6 +2847,9 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     white-space: nowrap;
 }
 
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn[ty-hint="新建文件"]::after { content: "新建"; }
+.mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn[ty-hint="New File"]::after { content: "New"; }
+
 .mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn .ty-icon {
     display: flex;
     flex: none;
@@ -2858,7 +2866,7 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 
 .mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:hover {
     background: var(--row-hover);
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
 .mac-seamless-mode.pin-outline #typora-sidebar.active-tab-files #sidebar-new-file-btn:hover .ty-icon {
