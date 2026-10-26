@@ -30,7 +30,7 @@ Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Wi
 
 ## Which version of the desktop app it follows
 
-The desktop app's interface changes over time. Claude Style 1.x follows the desktop app as of October 2026 (version 3.1623); 2.0 follows the new interface that came after it (version 3.6556): sizes, spacing, corners, type and layout and icons follow the new interface, and the colours stay those of 1.x. Only one colour follows the new interface: in the sidebar, file names and their extensions, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text. Tables, the border around inline code and file cards keep the look of 1.x; see [Questions you may have](#questions-you-may-have) for why. The 1.x releases stay on the Releases page for anyone who wants the earlier look.
+The desktop app's interface changes over time. The Claude Style 1.1 series follows the desktop app as of October 2026 (version 3.1623); the 1.2 series follows the new interface that came after it (version 3.6556): sizes, spacing, corners, type and layout and icons follow the new interface, and the colours stay those of the 1.1 series. Only one colour follows the new interface: in the sidebar, file names and their extensions, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text. Tables, the border around inline code and file cards keep the look of the 1.1 series; see [Questions you may have](#questions-you-may-have) for why. The releases of the 1.1 series stay on the Releases page for anyone who wants the earlier look.
 
 ## Installation
 
@@ -43,7 +43,7 @@ To switch between light and dark with the system appearance, turn on **Use separ
 
 Typora keeps themes in memory while it runs. After you replace the files with a newer version, quit and reopen Typora; switching themes from the menu does not make Typora read the theme files again.
 
-To keep the 1.x look, download the latest 1.x release from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
+To keep the look of the 1.1 series, download its latest release from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
 
 ## What it covers
 
@@ -90,7 +90,7 @@ Code in HTML exports stays on one line and scrolls, as it does in the editor. In
 
 ## Enhancement script (optional)
 
-A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. Without it, the theme works as it does now and nothing changes; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. It is made for Claude Style 2.0 and later.
+A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. Without it, the theme works as it does now and nothing changes; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. It is made for the Claude Style 1.2 series and later.
 
 With the script:
 
@@ -197,17 +197,20 @@ A theme cannot read the file or change the text a link shows, so the card shows 
 **Why are there two theme files rather than one that follows the system?**\
 Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
 
-**Why do tables in 2.0 look as they did in 1.x?**\
-2.0 takes most of its styles from the desktop app's new interface, but tables keep the look of 1.x. The new interface's tables drop the outer border, the rounded corners and the header's fill, and separate the rows with a few lines only; with its border and header fill, the 1.x table makes rows and columns easier to follow, so it was not changed.
+**Why do tables in the 1.2 series look as they did in the 1.1 series?**\
+The 1.2 series takes most of its styles from the desktop app's new interface, but tables keep the look of the 1.1 series. The new interface's tables drop the outer border, the rounded corners and the header's fill, and separate the rows with a few lines only; with its border and header fill, the table of the 1.1 series makes rows and columns easier to follow, so it was not changed.
 
-**Why is inline code in 2.0 still red, with a thin border?**\
-2.0 takes its styles from the new interface and keeps all the colours of 1.x, so inline code is still red. The new interface also drops the thin border around inline code; the border sets code apart from the text more clearly, so Claude Style keeps it, as in 1.x.
+**Why is inline code in the 1.2 series still red, with a thin border?**\
+The 1.2 series takes its styles from the new interface and keeps all the colours of the 1.1 series, so inline code is still red. The new interface also drops the thin border around inline code; the border sets code apart from the text more clearly, so Claude Style keeps it, as in the 1.1 series.
 
-**Why do file cards in 2.0 look as they did in 1.x?**\
-The new interface turned the card for a shared file into a single row with a small icon block on the left; the 1.x card, coloured by the kind of file, makes a file easier to recognise at a glance, so it was not changed.
+**Why do file cards in the 1.2 series look as they did in the 1.1 series?**\
+The new interface turned the card for a shared file into a single row with a small icon block on the left; the card of the 1.1 series, coloured by the kind of file, makes a file easier to recognise at a glance, so it was not changed.
 
-**Will 1.x still get updates?**\
-Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as 1.x patch releases, from the `1.x` branch. The 1.x releases stay on the Releases page.
+**Will the 1.1 series still get updates?**\
+Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as new releases of the 1.1 series (1.1.16, 1.1.17 and so on), from the `1.1` branch. The releases of the 1.1 series stay on the Releases page.
+
+**Why did the version numbers change?**\
+Since 26 October 2026, the second number tells which interface of the desktop app a release follows: the 1.1 series follows the earlier interface and the 1.2 series the new one, and the third number counts the releases in order. The releases once numbered 1.0.0 to 1.3.9 are now 1.1.0 to 1.1.15, and 2.0.0 and 2.1.0 are now 1.2.0 and 1.2.1. The files of every release are unchanged.
 
 ## Customization
 
