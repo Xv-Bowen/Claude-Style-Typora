@@ -90,7 +90,7 @@ Code in HTML exports stays on one line and scrolls, as it does in the editor. In
 
 ## Enhancement script (optional)
 
-A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. Without it, the theme works as it does now and nothing changes; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. It is made for the Claude Style 1.2 series and later.
+A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. Without it, the theme works as it does now and nothing changes; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. It is made for the Claude Style 1.2 series and later. Script 0.1.1 (from Claude Style 1.2.2) is adapted to Typora 1.14.15, and 0.1.0 (in Claude Style 1.2.1) to Typora 1.14.10. The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
 
 With the script:
 
