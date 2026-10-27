@@ -1187,6 +1187,10 @@ img::selection {
     }
 }
 
+body:not(.html-for-mac) #write:has(.md-image.md-img-loaded.md-expand) {
+    transform: none;
+}
+
 #write .footnotes {
     font-size: 0.875em;
     color: var(--text-secondary);
@@ -2226,6 +2230,22 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
 
 .file-node-title {
     vertical-align: top;
+}
+
+#file-library-tree {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#file-library-tree .file-node-content {
+    padding-inline-end: 28px;
+}
+
+#file-library-tree .file-node-title {
+    display: block;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
 }
 
 #typora-sidebar:not(.ty-no-mount-folder) #file-library::before {

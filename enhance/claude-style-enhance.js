@@ -1,5 +1,5 @@
 /*
- * Claude Style Enhance 0.1.3 for Typora
+ * Claude Style Enhance 0.1.4 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
@@ -352,25 +352,26 @@
     return urls.slice(0, 12);
   }
   function pictureOf(address) {
-    const known = pictures.get(address);
-    if (known !== void 0) return known;
     const urls = pictureUrls(address);
+    const key = urls.join("\n");
+    const known = pictures.get(key);
+    if (known !== void 0) return known;
     if (urls.length === 0) {
-      pictures.set(address, "failed");
+      pictures.set(key, "failed");
       return "failed";
     }
-    pictures.set(address, "loading");
+    pictures.set(key, "loading");
     const results = urls.map(() => "loading");
     const settle = () => {
       for (const result of results) {
         if (result === "loading") return;
         if (result === "failed") continue;
-        pictures.set(address, result);
+        pictures.set(key, result);
         if (inPage) refreshNow();
         else refreshSoon();
         return;
       }
-      pictures.set(address, "failed");
+      pictures.set(key, "failed");
     };
     urls.forEach((url, index) => {
       const picture = inPage ? pageImage() : new Image();
@@ -938,14 +939,6 @@ ${card}::after {
     const editor = typoraFile()?.editor;
     return editor?.library?.fileSearch;
   }
-  function isPattern(text) {
-    try {
-      new RegExp(text);
-      return true;
-    } catch {
-      return false;
-    }
-  }
   function startSearch() {
     const field = document.querySelector("#file-library-search-input");
     if (!(field instanceof HTMLInputElement)) return;
@@ -956,9 +949,7 @@ ${card}::after {
       const search = fileSearch();
       const open2 = document.querySelector("#typora-sidebar.active-tab-files.ty-show-search") !== null;
       if (!claudeStyleIsOn() || !open2 || search?.isShown_ !== true || typeof search.search !== "function") return;
-      const text = field.value.trim();
-      if (search.useRegexp === true && text !== "" && !isPattern(text)) return;
-      search.search(text);
+      search.search(field.value.trim());
     };
     const later = () => {
       window.clearTimeout(timer);
@@ -1039,6 +1030,9 @@ ${card}::after {
     if (event.key === "Escape") {
       stop2(event);
       close();
+    } else if (event.key === "Tab") {
+      stop2(event);
+      view.overlay.querySelector(".claude-style-viewer-close")?.focus({ preventScroll: true });
     } else if (event.metaKey || event.ctrlKey) {
       close();
     }
@@ -1200,7 +1194,8 @@ ${card}::after {
         apply(current);
       } else {
         ease(current);
-        zoomTo(current, Math.max(realScale(current), 2), ...middle(current));
+        const real = realScale(current);
+        zoomTo(current, real > 1.01 ? real : 2, ...middle(current));
       }
     });
     frame.addEventListener("pointerdown", (event) => {
@@ -1360,7 +1355,7 @@ ${card}::after {
     });
   }
 
-  var VERSION = "0.1.3";
+  var VERSION = "0.1.4";
   function whenTyporaIsReady(start) {
     let tries = 0;
     const wait = () => {
@@ -1400,7 +1395,7 @@ ${card}::after {
 })();
 
 /*
- * End of Claude Style Enhance 0.1.3 for Typora
+ * End of Claude Style Enhance 0.1.4 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen

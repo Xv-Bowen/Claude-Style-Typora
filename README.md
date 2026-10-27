@@ -28,9 +28,11 @@ Files linked in paragraphs of their own, in the light and the dark theme (in the
 
 Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Windows and Linux.
 
+Test report: [Claude Style 1.2.2 on Linux](reports/claude-style-1.2.2-linux-test-report.html) (an HTML file; download it and open it in a browser).
+
 ## Which version of the desktop app it follows
 
-The desktop app's interface changes over time. The Claude Style 1.1 series follows the desktop app as of October 2026 (version 3.1623); the 1.2 series follows the new interface that came after it (version 3.6556): sizes, spacing, corners, type and layout and icons follow the new interface, and the colours stay those of the 1.1 series. Only one colour follows the new interface: in the sidebar, file names and their extensions, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text. Tables, the border around inline code and file cards keep the look of the 1.1 series; see [Questions you may have](#questions-you-may-have) for why. The releases of the 1.1 series stay on the Releases page for anyone who wants the earlier look.
+The desktop app's interface changes over time. The Claude Style 1.1 series follows the desktop app as of October 2026 (version 3.1623); the 1.2 series follows the new interface that came after it (version 3.6556): sizes, spacing, corners, type and layout and icons follow the new interface, and the colours stay those of the 1.1 series. Only one colour follows the new interface: in the sidebar, file names and their extensions, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text. Tables, the border around inline code and file cards keep the look of the 1.1 series; see [Questions you may have](#questions-you-may-have) for why. The releases of the 1.1 series stay on the Releases page, but they are no longer updated; please move to the 1.2 series soon.
 
 ## Installation
 
@@ -43,7 +45,7 @@ To switch between light and dark with the system appearance, turn on **Use separ
 
 Typora keeps themes in memory while it runs. After you replace the files with a newer version, quit and reopen Typora; switching themes from the menu does not make Typora read the theme files again.
 
-To keep the look of the 1.1 series, download its latest release from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
+The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, and the enhancement script works only with the 1.2 series, so please move to the 1.2 series soon. To keep the look of the 1.1 series anyway, download its last release, 1.1.16, from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
 
 ## What it covers
 
@@ -56,7 +58,7 @@ To keep the look of the 1.1 series, download its latest release from the [Releas
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
 | File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links. HTML and PDF exports draw no cards: file links are plain links there (with the [enhancement script](#enhancement-script-optional)'s export snippet, exports draw them too) |
 | Pictures | When the text cursor moves onto a picture (click it, or reach it with the arrow keys), the picture is shown enlarged in the middle of the window with the rest of the window dimmed and a close button at its top right, as Claude shows a picture. Clicking the close button or anywhere in the text, or leaving with the arrow keys, closes it |
-| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to, and follows Typora's language with the enhancement script) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The bar at the foot of the sidebar has no switch between the file tree and the article list; switch with View → File Tree or View → Articles. At the right of the bar at the foot of the sidebar, a lock shows whether the document is in Read-Only Mode (View → Readonly Mode): open while you can edit, shut and shown pressed while the mode is on. Without the enhancement script, clicking it does nothing; with the script, a click switches the mode. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to (with the enhancement script they follow Typora's language) |
+| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to, and follows Typora's language with the enhancement script) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The bar at the foot of the sidebar has no switch between the file tree and the article list; switch with View → File Tree or View → Articles. At the right of the bar at the foot of the sidebar, a lock shows whether the document is in Read-Only Mode (View → Readonly Mode): open while you can edit, shut and shown pressed while the mode is on. Without the enhancement script, clicking it does nothing; with the script, a click switches the mode. A name too long for its row fades out at the end, as in Claude's sidebar; the whole path shows when the pointer rests on it. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to (with the enhancement script they follow Typora's language) |
 | Floating toolbar | The look of Claude's review bar: its buttons, menus and submenus open and behave the way Claude's do, and the heading levels sit in a submenu of Paragraph |
 | Find and quick open | The find and replace bar is a card at the top right of the page, as Claude's find bar is; when nothing matches it reads 0 / 0. Quick open stands where Claude's search does, with the rest of the window dimmed, one line for each result: its icon, its name and, on the right, its folder; search results mark their matches in bold, as Claude's search does; at its foot it names the keys that work there, as the sidebar search does |
 | Dialogs and notices | Dialogs, notifications and tooltips in Claude's look |
@@ -90,11 +92,11 @@ Code in HTML exports stays on one line and scrolls, as it does in the editor. In
 
 ## Enhancement script (optional)
 
-A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. The theme draws the buttons and icons, and the script makes them work: without it, the theme works as it does now, except that the code cards' copy button and the lock at the foot of the sidebar do nothing when clicked; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. Script 0.1.3 needs Claude Style 1.2.3 or later; with an older theme it does nothing. Script 0.1.3 (from Claude Style 1.2.3) and 0.1.1 (in Claude Style 1.2.2) are adapted to Typora 1.14.15, and 0.1.0 (in Claude Style 1.2.1) to Typora 1.14.10. The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
+A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. The theme draws the buttons and icons, and the script makes them work: without it, the theme works as it does now, except that the code cards' copy button and the lock at the foot of the sidebar do nothing when clicked; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. The script is made for the 1.2 series only: script 0.1.3 and later need Claude Style 1.2.3 or later, and with an older theme (the 1.1 series included) the script does nothing. Scripts 0.1.4 (from Claude Style 1.2.4), 0.1.3 (in Claude Style 1.2.3) and 0.1.1 (in Claude Style 1.2.2) are adapted to Typora 1.14.15, and 0.1.0 (in Claude Style 1.2.1) to Typora 1.14.10. The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
 
 With the script:
 
-- **Pictures**: click a picture, or reach it with the arrow keys, and it opens enlarged in the middle of the window, growing from where it sits in the text. Zoom with the scroll wheel or by pinching on the trackpad, drag it once it is zoomed in, and double-click to switch between fitting the window and its actual size. The close button at the picture's top right or Esc closes it, and the text stays where it was.
+- **Pictures**: click a picture, or reach it with the arrow keys, and it opens enlarged in the middle of the window, growing from where it sits in the text. Zoom with the scroll wheel or by pinching on the trackpad, drag it once it is zoomed in, and double-click to switch between fitting the window and its actual size (a picture already shown at its actual size doubles). The close button at the picture's top right or Esc closes it, and the text stays where it was.
 - **Clicks**: a single click on a file card or an inline formula no longer shows its Markdown; to edit it, double-click, or click while holding ⌥ (Alt on Windows and Linux).
 - **File cards**: a card shows the file's name without its extension, with `_` and `-` as spaces (`Q3_report-final.pptx` reads "Q3 report final"); for a kind of file the theme does not know, the second line names the extension too; cards for pictures show a thumbnail.
 - **Copying code**: click the copy button at a code card's top right to copy its code; the button then turns into a tick.
@@ -191,6 +193,24 @@ Typora does not let the top folder fold and draws no caret for it. The theme dra
 **Why is only the first part of a long web address a link?**\
 For an address typed without link syntax, Typora decides where it ends, and it stops before Chinese characters in it (in `?query=中文`, for example). Typora's own themes show the same.
 
+**Why do some words repeat in a sidebar search result?**\
+When a line matches more than once, Typora puts the result together with the words before each match, so some words show twice (searching for alpha in "Alpha alpha alphabet" shows "AlphaAlpha alphaAlpha alpha alphabet"). The number of matches is right. Typora's own themes show the same; neither the theme nor the script can change it.
+
+**Why can I still tick tasks in Read-Only Mode?**\
+Read-Only Mode is Typora's, and it does not stop a click on a task's checkbox; on Linux, Return may change the text too. The lock at the foot of the sidebar only switches the mode for you and cannot change what it stops. Typora's own themes behave the same.
+
+**Why do some rare characters show as boxes?**\
+The theme bundles no fonts. A character that no installed font has, such as 𠀀 (U+20000), shows as a box whatever the theme. Installing a font that has it makes it show.
+
+**Why does Alt-click not open a file card or a formula for editing on Linux?**\
+Many Linux desktops move a window when you drag it with Alt held down (Xfce does by default), and the window manager takes the click before Typora sees it. Double-click instead, or choose another key for moving windows in the desktop's settings.
+
+**Why does Tab not reach the lock at the foot of the sidebar?**\
+The lock is drawn by the theme on Typora's footer, and Typora does not let Tab reach the buttons there. From the keyboard, switch with View → Readonly Mode.
+
+**Why does the table toolbar's "More" button move to a second row in a narrow window?**\
+On Windows and Linux the table toolbar has a More button. The theme's toolbar buttons are 28px, as in Claude, larger than in Typora's own themes, so in a very narrow window with the sidebar open they do not fit on one row: More moves to a second row, over the table's header, and still works. The Mac's table toolbar has no More button.
+
 **Why does a file card differ a little from Claude's?**\
 A theme cannot read the file or change the text a link shows, so the card shows the link's text as its name (Claude shows the file's name), has no preview of pictures or PDFs and no download button; Command-click (Ctrl-click on Windows and Linux) opens the file. For a kind of file the theme does not know, the second line reads only 文件 (file), without the extension Claude adds. Links to a place in the document or to a part of a file stay links, where Claude's replies show them as plain text. With the enhancement script, the card shows the file's name, names the extension for kinds it does not know, and shows a thumbnail for pictures; PDFs still have no preview, and there is no download button.
 
@@ -207,7 +227,7 @@ The 1.2 series takes its styles from the new interface and keeps all the colours
 The new interface turned the card for a shared file into a single row with a small icon block on the left; the card of the 1.1 series, coloured by the kind of file, makes a file easier to recognise at a glance, so it was not changed.
 
 **Will the 1.1 series still get updates?**\
-Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as new releases of the 1.1 series (1.1.16, 1.1.17 and so on), from the `1.1` branch. The releases of the 1.1 series stay on the Releases page.
+No. The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, and the enhancement script works only with the 1.2 series, so please move to the 1.2 series soon. The releases of the 1.1 series stay on the Releases page; the last one is 1.1.16.
 
 **Why did the version numbers change?**\
 Since 26 October 2026, the second number tells which interface of the desktop app a release follows: the 1.1 series follows the earlier interface and the 1.2 series the new one, and the third number counts the releases in order. The releases once numbered 1.0.0 to 1.3.9 are now 1.1.0 to 1.1.15, and 2.0.0 and 2.1.0 are now 1.2.0 and 1.2.1. The files of every release are unchanged.
