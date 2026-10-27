@@ -105,6 +105,7 @@
 
     --toolbar-shadow: 0 8px 24px rgb(0 0 0 / 32%), 0 2px 6px rgb(0 0 0 / 20%);
     --toolbar-hover: rgb(255 255 255 / 10%);
+    --toolbar-selected: rgb(255 255 255 / 15%);
 
     --button-fill: rgb(255 255 255 / 10%);
     --button-ring: 0 1px 2px rgb(0 0 0 / 5%);
@@ -2181,6 +2182,21 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     opacity: 1;
 }
 
+#typora-sidebar.ty-no-mount-folder:hover :is(#file-library-tree, #file-library-list-children)::after,
+#typora-sidebar:hover #outline-content:empty::after {
+    animation: none;
+}
+
+.html-for-mac #typora-sidebar :is(#file-library-tree, #file-library-list-children):empty::after {
+    top: max(calc(50vh - 22px - 128px), 18px);
+    transform: translateY(-50%);
+}
+
+.html-for-mac #outline-content:empty::after {
+    top: max(calc(50vh - 94px), 18px);
+    transform: translateY(-50%);
+}
+
 .file-node-title-ext-part,
 .file-list-item-file-ext-part {
     color: var(--text-muted);
@@ -2758,6 +2774,10 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     gap: 3px;
 }
 
+#ty-sidebar-footer #switch-file-list-btn {
+    display: none !important;
+}
+
 .sidebar-footer .sidebar-footer-item,
 .html-for-mac .sidebar-footer .sidebar-footer-item {
     box-sizing: border-box;
@@ -2803,6 +2823,17 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     display: block;
     height: 12px;
     line-height: 12px;
+}
+
+#sidebar-menu-btn .ty-dots-v::before {
+    content: "\f107";
+    position: relative;
+    top: 0;
+    display: inline-block;
+    width: 12px;
+    font-family: FontAwesome;
+    font-size: 16px;
+    text-align: center;
 }
 
 #sidebar-menu-btn {
@@ -2916,6 +2947,10 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     color: var(--text-muted);
     font-size: 12px;
     line-height: 12px;
+}
+
+#typora-sidebar.ty-no-mount-folder #sidebar-menu-btn .footer-btn {
+    display: none;
 }
 
 #sidebar-files-menu {
@@ -4409,13 +4444,13 @@ body:not(.html-for-mac) .md-f-tooltip {
 }
 
 .ty-editor-toolbar-btn.active {
-    background: var(--info-wash);
-    color: var(--info-ink);
+    background: var(--toolbar-selected);
+    color: var(--text-primary);
 }
 
-body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="header1"]) .ty-editor-toolbar-btn[data-action="block-style"],
-body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="ol"]) .ty-editor-toolbar-btn[data-action="list"],
-body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-action="source-mode"]) .ty-editor-toolbar-btn[data-action="more"] {
+body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="header1"]) .ty-editor-toolbar-btn[data-action="block-style"]:not(.active),
+body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="ol"]) .ty-editor-toolbar-btn[data-action="list"]:not(.active),
+body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-action="source-mode"]) .ty-editor-toolbar-btn[data-action="more"]:not(.active) {
     background: var(--toolbar-hover);
 }
 
