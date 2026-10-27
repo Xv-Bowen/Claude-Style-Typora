@@ -2,6 +2,8 @@
 
 English · [简体中文](README.zh-CN.md)
 
+> The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, and the enhancement script works only with the 1.2 series, so please move to the 1.2 series soon; see the [main branch](https://github.com/Xv-Bowen/claude-style-typora) and the [latest release](https://github.com/Xv-Bowen/claude-style-typora/releases/latest).
+
 A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in Claude. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, a file linked on its own becomes the card Claude shows for a file it shares, and Typora's own interface (sidebar, menus, floating toolbar, find bar, dialogs) takes on Claude's look as well.
 
 Claude Style is an independent theme. It is not made, endorsed or supported by Anthropic, and it contains no fonts, icons or other files from Anthropic. Claude is a trademark of Anthropic.
@@ -128,7 +130,7 @@ A theme cannot read the file or change the text a link shows, so the card shows 
 Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
 
 **Will the 1.1 series still get updates?**\
-Yes, it will keep being maintained: problems get fixed and the theme keeps up with new Typora versions (Typora's own future 2.0 included), all as new releases of the 1.1 series, from the `1.1` branch. The 1.2 series follows the desktop app's new interface; see [Which version of the desktop app it follows](#which-version-of-the-desktop-app-it-follows).
+No. The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, and the enhancement script works only with the 1.2 series, so please move to the 1.2 series soon. The 1.2 series follows the desktop app's new interface; see [Which version of the desktop app it follows](#which-version-of-the-desktop-app-it-follows). The releases of the 1.1 series stay on the Releases page; the last one is 1.1.16.
 
 **Why did the version numbers change?**\
 Since 26 October 2026, the second number tells which interface of the desktop app a release follows: the 1.1 series follows the earlier interface and the 1.2 series the new one, and the third number counts the releases in order. The releases once numbered 1.0.0 to 1.3.9 are now 1.1.0 to 1.1.15, and 2.0.0 and 2.1.0 are now 1.2.0 and 1.2.1. The files of every release are unchanged.
