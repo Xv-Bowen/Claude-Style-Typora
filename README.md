@@ -32,7 +32,36 @@ Test report: [Claude Style 1.2.2 on Linux](reports/claude-style-1.2.2-linux-test
 
 ## Which version of the desktop app it follows
 
-The desktop app's interface changes over time. The Claude Style 1.1 series follows the desktop app as of October 2026 (version 3.1623); the 1.2 series follows the new interface that came after it (version 3.6556): sizes, spacing, corners, type and layout and icons follow the new interface, and the colours stay those of the 1.1 series. Only one colour follows the new interface: in the sidebar, file names and their extensions, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text. Tables, the border around inline code and file cards keep the look of the 1.1 series; see [Questions you may have](#questions-you-may-have) for why. The releases of the 1.1 series stay on the Releases page, but they are no longer updated; please move to the 1.2 series soon.
+The desktop app's interface changes over time, so Claude Style comes in two series:
+
+- **The 1.2 series** follows the new interface that came after version 3.1623 (version 3.6556). It keeps being updated, and the enhancement script works only with it.
+- **The 1.1 series** follows the desktop app as of October 2026 (version 3.1623), before the new interface. It is no longer updated; its last release is 1.1.16, and moving to the 1.2 series soon is recommended.
+
+**How the two series differ**
+
+The 1.2 series takes the new interface's sizes, spacing, corners, type and layout and icons:
+
+- **Text**: tighter line spacing, one size for headings of levels two to six, and slightly lighter bold.
+- **Menus**: larger icons, rounder cards, and one row height for every menu.
+- **Sidebar**: a New row and a Search row at the top, and taller rows; a taller footer, with a lock at its right for Read-Only Mode (from 1.2.3).
+- **Elsewhere**: dialogs, the find card, the sidebar search and quick open follow the new interface's sizes and spacing.
+
+The colours are much the same in both series, with one difference: in the 1.2 series, file names and their extensions in the sidebar, outline headings, New and Search, the 项目列表 heading and the folder's name in the footer are always in the colour of the body text, darker than in the 1.1 series.
+
+**Why the 1.2 series does not follow the new interface in everything**
+
+The new interface has not been well received, and many people reacted strongly to it. It changed more than sizes and layout: it also changed the colours and several everyday parts. Secondary text and dividing lines are fainter, most of all in dark mode; inline code is no longer red and has lost its border; tables have lost their border and the header's fill; and file cards have become one-line rows with a small icon on the left. Together these make a document harder to read than before.
+
+So the 1.2 series follows only the new interface's frame: its sizes, spacing, layout and icons. The colours and the parts below keep the look of the 1.1 series:
+
+- **Colours**: the 1.1 series' colours, with clearer text and dividing lines. The only colour taken from the new interface is the sidebar text described above, where the new interface uses a darker colour.
+- **Tables**: the border, the rounded corners and the header's fill stay, so rows and columns are easier to follow.
+- **Inline code**: the red text and the thin border stay, so code stands apart from the text more clearly.
+- **File cards**: the cards stay coloured by the kind of file, so you can tell what a file is at a glance.
+
+**How Claude Style is designed**
+
+Claude Style aims to make documents in Typora read like a reply in Claude, so wherever it can, it follows the desktop app instead of inventing its own look; but it follows the app so that documents read comfortably, not to copy it pixel for pixel. Where a change in the new interface makes documents harder to read, Claude Style does not take it; where Typora cannot do what the app does (a sidebar that shows the desktop through it, for example), it uses the closest look it can. When the desktop app's new interface changes again, or once it is clearly better received, Claude Style will look again at how far to follow it.
 
 ## Installation
 
@@ -160,11 +189,20 @@ Quit Typora and run `uninstall-mac.sh`, `uninstall-windows.ps1` or `uninstall-li
 
 ## Questions you may have
 
+### Choices made on purpose
+
+**Why is an unticked subtask crossed out?**\
+Claude does the same: once a task is ticked, the whole item greys and is crossed out, the tasks under it included. The subtask's own box stays unticked.
+
+**Why are there two theme files rather than one that follows the system?**\
+Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
+
+### What a theme cannot do
+
+Typora and the system work this way, and a theme can only change how things look. The [enhancement script](#enhancement-script-optional) makes up for several of these; the answers say which.
+
 **Why do some parts of Typora keep the system look?**\
 On macOS they are drawn by the system, not by the page a theme can style: right-click menus, the menus in the title bar, confirmation dialogs, the window's title bar buttons, window tabs, the tooltip that shows a link's title, the thickness of the text cursor and the Settings window.
-
-**Why is the file name in the title bar not centred over the page when the sidebar is open?**\
-The name is drawn by the macOS title bar, not by the page a theme can style. With the sidebar open, Typora asks the title bar to centre the name over the space beside the sidebar, but on macOS 27 with Typora 1.14.10 the title bar does not do so, with Typora's own themes too.
 
 **Why does the sidebar not show the desktop through it, as macOS's Liquid Glass does?**\
 On the Mac, Typora's window is opaque: when a theme makes the background see-through, the window shows black or white behind it, not the desktop. So a theme cannot give Typora macOS's Liquid Glass look.
@@ -172,20 +210,11 @@ On the Mac, Typora's window is opaque: when a theme makes the background see-thr
 **Why can an enlarged picture not be zoomed or downloaded, as in Claude?**\
 A theme can only change how Typora looks, while zooming and downloading need a script, which a theme cannot add. What a theme can use is a state Typora sets itself: when the text cursor is on a picture, Typora opens the picture's source, and the theme then shows the picture enlarged and hides the source; when the cursor leaves, the large view closes. So while the large view is open the cursor is still in the source, and typing changes how the picture is written; to change a picture's path or description, use source mode. The optional [enhancement script](#enhancement-script-optional) opens pictures in a viewer of their own, which zooms and drags; the viewer has no download button.
 
-**Why is an unticked subtask crossed out?**\
-Claude does the same: once a task is ticked, the whole item greys and is crossed out, the tasks under it included. The subtask's own box stays unticked.
-
-**Why does Esc not close the block type menu of the floating toolbar?**\
-The menu is Typora's, and Esc does not close it with Typora's own themes either. Click outside it, or click the button again. With the [enhancement script](#enhancement-script-optional), Esc closes the menu.
-
-**Why does the floating toolbar show "Paragraph" in English at first?**\
-Typora builds the toolbar before it loads its interface language; click in the text and it reads 段落 (paragraph). Typora's own themes show the same. With the enhancement script, it soon changes to 段落 by itself.
+**Why does the sidebar search only show results after I press Return, and why does Esc sometimes not close it?**\
+Both are how Typora works: its sidebar search starts when you press Return, and Esc closes the search only while the cursor is in the search field. A theme cannot change keys or how searching works. To find files by name as you type, use Open Quickly in the File menu. When the cursor is not in the field, click the close button at the top right of the card, or press ⇧⌘F again (Ctrl+Shift+F on Windows and Linux), which puts the cursor back in the field. With the enhancement script, it searches as you type, and Esc closes it wherever the cursor is.
 
 **Why does the quick open list jump several rows when I press the down arrow?**\
 That is how Typora scrolls it: when the chosen row reaches the bottom of the list, Typora scrolls it straight to the top; with the up arrow it scrolls one row at a time. A theme cannot change this, and Typora's own themes do the same. The chosen row always stays in view. With the enhancement script, the down arrow scrolls one row at a time too.
-
-**Why does the sidebar search only show results after I press Return, and why does Esc sometimes not close it?**\
-Both are how Typora works: its sidebar search starts when you press Return, and Esc closes the search only while the cursor is in the search field. A theme cannot change keys or how searching works. To find files by name as you type, use Open Quickly in the File menu. When the cursor is not in the field, click the close button at the top right of the card, or press ⇧⌘F again (Ctrl+Shift+F on Windows and Linux), which puts the cursor back in the field. With the enhancement script, it searches as you type, and Esc closes it wherever the cursor is.
 
 **Why does the caret before the top folder not fold it?**\
 Typora does not let the top folder fold and draws no caret for it. The theme draws one only so the folder lines up with the folders under it; clicking it does nothing. With the enhancement script, clicking the top folder's row folds it.
@@ -193,38 +222,41 @@ Typora does not let the top folder fold and draws no caret for it. The theme dra
 **Why is only the first part of a long web address a link?**\
 For an address typed without link syntax, Typora decides where it ends, and it stops before Chinese characters in it (in `?query=中文`, for example). Typora's own themes show the same.
 
+**Why does a file card differ a little from Claude's?**\
+A theme cannot read the file or change the text a link shows, so the card shows the link's text as its name (Claude shows the file's name), has no preview of pictures or PDFs and no download button; Command-click (Ctrl-click on Windows and Linux) opens the file. For a kind of file the theme does not know, the second line reads only 文件 (file), without the extension Claude adds. Links to a place in the document or to a part of a file stay links, where Claude's replies show them as plain text. With the enhancement script, the card shows the file's name, names the extension for kinds it does not know, and shows a thumbnail for pictures; PDFs still have no preview, and there is no download button.
+
+**Why do some rare characters show as boxes?**\
+The theme bundles no fonts. A character that no installed font has, such as 𠀀 (U+20000), shows as a box whatever the theme. Installing a font that has it makes it show.
+
+**Why does Tab not reach the lock at the foot of the sidebar?**\
+The lock is drawn by the theme on Typora's footer, and Typora does not let Tab reach the buttons there. From the keyboard, switch with View → Readonly Mode.
+
+### Known problems
+
+These are real faults that are not fixed yet. All but the last are in Typora, the system or the desktop, where a theme cannot reach; where there is a way around, the answer gives it.
+
+**Why is the file name in the title bar not centred over the page when the sidebar is open?**\
+The name is drawn by the macOS title bar, not by the page a theme can style. With the sidebar open, Typora asks the title bar to centre the name over the space beside the sidebar, but on macOS 27 with Typora 1.14.10 the title bar does not do so, with Typora's own themes too.
+
+**Why does Esc not close the block type menu of the floating toolbar?**\
+The menu is Typora's, and Esc does not close it with Typora's own themes either. Click outside it, or click the button again. With the [enhancement script](#enhancement-script-optional), Esc closes the menu.
+
+**Why does the floating toolbar show "Paragraph" in English at first?**\
+Typora builds the toolbar before it loads its interface language; click in the text and it reads 段落 (paragraph). Typora's own themes show the same. With the enhancement script, it soon changes to 段落 by itself.
+
 **Why do some words repeat in a sidebar search result?**\
 When a line matches more than once, Typora puts the result together with the words before each match, so some words show twice (searching for alpha in "Alpha alpha alphabet" shows "AlphaAlpha alphaAlpha alpha alphabet"). The number of matches is right. Typora's own themes show the same; neither the theme nor the script can change it.
 
 **Why can I still tick tasks in Read-Only Mode?**\
 Read-Only Mode is Typora's, and it does not stop a click on a task's checkbox; on Linux, Return may change the text too. The lock at the foot of the sidebar only switches the mode for you and cannot change what it stops. Typora's own themes behave the same.
 
-**Why do some rare characters show as boxes?**\
-The theme bundles no fonts. A character that no installed font has, such as 𠀀 (U+20000), shows as a box whatever the theme. Installing a font that has it makes it show.
-
 **Why does Alt-click not open a file card or a formula for editing on Linux?**\
 Many Linux desktops move a window when you drag it with Alt held down (Xfce does by default), and the window manager takes the click before Typora sees it. Double-click instead, or choose another key for moving windows in the desktop's settings.
-
-**Why does Tab not reach the lock at the foot of the sidebar?**\
-The lock is drawn by the theme on Typora's footer, and Typora does not let Tab reach the buttons there. From the keyboard, switch with View → Readonly Mode.
 
 **Why does the table toolbar's "More" button move to a second row in a narrow window?**\
 On Windows and Linux the table toolbar has a More button. The theme's toolbar buttons are 28px, as in Claude, larger than in Typora's own themes, so in a very narrow window with the sidebar open they do not fit on one row: More moves to a second row, over the table's header, and still works. The Mac's table toolbar has no More button.
 
-**Why does a file card differ a little from Claude's?**\
-A theme cannot read the file or change the text a link shows, so the card shows the link's text as its name (Claude shows the file's name), has no preview of pictures or PDFs and no download button; Command-click (Ctrl-click on Windows and Linux) opens the file. For a kind of file the theme does not know, the second line reads only 文件 (file), without the extension Claude adds. Links to a place in the document or to a part of a file stay links, where Claude's replies show them as plain text. With the enhancement script, the card shows the file's name, names the extension for kinds it does not know, and shows a thumbnail for pictures; PDFs still have no preview, and there is no download button.
-
-**Why are there two theme files rather than one that follows the system?**\
-Typora lists each theme file as one entry in its Themes menu, so with a single file you could no longer choose light or dark yourself, for example the light theme for printing while the system is dark. An exported HTML page would also change colour with the reader's system. The two files can switch with the system appearance as well; see [Installation](#installation).
-
-**Why do tables in the 1.2 series look as they did in the 1.1 series?**\
-The 1.2 series takes most of its styles from the desktop app's new interface, but tables keep the look of the 1.1 series. The new interface's tables drop the outer border, the rounded corners and the header's fill, and separate the rows with a few lines only; with its border and header fill, the table of the 1.1 series makes rows and columns easier to follow, so it was not changed.
-
-**Why is inline code in the 1.2 series still red, with a thin border?**\
-The 1.2 series takes its styles from the new interface and keeps all the colours of the 1.1 series, so inline code is still red. The new interface also drops the thin border around inline code; the border sets code apart from the text more clearly, so Claude Style keeps it, as in the 1.1 series.
-
-**Why do file cards in the 1.2 series look as they did in the 1.1 series?**\
-The new interface turned the card for a shared file into a single row with a small icon block on the left; the card of the 1.1 series, coloured by the kind of file, makes a file easier to recognise at a glance, so it was not changed.
+### Versions
 
 **Will the 1.1 series still get updates?**\
 No. The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, and the enhancement script works only with the 1.2 series, so please move to the 1.2 series soon. The releases of the 1.1 series stay on the Releases page; the last one is 1.1.16.
