@@ -28,7 +28,7 @@ Claude Style 是独立制作的主题，不是 Anthropic 出品，也没有得�
 
 Claude Style 在 Mac 上精心设计，在 macOS、Windows 和 Linux 上全面测试。
 
-测试报告：[Linux 上的 Claude Style 1.2.4](reports/claude-style-1.2.4-linux-test-report.html)（HTML 文件，下载后用浏览器打开）。
+测试报告：[Linux 上测量 Claude Style 1.2.5 的侧栏底栏](reports/claude-style-1.2.5-linux-footer-measurement.html)（HTML 文件，下载后用浏览器打开）。
 
 ## 照的是哪一版桌面应用
 

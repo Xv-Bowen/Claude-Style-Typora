@@ -28,7 +28,7 @@ Files linked in paragraphs of their own, in the light and the dark theme (in the
 
 Claude Style is carefully designed on the Mac and thoroughly tested on macOS, Windows and Linux.
 
-Test report: [Claude Style 1.2.4 on Linux](reports/claude-style-1.2.4-linux-test-report.html) (an HTML file; download it and open it in a browser).
+Test report: [the sidebar footer of Claude Style 1.2.5, measured on Linux](reports/claude-style-1.2.5-linux-footer-measurement.html) (an HTML file; download it and open it in a browser).
 
 ## Which version of the desktop app it follows
 
