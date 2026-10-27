@@ -5,6 +5,8 @@
  * Copyright (c) 2026 Xv-Bowen
  * Licensed under CC BY-NC-ND 4.0: https://creativecommons.org/licenses/by-nc-nd/4.0/
  * SPDX-License-Identifier: CC-BY-NC-ND-4.0
+ * Icons for exported pages: Font Awesome 4.1.0 by Dave Gandy, http://fontawesome.io, SIL OFL 1.1;
+ * Ionicons 2.0.1, http://ionicons.com, MIT
  * Not affiliated with Anthropic
  */
 
@@ -105,6 +107,7 @@
 
     --toolbar-shadow: 0 8px 24px rgb(0 0 0 / 32%), 0 2px 6px rgb(0 0 0 / 20%);
     --toolbar-hover: rgb(255 255 255 / 10%);
+    --selected-fill: rgb(255 255 255 / 15%);
 
     --button-fill: rgb(255 255 255 / 10%);
     --button-ring: 0 1px 2px rgb(0 0 0 / 5%);
@@ -165,9 +168,16 @@
 }
 
 :root {
+    --fa-f00c-ink: url("data:image/svg+xml,%3Csvg fill=%27%23f0efec%27 xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1792 1827%27%3E%3Cpath d=%27M149 996Q121 968 121 928Q121 888 149 860L285 724Q313 696 353 696Q393 696 421 724L715 1019L1371 362Q1399 334 1439 334Q1479 334 1507 362L1643 498Q1671 526 1671 566Q1671 606 1643 634L919 1358L783 1494Q755 1522 715 1522Q675 1522 647 1494L511 1358L149 996Z%27/%3E%3C/svg%3E");
+    --fa-f0c5-ink: url("data:image/svg+xml,%3Csvg fill=%27%23f0efec%27 xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1792 1827%27%3E%3Cpath d=%27M0 1312L0 640Q0 600 20 552Q40 504 68 476L476 68Q504 40 552 20Q600 0 640 0L1056 0Q1096 0 1124 28Q1152 56 1152 96L1152 424Q1220 384 1280 384L1696 384Q1736 384 1764 412Q1792 440 1792 480L1792 1696Q1792 1736 1764 1764Q1736 1792 1696 1792L736 1792Q696 1792 668 1764Q640 1736 640 1696L640 1408L96 1408Q56 1408 28 1380Q0 1352 0 1312ZM128 1280L640 1280L640 1024Q640 984 660 936Q680 888 708 860L1024 544L1024 128L640 128L640 544Q640 584 612 612Q584 640 544 640L128 640ZM213 512L512 512L512 213ZM768 1664L1664 1664L1664 512L1280 512L1280 928Q1280 968 1252 996Q1224 1024 1184 1024L768 1024ZM853 896L1152 896L1152 597Z%27/%3E%3C/svg%3E");
+}
+
+:root {
     --font-text: "Anthropic Serif", "Times New Roman", "PingFang SC", "Microsoft YaHei", serif;
     --font-ui: "Anthropic Sans", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
     --font-code: "JetBrains Mono NL", "JetBrains Mono", "Anthropic Mono", ui-monospace, "SF Mono", Menlo, "PingFang SC", monospace, "Microsoft YaHei";
+
+    --claude-style-enhance: 1;
 
     --motion-fast: 60ms;
     --motion-snap: 0.12s;
@@ -236,6 +246,29 @@ body {
 
 img::selection {
     background-color: var(--selection-image);
+}
+
+:root {
+    --fa-f0f6: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1536 1827%27%3E%3Cpath d=%27M0 1696L0 96Q0 56 28 28Q56 0 96 0L992 0Q1032 0 1080 20Q1128 40 1156 68L1468 380Q1496 408 1516 456Q1536 504 1536 544L1536 1696Q1536 1736 1508 1764Q1480 1792 1440 1792L96 1792Q56 1792 28 1764Q0 1736 0 1696ZM128 1664L1408 1664L1408 640L992 640Q952 640 924 612Q896 584 896 544L896 128L128 128ZM384 1376L384 1312Q384 1298 393 1289Q402 1280 416 1280L1120 1280Q1134 1280 1143 1289Q1152 1298 1152 1312L1152 1376Q1152 1390 1143 1399Q1134 1408 1120 1408L416 1408Q402 1408 393 1399Q384 1390 384 1376ZM384 1120L384 1056Q384 1042 393 1033Q402 1024 416 1024L1120 1024Q1134 1024 1143 1033Q1152 1042 1152 1056L1152 1120Q1152 1134 1143 1143Q1134 1152 1120 1152L416 1152Q402 1152 393 1143Q384 1134 384 1120ZM384 864L384 800Q384 786 393 777Q402 768 416 768L1120 768Q1134 768 1143 777Q1152 786 1152 800L1152 864Q1152 878 1143 887Q1134 896 1120 896L416 896Q402 896 393 887Q384 878 384 864ZM1024 512L1400 512Q1390 483 1378 471L1065 158Q1053 146 1024 136Z%27/%3E%3C/svg%3E");
+    --fa-f0f6-box: 0.85714em 1.01953em;
+    --fa-f016: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1536 1827%27%3E%3Cpath d=%27M0 1696L0 96Q0 56 28 28Q56 0 96 0L992 0Q1032 0 1080 20Q1128 40 1156 68L1468 380Q1496 408 1516 456Q1536 504 1536 544L1536 1696Q1536 1736 1508 1764Q1480 1792 1440 1792L96 1792Q56 1792 28 1764Q0 1736 0 1696ZM128 1664L1408 1664L1408 640L992 640Q952 640 924 612Q896 584 896 544L896 128L128 128ZM1024 512L1400 512Q1390 483 1378 471L1065 158Q1053 146 1024 136Z%27/%3E%3C/svg%3E");
+    --fa-f016-box: 0.85714em 1.01953em;
+    --fa-f0ce: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1664 1827%27%3E%3Cpath d=%27M0 1376L0 288Q0 222 47 175Q94 128 160 128L1504 128Q1570 128 1617 175Q1664 222 1664 288L1664 1376Q1664 1442 1617 1489Q1570 1536 1504 1536L160 1536Q94 1536 47 1489Q0 1442 0 1376ZM128 1376Q128 1390 137 1399Q146 1408 160 1408L480 1408Q494 1408 503 1399Q512 1390 512 1376L512 1184Q512 1170 503 1161Q494 1152 480 1152L160 1152Q146 1152 137 1161Q128 1170 128 1184ZM128 992Q128 1006 137 1015Q146 1024 160 1024L480 1024Q494 1024 503 1015Q512 1006 512 992L512 800Q512 786 503 777Q494 768 480 768L160 768Q146 768 137 777Q128 786 128 800ZM128 608Q128 622 137 631Q146 640 160 640L480 640Q494 640 503 631Q512 622 512 608L512 416Q512 402 503 393Q494 384 480 384L160 384Q146 384 137 393Q128 402 128 416ZM640 1376Q640 1390 649 1399Q658 1408 672 1408L992 1408Q1006 1408 1015 1399Q1024 1390 1024 1376L1024 1184Q1024 1170 1015 1161Q1006 1152 992 1152L672 1152Q658 1152 649 1161Q640 1170 640 1184ZM640 992Q640 1006 649 1015Q658 1024 672 1024L992 1024Q1006 1024 1015 1015Q1024 1006 1024 992L1024 800Q1024 786 1015 777Q1006 768 992 768L672 768Q658 768 649 777Q640 786 640 800ZM640 608Q640 622 649 631Q658 640 672 640L992 640Q1006 640 1015 631Q1024 622 1024 608L1024 416Q1024 402 1015 393Q1006 384 992 384L672 384Q658 384 649 393Q640 402 640 416ZM1152 1376Q1152 1390 1161 1399Q1170 1408 1184 1408L1504 1408Q1518 1408 1527 1399Q1536 1390 1536 1376L1536 1184Q1536 1170 1527 1161Q1518 1152 1504 1152L1184 1152Q1170 1152 1161 1161Q1152 1170 1152 1184ZM1152 992Q1152 1006 1161 1015Q1170 1024 1184 1024L1504 1024Q1518 1024 1527 1015Q1536 1006 1536 992L1536 800Q1536 786 1527 777Q1518 768 1504 768L1184 768Q1170 768 1161 777Q1152 786 1152 800ZM1152 608Q1152 622 1161 631Q1170 640 1184 640L1504 640Q1518 640 1527 631Q1536 622 1536 608L1536 416Q1536 402 1527 393Q1518 384 1504 384L1184 384Q1170 384 1161 393Q1152 402 1152 416Z%27/%3E%3C/svg%3E");
+    --fa-f0ce-box: 0.92857em 1.01953em;
+    --fa-f1c0: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1536 1827%27%3E%3Cpath d=%27M0 1536L0 1366Q119 1450 325 1493Q531 1536 768 1536Q1005 1536 1211 1493Q1417 1450 1536 1366L1536 1536Q1536 1605 1433 1664Q1330 1723 1153 1758Q976 1792 768 1792Q560 1792 383 1758Q206 1723 103 1664Q0 1605 0 1536ZM0 1152L0 982Q119 1066 325 1109Q531 1152 768 1152Q1005 1152 1211 1109Q1417 1066 1536 982L1536 1152Q1536 1221 1433 1280Q1330 1339 1153 1374Q976 1408 768 1408Q560 1408 383 1374Q206 1339 103 1280Q0 1221 0 1152ZM0 768L0 598Q119 682 325 725Q531 768 768 768Q1005 768 1211 725Q1417 682 1536 598L1536 768Q1536 837 1433 896Q1330 955 1153 990Q976 1024 768 1024Q560 1024 383 990Q206 955 103 896Q0 837 0 768ZM0 384L0 256Q0 187 103 128Q206 69 383 35Q560 0 768 0Q976 0 1153 35Q1330 69 1433 128Q1536 187 1536 256L1536 384Q1536 453 1433 512Q1330 571 1153 606Q976 640 768 640Q560 640 383 606Q206 571 103 512Q0 453 0 384Z%27/%3E%3C/svg%3E");
+    --fa-f1c0-box: 0.85714em 1.01953em;
+    --fa-f0c5: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1792 1827%27%3E%3Cpath d=%27M0 1312L0 640Q0 600 20 552Q40 504 68 476L476 68Q504 40 552 20Q600 0 640 0L1056 0Q1096 0 1124 28Q1152 56 1152 96L1152 424Q1220 384 1280 384L1696 384Q1736 384 1764 412Q1792 440 1792 480L1792 1696Q1792 1736 1764 1764Q1736 1792 1696 1792L736 1792Q696 1792 668 1764Q640 1736 640 1696L640 1408L96 1408Q56 1408 28 1380Q0 1352 0 1312ZM128 1280L640 1280L640 1024Q640 984 660 936Q680 888 708 860L1024 544L1024 128L640 128L640 544Q640 584 612 612Q584 640 544 640L128 640ZM213 512L512 512L512 213ZM768 1664L1664 1664L1664 512L1280 512L1280 928Q1280 968 1252 996Q1224 1024 1184 1024L768 1024ZM853 896L1152 896L1152 597Z%27/%3E%3C/svg%3E");
+    --fa-f0c5-box: 1.0em 1.01953em;
+    --fa-f03e: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1920 1827%27%3E%3Cpath d=%27M0 1504L0 288Q0 222 47 175Q94 128 160 128L1760 128Q1826 128 1873 175Q1920 222 1920 288L1920 1504Q1920 1570 1873 1617Q1826 1664 1760 1664L160 1664Q94 1664 47 1617Q0 1570 0 1504ZM128 1504Q128 1517 138 1527Q147 1536 160 1536L1760 1536Q1773 1536 1782 1527Q1792 1517 1792 1504L1792 288Q1792 275 1782 266Q1773 256 1760 256L160 256Q147 256 138 266Q128 275 128 288ZM256 1408L256 1216L576 896L736 1056L1248 544L1664 960L1664 1408ZM312 712Q256 656 256 576Q256 496 312 440Q368 384 448 384Q528 384 584 440Q640 496 640 576Q640 656 584 712Q528 768 448 768Q368 768 312 712Z%27/%3E%3C/svg%3E");
+    --fa-f03e-box: 1.07143em 1.01953em;
+    --fa-f187: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1792 1827%27%3E%3Cpath d=%27M64 448L64 192Q64 166 83 147Q102 128 128 128L1664 128Q1690 128 1709 147Q1728 166 1728 192L1728 448Q1728 474 1709 493Q1690 512 1664 512L128 512Q102 512 83 493Q64 474 64 448ZM128 1600L128 640Q128 614 147 595Q166 576 192 576L1600 576Q1626 576 1645 595Q1664 614 1664 640L1664 1600Q1664 1626 1645 1645Q1626 1664 1600 1664L192 1664Q166 1664 147 1645Q128 1626 128 1600ZM723 787Q704 806 704 832Q704 858 723 877Q742 896 768 896L1024 896Q1050 896 1069 877Q1088 858 1088 832Q1088 806 1069 787Q1050 768 1024 768L768 768Q742 768 723 787Z%27/%3E%3C/svg%3E");
+    --fa-f187-box: 1.0em 1.01953em;
+    --fa-f121: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1920 1827%27%3E%3Cpath d=%27M55 983Q45 973 45 960Q45 947 55 937L521 471Q531 461 544 461Q557 461 567 471L617 521Q627 531 627 544Q627 557 617 567L224 960L617 1353Q627 1363 627 1376Q627 1389 617 1399L567 1449Q557 1459 544 1459Q531 1459 521 1449L55 983ZM712 1588L1085 297Q1089 284 1100 278Q1112 271 1124 275L1186 292Q1199 296 1206 308Q1212 319 1208 332L835 1623Q831 1636 820 1643Q808 1649 796 1645L734 1628Q721 1624 714 1613Q708 1601 712 1588ZM1303 1399Q1293 1389 1293 1376Q1293 1363 1303 1353L1696 960L1303 567Q1293 557 1293 544Q1293 531 1303 521L1353 471Q1363 461 1376 461Q1389 461 1399 471L1865 937Q1875 947 1875 960Q1875 973 1865 983L1399 1449Q1389 1459 1376 1459Q1363 1459 1353 1449L1303 1399Z%27/%3E%3C/svg%3E");
+    --fa-f121-box: 1.07143em 1.01953em;
+    --fa-f00c: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1792 1827%27%3E%3Cpath d=%27M149 996Q121 968 121 928Q121 888 149 860L285 724Q313 696 353 696Q393 696 421 724L715 1019L1371 362Q1399 334 1439 334Q1479 334 1507 362L1643 498Q1671 526 1671 566Q1671 606 1643 634L919 1358L783 1494Q755 1522 715 1522Q675 1522 647 1494L511 1358L149 996Z%27/%3E%3C/svg%3E");
+    --fa-f00c-box: 1.0em 1.01953em;
+    --io-f1f7: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 416 512%27%3E%3Cpath d=%27M208 48Q294 48 355 109Q416 170 416 256Q416 342 355 403Q294 464 208 464L208 464Q122 464 61 403Q0 342 0 256Q0 170 61 109Q122 48 208 48ZM216 172L216 248L291 248Q290 202 280 164Q254 170 216 172ZM216 156Q253 154 276 148Q266 114 250 92Q233 71 216 66ZM200 66Q164 75 140 148Q164 154 200 156ZM200 172Q161 170 135 164Q125 202 124 248L200 248ZM108 248Q110 195 119 160Q90 152 60 135Q20 183 17 248ZM108 264L17 264Q20 329 60 377Q94 359 119 352Q110 317 108 264ZM124 264Q125 310 135 348Q166 341 200 339L200 264ZM200 356Q164 358 140 364Q164 437 200 446ZM216 446Q233 441 250 420Q266 398 276 364Q253 358 216 356ZM216 339Q248 340 280 348Q290 310 291 264L216 264ZM308 264Q306 313 296 352Q323 360 356 377Q396 329 399 264ZM308 248L399 248Q396 183 356 135Q322 153 297 160Q306 195 308 248ZM344 122Q304 82 253 70Q276 94 292 144Q320 135 344 122ZM163 70Q110 82 72 122Q88 131 124 143Q139 95 163 70ZM72 390Q112 430 163 442Q138 416 123 368Q94 378 72 390ZM253 442Q304 430 344 390Q320 377 292 368Q276 418 253 442Z%27/%3E%3C/svg%3E");
+    --io-f1f7-box: 0.8125em 1.0em;
 }
 
 #write {
@@ -530,6 +563,8 @@ img::selection {
     --claude-file-ink: var(--file-blue-ink);
     --claude-file-glyph: "\f0f6";
     --claude-file-glyph-size: 16px;
+    --claude-file-mask: var(--fa-f0f6);
+    --claude-file-mask-size: var(--fa-f0f6-box);
     --claude-file-meta: "文件";
 }
 
@@ -545,6 +580,8 @@ img::selection {
 #write .md-link:has(> a:is(
     [href$=".md" i], [href$=".markdown" i])) {
     --claude-file-glyph: "\f016";
+    --claude-file-mask: var(--fa-f016);
+    --claude-file-mask-size: var(--fa-f016-box);
     --claude-file-glyph-size: 14px;
 }
 
@@ -555,6 +592,8 @@ img::selection {
     --claude-file-edge: var(--file-green-edge);
     --claude-file-ink: var(--file-green-ink);
     --claude-file-glyph: "\f0ce";
+    --claude-file-mask: var(--fa-f0ce);
+    --claude-file-mask-size: var(--fa-f0ce-box);
     --claude-file-glyph-size: 16px;
 }
 
@@ -565,6 +604,8 @@ img::selection {
     --claude-file-edge: var(--file-green-edge);
     --claude-file-ink: var(--file-green-ink);
     --claude-file-glyph: "\f1c0";
+    --claude-file-mask: var(--fa-f1c0);
+    --claude-file-mask-size: var(--fa-f1c0-box);
     --claude-file-glyph-size: 14px;
 }
 
@@ -575,6 +616,8 @@ img::selection {
     --claude-file-edge: var(--file-orange-edge);
     --claude-file-ink: var(--file-orange-ink);
     --claude-file-glyph: "\f0c5";
+    --claude-file-mask: var(--fa-f0c5);
+    --claude-file-mask-size: var(--fa-f0c5-box);
     --claude-file-glyph-size: 14px;
 }
 
@@ -586,6 +629,8 @@ img::selection {
     --claude-file-edge: var(--file-violet-edge);
     --claude-file-ink: var(--file-violet-ink);
     --claude-file-glyph: "\f03e";
+    --claude-file-mask: var(--fa-f03e);
+    --claude-file-mask-size: var(--fa-f03e-box);
     --claude-file-glyph-size: 15px;
 }
 
@@ -593,6 +638,8 @@ img::selection {
     [href$=".zip" i], [href$=".rar" i], [href$=".7z" i], [href$=".tar" i], [href$=".gz" i], [href$=".tgz" i],
     [href$=".bz2" i], [href$=".xz" i])) {
     --claude-file-glyph: "\f187";
+    --claude-file-mask: var(--fa-f187);
+    --claude-file-mask-size: var(--fa-f187-box);
 }
 
 #write .md-link:has(> a:is(
@@ -607,6 +654,8 @@ img::selection {
     --claude-file-edge: var(--file-yellow-edge);
     --claude-file-ink: var(--file-yellow-ink);
     --claude-file-glyph: "\f121";
+    --claude-file-mask: var(--fa-f121);
+    --claude-file-mask-size: var(--fa-f121-box);
     --claude-file-glyph-size: 16px;
 }
 
@@ -617,6 +666,8 @@ img::selection {
     --claude-file-edge: var(--file-magenta-edge);
     --claude-file-ink: var(--file-magenta-ink);
     --claude-file-glyph: "\f1f7";
+    --claude-file-mask: var(--io-f1f7);
+    --claude-file-mask-size: var(--io-f1f7-box);
     --claude-file-glyph-size: 18.5px;
     --claude-file-glyph-font: Ionicons;
 }
@@ -772,6 +823,15 @@ img::selection {
     text-align: center;
     translate: 0 var(--claude-sheet-lift, 0px);
     transition: translate var(--motion-base) var(--ease-out);
+}
+
+.typora-export #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::before {
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-color: currentColor;
+    -webkit-mask: var(--claude-file-mask) center / var(--claude-file-mask-size) no-repeat;
+    mask: var(--claude-file-mask) center / var(--claude-file-mask-size) no-repeat;
 }
 
 #write p:not(li p) > .md-link:only-child:not(.md-expand):not(:has(img)) > a::after {
@@ -1231,6 +1291,92 @@ img::selection {
 
 #write pre.md-meta-block::before {
     content: "yaml";
+}
+
+#write pre.md-fences:not(.md-diagram) {
+    display: flex;
+    flex-direction: column;
+}
+
+#write pre.md-fences:not(.md-diagram)::after {
+    content: "\e934";
+    order: -1;
+    position: sticky;
+    top: 18px;
+    z-index: 10;
+    align-self: flex-end;
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    margin: 10px 8px 10px 0;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font: normal 16.25px/28px typora-icon;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#write pre.md-fences:not(.md-diagram):not([lang=""])[lang]::before {
+    margin-top: -48px;
+}
+
+#write pre.md-fences:not(.md-diagram):is(:not([lang]), [lang=""]) > .CodeMirror {
+    margin-top: -48px;
+}
+
+#write pre.md-fences.mock-cm:not(.md-diagram):is(:not([lang]), [lang=""])::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#write pre.md-fences:not(.md-diagram):is(:hover, :focus-within)::after {
+    opacity: 1;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+@media (hover: none) {
+    #write pre.md-fences:not(.md-diagram)::after {
+        opacity: 1;
+    }
+}
+
+#write pre.md-fences.claude-style-copy-hover::after {
+    background-color: var(--row-hover);
+}
+
+#write pre.md-fences.claude-style-copied::after {
+    content: "\f00c";
+    font-family: FontAwesome;
+}
+
+#claude-style-copy-tip {
+    position: fixed;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.typora-export #write pre.md-fences:not(.md-diagram)::after {
+    content: "";
+    background-image: var(--fa-f0c5-ink);
+    background-position: center;
+    background-size: var(--fa-f0c5-box);
+    background-repeat: no-repeat;
+}
+
+.typora-export #write pre.md-fences.claude-style-copied::after {
+    background-image: var(--fa-f00c-ink);
+    background-size: var(--fa-f00c-box);
+}
+
+@media print {
+    #write pre.md-fences:not(.md-diagram)::after {
+        visibility: hidden;
+    }
 }
 
 #write .md-fences .CodeMirror {
@@ -2146,6 +2292,15 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     text-indent: -4px;
 }
 
+.file-node-root.claude-style-folded > .file-node-children {
+    display: none;
+}
+
+.file-node-root.claude-style-folded > .file-node-content::before {
+    content: "\f0da";
+    text-indent: 0;
+}
+
 .file-tree-node.file-not-editable > .file-node-content,
 .file-list-item.file-not-editable.active,
 .file-list-item.file-not-editable:not(.active):not(.select) {
@@ -2208,6 +2363,21 @@ body.mac-seamless-mode.pin-outline:has(#typora-sidebar.active-tab-files #sidebar
     color: var(--text-muted);
     font-size: 14px;
     opacity: 1;
+}
+
+#typora-sidebar.ty-no-mount-folder:hover :is(#file-library-tree, #file-library-list-children)::after,
+#typora-sidebar:hover #outline-content:empty::after {
+    animation: none;
+}
+
+.html-for-mac #typora-sidebar :is(#file-library-tree, #file-library-list-children):empty::after {
+    top: max(calc(50vh - 24px - 132px), 18px);
+    transform: translateY(-50%);
+}
+
+.html-for-mac #outline-content:empty::after {
+    top: max(calc(50vh - 98px), 18px);
+    transform: translateY(-50%);
 }
 
 .file-node-title-ext-part,
@@ -2791,6 +2961,71 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     gap: 6px;
 }
 
+#ty-sidebar-footer > div::before,
+#ty-sidebar-footer > div::after {
+    display: block;
+    flex: none;
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+}
+
+#ty-sidebar-footer > div::before {
+    content: "";
+    order: 0;
+}
+
+#ty-sidebar-footer > div::after {
+    content: "\f09c";
+    position: relative;
+    top: 0.75px;
+    order: 1;
+    margin-inline-start: -34px;
+    font-family: FontAwesome;
+    font-size: 16.25px;
+    line-height: 28px;
+    text-align: center;
+}
+
+:root:has(#write[locked="true"]) #ty-sidebar-footer > div::after {
+    content: "\f023";
+}
+
+#ty-sidebar-footer > div::before {
+    transition: background-color var(--motion-fast) var(--ease-out);
+}
+
+#ty-sidebar-footer > div::after {
+    transition: color var(--motion-fast) var(--ease-out);
+}
+
+#ty-sidebar-footer > div.claude-style-readonly-hover::before {
+    background-color: var(--row-hover);
+}
+
+#ty-sidebar-footer > div.claude-style-readonly-hover::after {
+    color: var(--text-primary);
+}
+
+#claude-style-readonly-tip {
+    position: fixed;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+:root:has(#write[locked="true"]) #ty-sidebar-footer > div::before {
+    background-color: var(--selected-fill);
+}
+
+:root:has(#write[locked="true"]) #ty-sidebar-footer > div::after {
+    color: var(--text-primary);
+}
+
+#ty-sidebar-footer #switch-file-list-btn {
+    display: none !important;
+}
+
 .sidebar-footer .sidebar-footer-item,
 .html-for-mac .sidebar-footer .sidebar-footer-item {
     box-sizing: border-box;
@@ -2837,6 +3072,17 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     display: block;
     height: 12px;
     line-height: 12px;
+}
+
+#sidebar-menu-btn .ty-dots-v::before {
+    content: "\f107";
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 12px;
+    font-family: FontAwesome;
+    font-size: 13px;
+    text-align: center;
 }
 
 #sidebar-menu-btn {
@@ -2960,6 +3206,10 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
     color: var(--text-muted);
     font-size: 12px;
     line-height: 12px;
+}
+
+#typora-sidebar.ty-no-mount-folder #sidebar-menu-btn .footer-btn {
+    display: none;
 }
 
 #sidebar-files-menu {
@@ -4439,13 +4689,13 @@ body:not(.html-for-mac) .md-f-tooltip {
 }
 
 .ty-editor-toolbar-btn.active {
-    background: var(--info-wash);
-    color: var(--info-ink);
+    background: var(--selected-fill);
+    color: var(--text-primary);
 }
 
-body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="header1"]) .ty-editor-toolbar-btn[data-action="block-style"],
-body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="ol"]) .ty-editor-toolbar-btn[data-action="list"],
-body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-action="source-mode"]) .ty-editor-toolbar-btn[data-action="more"] {
+body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="header1"]) .ty-editor-toolbar-btn[data-action="block-style"]:not(.active),
+body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-style="ol"]) .ty-editor-toolbar-btn[data-action="list"]:not(.active),
+body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-action="source-mode"]) .ty-editor-toolbar-btn[data-action="more"]:not(.active) {
     background: var(--toolbar-hover);
 }
 
@@ -5352,6 +5602,256 @@ body:has(> .ty-editor-toolbar-menu:not(.ty-editor-toolbar-submenu) > [data-actio
     opacity: 1;
 }
 
+html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    animation: none;
+    anchor-name: none;
+}
+
+html.claude-style-enhance-on #write p > .md-image.md-img-loaded.md-expand:only-child {
+    width: 100%;
+}
+
+html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand > img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: none;
+    margin: 0;
+    border-width: 0 4px 0 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+html.claude-style-enhance-on #write p > .md-image.md-img-loaded.md-expand:only-child > img {
+    display: block;
+    margin: auto;
+}
+
+html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand > .md-meta {
+    pointer-events: none;
+}
+
+html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand::before,
+html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand::after,
+html.claude-style-enhance-on #write :has(> .md-image.md-img-loaded.md-expand)::after {
+    content: none;
+}
+
+@media print {
+    #claude-style-viewer {
+        display: none;
+    }
+}
+
+#claude-style-viewer {
+    --claude-style-viewer-max-width: min(90vw, 100vw - 80px);
+    --claude-style-viewer-max-height: min(90vh - 2rem, 100vh - 80px);
+    position: fixed;
+    inset: 0;
+    z-index: 10050;
+    display: grid;
+    place-items: center;
+    padding: 40px;
+    background: rgb(0 0 0 / 62.5%);
+    outline: none;
+    font-family: var(--font-ui);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#claude-style-viewer .claude-style-viewer-column {
+    width: var(--claude-style-viewer-max-width);
+}
+
+#claude-style-viewer .claude-style-viewer-figure {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#claude-style-viewer .claude-style-viewer-frame {
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: var(--surface-page);
+    box-shadow: 0 4px 32px rgb(0 0 0 / 30%), 0 0 0 0.5px rgb(0 0 0 / 25%);
+    transform-origin: 50% 50%;
+    touch-action: none;
+}
+
+#claude-style-viewer .claude-style-viewer-image {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-width: var(--claude-style-viewer-max-width);
+    max-height: var(--claude-style-viewer-max-height);
+    -webkit-user-drag: none;
+}
+
+#claude-style-viewer.claude-style-viewer-zoomed .claude-style-viewer-frame {
+    cursor: grab;
+}
+
+#claude-style-viewer.claude-style-viewer-dragging .claude-style-viewer-frame {
+    cursor: grabbing;
+}
+
+#claude-style-viewer.claude-style-viewer-easing .claude-style-viewer-frame {
+    transition: transform 0.35s cubic-bezier(.32, .72, 0, 1);
+}
+
+#claude-style-viewer .claude-style-viewer-caption {
+    padding-top: 6px;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    text-shadow: 0 0 8px rgb(0 0 0 / 25%);
+    overflow-wrap: anywhere;
+    transition: opacity 0.2s cubic-bezier(.32, .72, 0, 1);
+}
+
+#claude-style-viewer.claude-style-viewer-zoomed .claude-style-viewer-caption {
+    opacity: 0;
+}
+
+#claude-style-viewer .claude-style-viewer-close {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 6px);
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+    font: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#claude-style-viewer .claude-style-viewer-close:hover {
+    background: rgb(255 255 255 / 15%);
+}
+
+#claude-style-viewer .claude-style-viewer-close::before {
+    content: "\f129";
+    font: normal 16px/28px Ionicons;
+}
+@media (max-width: 639.98px) {
+    #claude-style-viewer {
+        --claude-style-viewer-max-width: min(90vw, 100vw - 32px);
+        --claude-style-viewer-max-height: min(90vh - 2rem, 100vh - 32px);
+        padding: 16px;
+    }
+
+    #claude-style-viewer .claude-style-viewer-close {
+        top: 6px;
+        right: 6px;
+        left: auto;
+        background: var(--on-content-fill);
+        box-shadow: inset 0 0 0 1px var(--on-content-ring);
+        color: var(--text-primary);
+    }
+
+    #claude-style-viewer .claude-style-viewer-close:hover {
+        background: var(--on-content-hover);
+    }
+}
+
+::view-transition-group(claude-style-picture) {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(.32, .72, 0, 1);
+}
+
+html.claude-style-vt-closing::view-transition-group(claude-style-picture) {
+    animation-duration: 0.25s;
+}
+
+::view-transition-image-pair(claude-style-picture) {
+    isolation: auto;
+    overflow: clip;
+    animation: 0.35s cubic-bezier(.32, .72, 0, 1) both claude-style-vt-in;
+}
+
+html.claude-style-vt-closing::view-transition-image-pair(claude-style-picture) {
+    animation-name: claude-style-vt-out;
+    animation-duration: 0.25s;
+}
+
+::view-transition-old(claude-style-picture),
+::view-transition-new(claude-style-picture) {
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: normal;
+    object-fit: cover;
+    animation: none;
+}
+
+html:not(.claude-style-vt-closing)::view-transition-old(claude-style-picture),
+html.claude-style-vt-closing::view-transition-new(claude-style-picture) {
+    display: none;
+}
+
+html.claude-style-vt-no-origin::view-transition-group(claude-style-picture) {
+    animation-name: claude-style-vt-fade-out;
+}
+
+html.claude-style-vt :not(html) {
+    view-transition-name: none !important;
+}
+
+html.claude-style-vt::view-transition-group(root) {
+    animation-duration: 0.35s !important;
+}
+
+html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
+    animation-duration: 0.25s !important;
+}
+
+@keyframes claude-style-vt-in {
+    from {
+        border-radius: var(--claude-style-vt-source-radius, 0px);
+        box-shadow: 0 4px 32px rgb(0 0 0 / 0%), 0 0 0 0.5px rgb(0 0 0 / 0%);
+    }
+    to {
+        border-radius: var(--claude-style-vt-target-radius, 6px);
+        box-shadow: 0 4px 32px rgb(0 0 0 / 30%), 0 0 0 0.5px rgb(0 0 0 / 25%);
+    }
+}
+
+@keyframes claude-style-vt-out {
+    from {
+        border-radius: var(--claude-style-vt-target-radius, 6px);
+        box-shadow: 0 4px 32px rgb(0 0 0 / 30%), 0 0 0 0.5px rgb(0 0 0 / 25%);
+    }
+    to {
+        border-radius: var(--claude-style-vt-source-radius, 0px);
+        box-shadow: 0 4px 32px rgb(0 0 0 / 0%), 0 0 0 0.5px rgb(0 0 0 / 0%);
+    }
+}
+
+@keyframes claude-style-vt-fade-out {
+    to { opacity: 0; }
+}
+
 #ty-preview {
     background: var(--surface-page);
     color: var(--text-primary);
@@ -5779,6 +6279,38 @@ body:not(.html-for-mac).typora-sourceview-on #toggle-sourceview-btn {
     }
 }
 
+.claude-style-print-icon {
+    display: none;
+}
+
+@media print {
+    html.claude-style-enhance-on #write .md-link > a::before {
+        content: none !important;
+    }
+
+    html.claude-style-enhance-on #write .claude-style-print-icon {
+        display: flex;
+        position: absolute;
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+    }
+
+    .claude-style-print-icon svg {
+        flex: none;
+        fill: currentColor;
+    }
+
+    .claude-style-print-icon svg [fill]:not([fill="none"]) {
+        fill: currentColor;
+    }
+
+    .claude-style-print-icon svg [stroke]:not([stroke="none"]) {
+        stroke: currentColor;
+    }
+}
+
 @media print {
     :root {
         --mermaid-theme: dark;
@@ -5792,5 +6324,7 @@ body:not(.html-for-mac).typora-sourceview-on #toggle-sourceview-btn {
  * Copyright (c) 2026 Xv-Bowen
  * Licensed under CC BY-NC-ND 4.0: https://creativecommons.org/licenses/by-nc-nd/4.0/
  * SPDX-License-Identifier: CC-BY-NC-ND-4.0
+ * Icons for exported pages: Font Awesome 4.1.0 by Dave Gandy, http://fontawesome.io, SIL OFL 1.1;
+ * Ionicons 2.0.1, http://ionicons.com, MIT
  * Not affiliated with Anthropic
  */

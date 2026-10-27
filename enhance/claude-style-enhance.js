@@ -1,5 +1,5 @@
 /*
- * Claude Style Enhance 0.1.1 for Typora
+ * Claude Style Enhance 0.1.3 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
@@ -26,7 +26,7 @@
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   }
   function claudeStyleIsOn() {
-    return rootValue("--surface-fence") !== "";
+    return rootValue("--claude-style-enhance") !== "";
   }
 
   var listeners = [];
@@ -56,7 +56,6 @@
     wholeWord: ["Whole Word", "Front"],
     regularExpression: ["Regular Expression", "Front"],
     readonly: ["Readonly Mode", "Menu"],
-    readonlyMark: ["Readonly Mode", "Menu"],
     copy: ["Copy", "Menu"]
   };
   var SIMPLIFIED = {
@@ -66,7 +65,6 @@
     wholeWord: "查找整个单词",
     regularExpression: "正则表达式",
     readonly: "只读模式",
-    readonlyMark: "只读",
     copy: "复制",
     copyToClipboard: "复制到剪贴板",
     copied: "已复制",
@@ -81,7 +79,6 @@
     wholeWord: "尋找整個單字",
     regularExpression: "正規表達式",
     readonly: "唯讀模式",
-    readonlyMark: "唯讀模式",
     copy: "複製",
     copyToClipboard: "複製到剪貼板",
     copied: "已複製",
@@ -96,7 +93,6 @@
     wholeWord: "Whole Word",
     regularExpression: "Regular Expression",
     readonly: "Readonly Mode",
-    readonlyMark: "Readonly Mode",
     copy: "Copy",
     copyToClipboard: "Copy to clipboard",
     copied: "Copied",
@@ -133,9 +129,9 @@
     if (found !== void 0 && found !== "") return found;
     return kind === "traditional" ? TRADITIONAL[word] : ENGLISH[word];
   }
-  function kindIn(label2) {
+  function kindIn(label) {
     const kind = script();
-    const words = KINDS[label2];
+    const words = KINDS[label];
     if (kind === "simplified" || words === void 0) return void 0;
     return kind === "traditional" ? words[0] : words[1];
   }
@@ -264,7 +260,6 @@
     "jnlp"
   ]);
   var BIDI = /[\u061C\u200E\u200F\u202A-\u202E\u2066-\u2069]/g;
-  var moreRules;
   var inPage = false;
   var changes = [];
   var pictures = new Map();
@@ -301,9 +296,9 @@
   function metaOf(value) {
     if (!value.startsWith('"') || !value.endsWith('"')) return void 0;
     const gap = String.fromCharCode(8196);
-    const [label2 = "", extension = ""] = value.slice(1, -1).replace(/\\2004 ?/g, gap).split("·");
+    const [label = "", extension = ""] = value.slice(1, -1).replace(/\\2004 ?/g, gap).split("·");
     const trim = (part) => part.split(gap).join("").trim();
-    return { label: trim(label2), extension: trim(extension) };
+    return { label: trim(label), extension: trim(extension) };
   }
   function tidy(text) {
     return text.replace(/\s+/g, " ").trim();
@@ -430,8 +425,6 @@
           rules.push(`${card} { --claude-card-meta: ${line}; }`);
         }
       }
-      const more = moreRules?.(card, holder);
-      if (more !== void 0) rules.push(more);
       if (kind.startsWith('"图片')) {
         const picture = pictureOf(address);
         if (typeof picture === "object") rules.push(thumbnail(card, picture.url, picture));
@@ -492,177 +485,129 @@ ${card}::after {
     if (held !== void 0 && heldAt(event.target) === held) stop(event);
   }
 
-  var ON2 = "html.claude-style-enhance-on #write pre.md-fences";
-  var iconRules = "";
-  var CSS2 = `
-#write pre.md-fences > .claude-style-copy {
-    display: none;
-}
-
-${ON2} > .claude-style-copy {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-    width: 0;
-    pointer-events: none;
-}
-
-${ON2} > .claude-style-copy > .claude-style-copy-bar {
-    position: sticky;
-    top: 8px;
-    box-sizing: border-box;
-    height: 48px;
-    opacity: 0;
-}
-
-${ON2}:hover > .claude-style-copy > .claude-style-copy-bar,
-${ON2}:focus-within > .claude-style-copy > .claude-style-copy-bar {
-    opacity: 1;
-}
-
-@media (hover: none) {
-    ${ON2} > .claude-style-copy > .claude-style-copy-bar {
-        opacity: 1;
+  var CARD3 = "pre.md-fences:not(.md-diagram)";
+  var HOVER = "claude-style-copy-hover";
+  var COPIED = "claude-style-copied";
+  var TIP = "claude-style-copy-tip";
+  var TIP_GAP = 4;
+  var TIP_ROOM = 5;
+  function px(value) {
+    const number = Number.parseFloat(value);
+    return Number.isFinite(number) ? number : 0;
+  }
+  function viewTop(card) {
+    for (let node = card.parentElement; node !== null; node = node.parentElement) {
+      if (node === document.body || node === document.documentElement) break;
+      const overflow = getComputedStyle(node).overflowY;
+      if (overflow === "auto" || overflow === "scroll" || overflow === "overlay" || overflow === "hidden") {
+        return node.getBoundingClientRect().top + px(getComputedStyle(node).borderTopWidth);
+      }
     }
-}
-
-${ON2} .claude-style-copy-group {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    display: inline-flex;
-    align-items: center;
-    height: 32px;
-}
-
-${ON2} .claude-style-copy-button {
-    display: grid;
-    place-items: center;
-    box-sizing: border-box;
-    width: 28px;
-    height: 28px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--text-primary);
-    font: inherit;
-    pointer-events: auto;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-${ON2}:hover .claude-style-copy-button,
-${ON2}:focus-within .claude-style-copy-button {
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-}
-
-${ON2} .claude-style-copy-button:hover {
-    background: var(--row-hover);
-}
-
-${ON2} .claude-style-copy-button::before {
-    content: "\\e934";
-    width: 20px;
-    height: 20px;
-    font: normal 16.25px/20px typora-icon;
-    text-align: center;
-}
-
-${ON2} .claude-style-copy-button.claude-style-copied::before {
-    content: "\\f00c";
-    font-family: FontAwesome;
-}
-` + iconRules + `
-${ON2} .claude-style-copy-status {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
-@media print {
-    #write pre.md-fences > .claude-style-copy {
-        display: none;
+    return 0;
+  }
+  function buttonOf(card) {
+    const look = getComputedStyle(card, "::after");
+    const width = px(look.width);
+    const height = px(look.height);
+    if (look.content === "none" || look.display === "none" || !(width > 0) || !(height > 0)) return void 0;
+    const box = card.getBoundingClientRect();
+    const frame = getComputedStyle(card);
+    const inner = {
+      top: box.top + px(frame.borderTopWidth) + px(frame.paddingTop),
+      right: box.right - px(frame.borderRightWidth) - px(frame.paddingRight),
+      bottom: box.bottom - px(frame.borderBottomWidth) - px(frame.paddingBottom)
+    };
+    if (look.position === "absolute") {
+      const top2 = box.top + px(frame.borderTopWidth) + px(look.top) + px(look.marginTop);
+      const right2 = box.right - px(frame.borderRightWidth) - px(look.right) - px(look.marginRight);
+      return new DOMRect(right2 - width, top2, width, height);
     }
-}
-`;
+    const right = inner.right - px(look.marginRight);
+    const natural = inner.top + px(look.marginTop);
+    let top = natural;
+    if (look.position === "sticky") {
+      const stuck = viewTop(card) + px(look.top);
+      const lowest = inner.bottom - px(look.marginBottom) - height;
+      top = Math.max(natural, Math.min(stuck, lowest));
+    }
+    return new DOMRect(right - width, top, width, height);
+  }
+  function holds(rect, event) {
+    return rect !== void 0 && event.clientX >= rect.left && event.clientX < rect.right && event.clientY >= rect.top && event.clientY < rect.bottom;
+  }
+  function under(event) {
+    if (!claudeStyleIsOn() || !(event.target instanceof Element)) return void 0;
+    const card = event.target.closest(CARD3);
+    if (!(card instanceof HTMLElement) || card.closest("#write") === null) return void 0;
+    const rect = buttonOf(card);
+    return holds(rect, event) ? { card, rect } : void 0;
+  }
   function startCopy() {
-    addStyle("claude-style-enhance-copy", CSS2);
     const write = document.querySelector("#write");
     if (write === null) return;
-    for (const pre of write.querySelectorAll("pre.md-fences")) addButton(pre);
-    new MutationObserver((records) => {
-      const cards = new Set();
-      for (const record of records) {
-        const inside = record.target instanceof Element ? record.target.closest("pre.md-fences") : null;
-        if (inside !== null) cards.add(inside);
-        for (const node of record.addedNodes) {
-          if (!(node instanceof Element)) continue;
-          if (node.matches("pre.md-fences")) cards.add(node);
-          else for (const pre of node.querySelectorAll("pre.md-fences")) cards.add(pre);
-        }
-      }
-      for (const pre of cards) addButton(pre);
-    }).observe(write, { childList: true, subtree: true });
-    onWords(() => {
-      for (const button of write.querySelectorAll(".claude-style-copy-button")) label(button);
-    });
-  }
-  function label(button) {
-    button.setAttribute("aria-label", say("copyToClipboard"));
-    button.setAttribute("ty-hint", say("copy"));
-  }
-  function addButton(pre) {
-    if (!(pre instanceof HTMLElement) || pre.classList.contains("md-diagram")) return;
-    if (pre.querySelector(":scope > .claude-style-copy") !== null) return;
-    const column = document.createElement("div");
-    column.className = "claude-style-copy";
-    column.contentEditable = "false";
-    const bar = document.createElement("div");
-    bar.className = "claude-style-copy-bar";
-    const group = document.createElement("span");
-    group.className = "claude-style-copy-group";
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "claude-style-copy-button";
-    label(button);
-    const status = document.createElement("span");
-    status.className = "claude-style-copy-status";
-    status.setAttribute("role", "status");
-    group.append(button);
-    bar.append(group, status);
-    column.append(bar);
-    pre.append(column);
-    for (const type of ["mousedown", "mouseup"]) {
-      column.addEventListener(type, (event) => {
+    const inTypora = !document.body.classList.contains("typora-export");
+    let tip;
+    if (inTypora) {
+      const label = document.createElement("div");
+      label.id = TIP;
+      label.className = "ty-tooltip";
+      label.setAttribute("role", "tooltip");
+      document.body.append(label);
+      onWords(() => {
+        label.textContent = say("copy");
+      });
+      tip = label;
+    }
+    let hovered;
+    const leave = () => {
+      hovered?.classList.remove(HOVER);
+      hovered = void 0;
+      tip?.classList.remove("shown");
+    };
+    const enter = (card, rect) => {
+      if (hovered === card) return;
+      leave();
+      hovered = card;
+      card.classList.add(HOVER);
+      if (tip === void 0 || card.classList.contains(COPIED)) return;
+      const width = tip.offsetWidth;
+      const height = tip.offsetHeight;
+      const left = Math.min(Math.max(rect.left + rect.width / 2 - width / 2, TIP_ROOM), window.innerWidth - TIP_ROOM - width);
+      tip.style.left = `${left}px`;
+      const below = rect.bottom + TIP_GAP;
+      tip.style.top = `${below + height <= window.innerHeight - TIP_ROOM ? below : rect.top - TIP_GAP - height}px`;
+      tip.classList.add("shown");
+    };
+    window.addEventListener("mousemove", (event) => {
+      const found = under(event);
+      if (found !== void 0) enter(found.card, found.rect);
+      else leave();
+    }, true);
+    document.addEventListener("mouseleave", leave);
+    window.addEventListener("scroll", leave, true);
+    window.addEventListener("blur", leave);
+    for (const type of ["mousedown", "mouseup", "dblclick"]) {
+      window.addEventListener(type, (event) => {
+        if (under(event) === void 0) return;
         event.preventDefault();
         event.stopPropagation();
-      });
+      }, true);
     }
-    let timer = 0;
-    button.addEventListener("click", (event) => {
+    const timers = new WeakMap();
+    window.addEventListener("click", (event) => {
+      const found = under(event);
+      if (found === void 0) return;
       event.preventDefault();
       event.stopPropagation();
-      if (!claudeStyleIsOn()) return;
-      void copyText(codeOf(pre)).then((done) => {
+      const { card } = found;
+      tip?.classList.remove("shown");
+      void copyText(codeOf(card)).then((done) => {
         if (!done) return;
-        button.classList.add("claude-style-copied");
-        status.textContent = say("copied");
-        window.clearTimeout(timer);
-        timer = window.setTimeout(() => {
-          button.classList.remove("claude-style-copied");
-          status.textContent = "";
-        }, 2e3);
+        card.classList.add(COPIED);
+        window.clearTimeout(timers.get(card));
+        timers.set(card, window.setTimeout(() => card.classList.remove(COPIED), 2e3));
       });
-    });
+    }, true);
   }
   function codeOf(pre) {
     const holder = pre.querySelector(".CodeMirror");
@@ -670,9 +615,7 @@ ${ON2} .claude-style-copy-status {
     if (typeof value === "string") return value;
     const lines = pre.querySelectorAll(".CodeMirror-line");
     if (lines.length > 0) return Array.from(lines, (line) => line.textContent ?? "").join("\n");
-    const copy = pre.cloneNode(true);
-    copy.querySelector(":scope > .claude-style-copy")?.remove();
-    return copy.textContent ?? "";
+    return pre.textContent ?? "";
   }
   async function copyText(text) {
     try {
@@ -709,18 +652,6 @@ ${ON2} .claude-style-copy-status {
 
   var FOLDED = "claude-style-folded";
   var KEY = "claude-style-enhance.folded-roots";
-  var ON3 = "html.claude-style-enhance-on";
-  var iconRules2 = "";
-  var CSS3 = `
-${ON3} .file-node-root.${FOLDED} > .file-node-children {
-    display: none;
-}
-
-${ON3} .file-node-root.${FOLDED} > .file-node-content::before {
-    content: "\\f0da";
-    text-indent: 0;
-}
-` + iconRules2;
   function stored() {
     try {
       const value = JSON.parse(localStorage.getItem(KEY) ?? "[]");
@@ -755,7 +686,6 @@ ${ON3} .file-node-root.${FOLDED} > .file-node-content::before {
   function startFolder() {
     const tree = document.querySelector("#file-library-tree");
     if (tree === null) return;
-    addStyle("claude-style-enhance-folder", CSS3);
     const restore = () => {
       const node = root();
       const path = node?.getAttribute("data-path");
@@ -911,114 +841,94 @@ ${ON3} .file-node-root.${FOLDED} > .file-node-content::before {
     if (cid === null) return;
     const list = document.querySelector("#outline-content");
     if (list === null) return;
-    let label2 = list.querySelector(`.outline-label[data-ref="${CSS.escape(cid)}"]`);
-    if (label2 === null) return;
+    let label = list.querySelector(`.outline-label[data-ref="${CSS.escape(cid)}"]`);
+    if (label === null) return;
     if (!document.body.classList.contains("no-collapse-outline")) {
-      const open2 = label2.closest(".outline-item-open > .outline-children") ?? list;
-      const holder = Array.from(open2.children).find((child) => child === label2 || child.contains(label2));
-      label2 = holder?.querySelector(".outline-label") ?? label2;
+      const open2 = label.closest(".outline-item-open > .outline-children") ?? list;
+      const holder = Array.from(open2.children).find((child) => child === label || child.contains(label));
+      label = holder?.querySelector(".outline-label") ?? label;
     }
     for (const old of document.querySelectorAll(".outline-item-active")) old.classList.remove("outline-item-active");
     for (const old of list.querySelectorAll(".outline-active")) old.classList.remove("outline-active");
-    label2.classList.add("outline-active");
-    label2.parentElement?.classList.add("outline-item-active");
-    keepInView(label2);
+    label.classList.add("outline-active");
+    label.parentElement?.classList.add("outline-item-active");
+    keepInView(label);
   }
-  function keepInView(label2) {
+  function keepInView(label) {
     const box = document.querySelector("#outline-content")?.parentElement;
     if (box === null || box === void 0) return;
-    const row = label2.getBoundingClientRect();
+    const row = label.getBoundingClientRect();
     const view2 = box.getBoundingClientRect();
     if (row.bottom > view2.bottom) box.scrollTop += row.bottom - view2.bottom;
     else if (row.top < view2.top) box.scrollTop -= view2.top - row.top;
   }
 
-  var ID = "claude-style-readonly-btn";
-  var MARK = "claude-style-readonly-mark";
-  var CSS4 = `
-#${ID} {
-    display: none;
-}
-
-html.claude-style-enhance-on #${ID} {
-    display: block;
-    width: 28px;
-    padding-inline: 0;
-    font-size: 16.25px;
-    text-align: center;
-    cursor: default;
-}
-
-html.claude-style-enhance-on #${ID}::before {
-    content: "\\f09c";
-    font-family: FontAwesome;
-    line-height: 28px;
-}
-
-html.claude-style-enhance-on #${ID}.claude-style-locked::before {
-    content: "\\f023";
-}
-
-#${MARK} {
-    display: none;
-}
-
-html.claude-style-enhance-on #${MARK}.claude-style-locked {
-    display: block;
-    position: fixed;
-    top: calc(var(--title-bar-height, 20px) + 12px);
-    right: 20px;
-    z-index: 9;
-    color: var(--text-muted);
-    font-family: var(--font-ui);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 17px;
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-}
-
-@media print {
-    html.claude-style-enhance-on #${MARK}.claude-style-locked {
-        display: none;
-    }
-}
-`;
-  function startReadonlyButton() {
+  var ROW = "#ty-sidebar-footer > div";
+  var HOVER2 = "claude-style-readonly-hover";
+  var TIP2 = "claude-style-readonly-tip";
+  var TIP_GAP2 = 4;
+  var TIP_ROOM2 = 6;
+  function slotOf(row) {
+    const slot = getComputedStyle(row, "::before");
+    const width = Number.parseFloat(slot.width);
+    const height = Number.parseFloat(slot.height);
+    if (slot.content === "none" || slot.display === "none" || !(width > 0) || !(height > 0)) return void 0;
+    const box = row.getBoundingClientRect();
+    const style = getComputedStyle(row);
+    const gap = Number.parseFloat(style.columnGap) || 0;
     const switcher = document.getElementById("switch-file-list-btn");
-    const write = document.querySelector("#write");
-    if (switcher === null || write === null || document.getElementById(ID) !== null) return;
-    addStyle("claude-style-enhance-readonly", CSS4);
-    const button = document.createElement("div");
-    button.id = ID;
-    button.className = "sidebar-footer-item footer-item-right footer-btn";
-    button.setAttribute("role", "button");
-    switcher.before(button);
-    const mark3 = document.createElement("div");
-    mark3.id = MARK;
-    mark3.setAttribute("aria-hidden", "true");
-    document.body.append(mark3);
+    const right = switcher !== null && switcher.getClientRects().length > 0 ? switcher.getBoundingClientRect().left - gap : box.right - (Number.parseFloat(style.borderRightWidth) || 0) - (Number.parseFloat(style.paddingRight) || 0);
+    return new DOMRect(right - width, box.top + (box.height - height) / 2, width, height);
+  }
+  function holds2(slot, event) {
+    return slot !== void 0 && event.clientX >= slot.left && event.clientX < slot.right && event.clientY >= slot.top && event.clientY < slot.bottom;
+  }
+  function startReadonlyButton() {
+    const row = document.querySelector(ROW);
+    if (row === null || document.getElementById(TIP2) !== null) return;
+    const tip = document.createElement("div");
+    tip.id = TIP2;
+    tip.className = "ty-tooltip";
+    tip.setAttribute("role", "tooltip");
+    document.body.append(tip);
     onWords(() => {
-      button.setAttribute("ty-hint", say("readonly"));
-      button.setAttribute("aria-label", say("readonly"));
-      mark3.textContent = say("readonlyMark");
+      tip.textContent = say("readonly");
     });
-    const show2 = () => {
-      const locked = write.getAttribute("contenteditable") === "false" || write.getAttribute("locked") === "true";
-      button.classList.toggle("claude-style-locked", locked);
-      mark3.classList.toggle("claude-style-locked", locked);
-      button.setAttribute("aria-pressed", String(locked));
+    const leave = () => {
+      row.classList.remove(HOVER2);
+      tip.classList.remove("shown");
     };
-    show2();
-    new MutationObserver(show2).observe(write, { attributes: true, attributeFilter: ["contenteditable", "locked"] });
-    button.addEventListener("mousedown", (event) => {
+    const enter = (slot) => {
+      if (row.classList.contains(HOVER2)) return;
+      row.classList.add(HOVER2);
+      const width = tip.offsetWidth;
+      const height = tip.offsetHeight;
+      const left = Math.min(Math.max(slot.left + slot.width / 2 - width / 2, TIP_ROOM2), window.innerWidth - TIP_ROOM2 - width);
+      tip.style.left = `${left}px`;
+      tip.style.top = `${slot.top - TIP_GAP2 - height}px`;
+      tip.classList.add("shown");
+    };
+    const over = (event) => {
+      if (!claudeStyleIsOn()) return void 0;
+      const slot = slotOf(row);
+      return holds2(slot, event) ? slot : void 0;
+    };
+    row.addEventListener("mousemove", (event) => {
+      const slot = over(event);
+      if (slot !== void 0) enter(slot);
+      else leave();
+    });
+    row.addEventListener("mouseleave", leave);
+    row.addEventListener("mousedown", (event) => {
+      if (over(event) === void 0) return;
       event.preventDefault();
       event.stopPropagation();
     });
-    button.addEventListener("click", (event) => {
+    row.addEventListener("click", (event) => {
+      if (over(event) === void 0) return;
       event.preventDefault();
       event.stopPropagation();
+      tip.classList.remove("shown");
       typoraFile()?.toggleReadonlyMode?.();
     });
   }
@@ -1072,263 +982,6 @@ html.claude-style-enhance-on #${MARK}.claude-style-locked {
   }
 
   var NAME = "claude-style-picture";
-  var EASE = "cubic-bezier(.32, .72, 0, 1)";
-  var SHADOW = "0 4px 32px rgb(0 0 0 / 30%), 0 0 0 0.5px rgb(0 0 0 / 25%)";
-  var CLEAR_SHADOW = "0 4px 32px rgb(0 0 0 / 0%), 0 0 0 0.5px rgb(0 0 0 / 0%)";
-  var CSS5 = `
-html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand {
-    position: relative;
-    inset: auto;
-    z-index: auto;
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    animation: none;
-    anchor-name: none;
-}
-
-html.claude-style-enhance-on #write p > .md-image.md-img-loaded.md-expand:only-child {
-    width: 100%;
-}
-
-html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand > img {
-    display: inline-block;
-    max-width: 100%;
-    max-height: none;
-    margin: 0;
-    border-width: 0 4px 0 2px;
-    border-style: solid;
-    border-color: transparent;
-    border-radius: 0;
-    background-color: transparent;
-    box-shadow: none;
-}
-
-html.claude-style-enhance-on #write p > .md-image.md-img-loaded.md-expand:only-child > img {
-    display: block;
-    margin: auto;
-}
-
-html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand > .md-meta {
-    pointer-events: none;
-}
-
-html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand::before,
-html.claude-style-enhance-on #write .md-image.md-img-loaded.md-expand::after,
-html.claude-style-enhance-on #write :has(> .md-image.md-img-loaded.md-expand)::after {
-    content: none;
-}
-
-@media print {
-    #claude-style-viewer {
-        display: none;
-    }
-}
-`;
-  var iconRules3 = "";
-  var VIEW_CSS = `
-#claude-style-viewer {
-    --claude-style-viewer-max-width: min(90vw, 100vw - 80px);
-    --claude-style-viewer-max-height: min(90vh - 2rem, 100vh - 80px);
-    position: fixed;
-    inset: 0;
-    z-index: 10050;
-    display: grid;
-    place-items: center;
-    padding: 40px;
-    background: rgb(0 0 0 / 62.5%);
-    outline: none;
-    font-family: var(--font-ui);
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-#claude-style-viewer .claude-style-viewer-column {
-    width: var(--claude-style-viewer-max-width);
-}
-
-#claude-style-viewer .claude-style-viewer-figure {
-    position: relative;
-    width: fit-content;
-    margin: 0 auto;
-}
-
-#claude-style-viewer .claude-style-viewer-frame {
-    overflow: hidden;
-    border-radius: 6px;
-    background-color: var(--surface-page);
-    box-shadow: ${SHADOW};
-    transform-origin: 50% 50%;
-    touch-action: none;
-}
-
-#claude-style-viewer .claude-style-viewer-image {
-    display: block;
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    max-width: var(--claude-style-viewer-max-width);
-    max-height: var(--claude-style-viewer-max-height);
-    -webkit-user-drag: none;
-}
-
-#claude-style-viewer.claude-style-viewer-zoomed .claude-style-viewer-frame {
-    cursor: grab;
-}
-
-#claude-style-viewer.claude-style-viewer-dragging .claude-style-viewer-frame {
-    cursor: grabbing;
-}
-
-#claude-style-viewer.claude-style-viewer-easing .claude-style-viewer-frame {
-    transition: transform 0.35s ${EASE};
-}
-
-#claude-style-viewer .claude-style-viewer-caption {
-    padding-top: 6px;
-    color: #ffffff;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    text-shadow: 0 0 8px rgb(0 0 0 / 25%);
-    overflow-wrap: anywhere;
-    transition: opacity 0.2s ${EASE};
-}
-
-#claude-style-viewer.claude-style-viewer-zoomed .claude-style-viewer-caption {
-    opacity: 0;
-}
-
-#claude-style-viewer .claude-style-viewer-close {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 6px);
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    box-sizing: border-box;
-    width: 28px;
-    height: 28px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: #ffffff;
-    font: inherit;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-#claude-style-viewer .claude-style-viewer-close:hover {
-    background: rgb(255 255 255 / 15%);
-}
-
-#claude-style-viewer .claude-style-viewer-close::before {
-    content: "\\f129";
-    font: normal 16px/28px Ionicons;
-}
-` + iconRules3 + `
-@media (max-width: 639.98px) {
-    #claude-style-viewer {
-        --claude-style-viewer-max-width: min(90vw, 100vw - 32px);
-        --claude-style-viewer-max-height: min(90vh - 2rem, 100vh - 32px);
-        padding: 16px;
-    }
-
-    #claude-style-viewer .claude-style-viewer-close {
-        top: 6px;
-        right: 6px;
-        left: auto;
-        background: var(--on-content-fill);
-        box-shadow: inset 0 0 0 1px var(--on-content-ring);
-        color: var(--text-primary);
-    }
-
-    #claude-style-viewer .claude-style-viewer-close:hover {
-        background: var(--on-content-hover);
-    }
-}
-
-::view-transition-group(${NAME}) {
-    animation-duration: 0.35s;
-    animation-timing-function: ${EASE};
-}
-
-html.claude-style-vt-closing::view-transition-group(${NAME}) {
-    animation-duration: 0.25s;
-}
-
-::view-transition-image-pair(${NAME}) {
-    isolation: auto;
-    overflow: clip;
-    animation: 0.35s ${EASE} both claude-style-vt-in;
-}
-
-html.claude-style-vt-closing::view-transition-image-pair(${NAME}) {
-    animation-name: claude-style-vt-out;
-    animation-duration: 0.25s;
-}
-
-::view-transition-old(${NAME}),
-::view-transition-new(${NAME}) {
-    width: 100%;
-    height: 100%;
-    mix-blend-mode: normal;
-    object-fit: cover;
-    animation: none;
-}
-
-html:not(.claude-style-vt-closing)::view-transition-old(${NAME}),
-html.claude-style-vt-closing::view-transition-new(${NAME}) {
-    display: none;
-}
-
-html.claude-style-vt-no-origin::view-transition-group(${NAME}) {
-    animation-name: claude-style-vt-fade-out;
-}
-
-html.claude-style-vt :not(html) {
-    view-transition-name: none !important;
-}
-
-html.claude-style-vt::view-transition-group(root) {
-    animation-duration: 0.35s !important;
-}
-
-html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
-    animation-duration: 0.25s !important;
-}
-
-@keyframes claude-style-vt-in {
-    from {
-        border-radius: var(--claude-style-vt-source-radius, 0px);
-        box-shadow: ${CLEAR_SHADOW};
-    }
-    to {
-        border-radius: var(--claude-style-vt-target-radius, 6px);
-        box-shadow: ${SHADOW};
-    }
-}
-
-@keyframes claude-style-vt-out {
-    from {
-        border-radius: var(--claude-style-vt-target-radius, 6px);
-        box-shadow: ${SHADOW};
-    }
-    to {
-        border-radius: var(--claude-style-vt-source-radius, 0px);
-        box-shadow: ${CLEAR_SHADOW};
-    }
-}
-
-@keyframes claude-style-vt-fade-out {
-    to { opacity: 0; }
-}
-`;
   var view;
   var pressed2;
   var moving = false;
@@ -1337,7 +990,6 @@ html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
   var lastKey = "";
   var lastKeyAt = 0;
   function startViewer() {
-    addStyle("claude-style-enhance-viewer", CSS5 + VIEW_CSS);
     window.addEventListener("mousedown", onPress2, true);
     window.addEventListener("mouseup", onRelease2, true);
     window.addEventListener("click", onClick2, true);
@@ -1708,7 +1360,7 @@ html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
     });
   }
 
-  var VERSION = "0.1.1";
+  var VERSION = "0.1.3";
   function whenTyporaIsReady(start) {
     let tries = 0;
     const wait = () => {
@@ -1748,7 +1400,7 @@ html.claude-style-vt.claude-style-vt-closing::view-transition-group(root) {
 })();
 
 /*
- * End of Claude Style Enhance 0.1.1 for Typora
+ * End of Claude Style Enhance 0.1.3 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
