@@ -5731,6 +5731,14 @@ html.claude-style-enhance-on #write :has(> .md-image.md-img-loaded.md-expand)::a
     transition: transform 0.35s cubic-bezier(.32, .72, 0, 1);
 }
 
+#claude-style-viewer.claude-style-viewer-easing .claude-style-viewer-close {
+    transition:
+        translate 0.35s cubic-bezier(.32, .72, 0, 1),
+        background-color 0.35s cubic-bezier(.32, .72, 0, 1),
+        box-shadow 0.35s cubic-bezier(.32, .72, 0, 1),
+        color 0.35s cubic-bezier(.32, .72, 0, 1);
+}
+
 #claude-style-viewer .claude-style-viewer-caption {
     padding-top: 6px;
     color: #ffffff;
@@ -5765,10 +5773,26 @@ html.claude-style-enhance-on #write :has(> .md-image.md-img-loaded.md-expand)::a
     font: inherit;
     -webkit-appearance: none;
     appearance: none;
+    scroll-margin: 6px;
+    translate: var(--claude-style-viewer-close-x, 0px) var(--claude-style-viewer-close-y, 0px);
+}
+
+.mac-seamless-mode #claude-style-viewer .claude-style-viewer-close {
+    scroll-margin-top: calc(var(--title-bar-height, 28px) + 6px);
 }
 
 #claude-style-viewer .claude-style-viewer-close:hover {
     background: rgb(255 255 255 / 15%);
+}
+
+#claude-style-viewer .claude-style-viewer-close.claude-style-viewer-close-over {
+    background: var(--on-content-fill);
+    box-shadow: inset 0 0 0 1px var(--on-content-ring);
+    color: var(--text-primary);
+}
+
+#claude-style-viewer .claude-style-viewer-close.claude-style-viewer-close-over:hover {
+    background: var(--on-content-hover);
 }
 
 #claude-style-viewer .claude-style-viewer-close::before {

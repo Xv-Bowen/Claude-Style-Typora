@@ -1,5 +1,5 @@
 /*
- * Claude Style Enhance 0.1.4 for Typora
+ * Claude Style Enhance 0.1.5 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
@@ -935,13 +935,83 @@ ${card}::after {
   }
 
   var PAUSE = 500;
+  var MATCH = "ty-file-search-match-text";
   function fileSearch() {
     const editor = typoraFile()?.editor;
     return editor?.library?.fileSearch;
   }
+  function pattern(search, query) {
+    let source = query;
+    if (search.useRegexp === true) {
+      if (search.wholeWord === true) source = `\\b${source.replace(/^\\b|\\b$/g, "")}\\b`;
+    } else {
+      source = query.trim().replace(/[\\^$.*+?()[\]{}|]/g, "\\$&");
+      if (search.wholeWord === true) source = `\\b${source}\\b`;
+    }
+    try {
+      return new RegExp(source, search.caseSensitive === true ? "g" : "gi");
+    } catch {
+      return void 0;
+    }
+  }
+  function piece(text, start, end, match, cut) {
+    const span = document.createElement("span");
+    if (match) span.classList.add(MATCH);
+    let words = text.substring(start, end).replace(/\r*\n/, "");
+    if (cut && start === 0) words = words.replace(/^\s+/, "").replace(/\s+$/, " ");
+    if (cut && !match && words.length > 20) {
+      const last = words.substring(words.length - 20);
+      words = "..." + (last.replace(/^.+?\b/, "") || last);
+    }
+    span.textContent = words;
+    return span;
+  }
+  function mend(line, first, find) {
+    const text = line.dataset["lineText"];
+    const marked = [...line.querySelectorAll(`.${MATCH}`)].map((span) => span.textContent);
+    if (text === void 0 || marked.length === 0) return;
+    const pieces = [];
+    const found = [];
+    let end = 0;
+    find.lastIndex = 0;
+    for (let hit = find.exec(text); hit !== null; hit = find.exec(text)) {
+      if (hit[0] === "") {
+        find.lastIndex += 1;
+        continue;
+      }
+      if (end < hit.index) pieces.push(piece(text, end, hit.index, false, first));
+      end = hit.index + hit[0].length;
+      const match = piece(text, hit.index, end, true, true);
+      found.push(match.textContent ?? "");
+      pieces.push(match);
+    }
+    if (end < text.length) pieces.push(piece(text, end, text.length, false, false));
+    if (found.length !== marked.length || found.some((words, at) => words !== marked[at])) return;
+    line.replaceChildren(...pieces);
+  }
+  function mendResults(field) {
+    const list = document.querySelector("#file-library-search-result");
+    if (list === null) return;
+    new MutationObserver((records) => {
+      const search = fileSearch();
+      if (!claudeStyleIsOn() || search === void 0) return;
+      let find;
+      for (const record of records) {
+        for (const item of record.addedNodes) {
+          if (!(item instanceof HTMLElement)) continue;
+          find ??= pattern(search, field.value.trim());
+          if (find === void 0) return;
+          const current = find;
+          const lines = item.querySelectorAll(".ty-search-item-line:not(.ty-search-item-line-expand)");
+          lines.forEach((line, index) => mend(line, index === 0, current));
+        }
+      }
+    }).observe(list, { childList: true });
+  }
   function startSearch() {
     const field = document.querySelector("#file-library-search-input");
     if (!(field instanceof HTMLInputElement)) return;
+    mendResults(field);
     let timer = 0;
     let composing = false;
     const run = () => {
@@ -989,6 +1059,13 @@ ${card}::after {
     onThemeChange(() => {
       if (view !== void 0) close();
     });
+    window.addEventListener("resize", () => {
+      if (view !== void 0) placeCloser(view);
+    });
+  }
+  function px2(value) {
+    const number = Number.parseFloat(value);
+    return Number.isFinite(number) ? number : 0;
   }
   function pictureAt(target) {
     if (!(target instanceof HTMLImageElement)) return void 0;
@@ -1151,6 +1228,7 @@ ${card}::after {
       figure,
       frame,
       image,
+      closer,
       origin,
       ratio,
       previousFocus: document.activeElement,
@@ -1267,6 +1345,41 @@ ${card}::after {
     const { frame, overlay, scale, x, y } = current;
     frame.style.transform = scale > 1 ? `translate(${x}px, ${y}px) scale(${scale})` : "";
     overlay.classList.toggle("claude-style-viewer-zoomed", scale > 1.01);
+    placeCloser(current);
+  }
+  function placeCloser(current) {
+    const { closer, scale, x, y } = current;
+    let shiftX = 0;
+    let shiftY = 0;
+    let over = false;
+    if (scale > 1.01) {
+      const box = fitted(current);
+      const width = box.width * scale;
+      const height = box.height * scale;
+      const left = box.left + box.width / 2 + x - width / 2;
+      const top = box.top + box.height / 2 + y - height / 2;
+      const style = getComputedStyle(closer);
+      const startX = box.left + px2(style.left);
+      const startY = box.top + px2(style.top);
+      const ownWidth = px2(style.width);
+      const ownHeight = px2(style.height);
+      const wantX = startX + left + width - box.right;
+      const wantY = startY + top - box.top;
+      const placeX = Math.min(
+        Math.max(wantX, px2(style.scrollMarginLeft)),
+        window.innerWidth - px2(style.scrollMarginRight) - ownWidth
+      );
+      const placeY = Math.min(
+        Math.max(wantY, px2(style.scrollMarginTop)),
+        window.innerHeight - px2(style.scrollMarginBottom) - ownHeight
+      );
+      shiftX = placeX - startX;
+      shiftY = placeY - startY;
+      over = placeX < left + width && placeX + ownWidth > left && placeY < top + height && placeY + ownHeight > top;
+    }
+    closer.style.setProperty("--claude-style-viewer-close-x", `${shiftX}px`);
+    closer.style.setProperty("--claude-style-viewer-close-y", `${shiftY}px`);
+    closer.classList.toggle("claude-style-viewer-close-over", over);
   }
   function ease(current) {
     const { overlay, frame } = current;
@@ -1355,7 +1468,7 @@ ${card}::after {
     });
   }
 
-  var VERSION = "0.1.4";
+  var VERSION = "0.1.5";
   function whenTyporaIsReady(start) {
     let tries = 0;
     const wait = () => {
@@ -1387,7 +1500,7 @@ ${card}::after {
       begin("the keys", startKeys);
       begin("the outline", startOutline);
       begin("the file cards", startCards);
-      begin("the search as you type", startSearch);
+      begin("the sidebar search", startSearch);
       begin("the words", startLanguage);
       begin("the open folder's fold", startFolder);
     });
@@ -1395,7 +1508,7 @@ ${card}::after {
 })();
 
 /*
- * End of Claude Style Enhance 0.1.4 for Typora
+ * End of Claude Style Enhance 0.1.5 for Typora
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen

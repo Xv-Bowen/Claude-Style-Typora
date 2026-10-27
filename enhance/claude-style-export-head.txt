@@ -1,6 +1,6 @@
 <script>
 /*
- * Claude Style Enhance 0.1.4 for Typora: HTML export
+ * Claude Style Enhance 0.1.5 for Typora: HTML export
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
@@ -26,7 +26,7 @@ ${t}::after {
 `):t.textContent??""}async function Se(t){try{return await navigator.clipboard.writeText(t),!0}catch{return Te(t)}}function Te(t){let e=window.getSelection(),n=e!==null&&e.rangeCount>0?e.getRangeAt(0).cloneRange():void 0,o=document.activeElement,i=document.createElement("textarea");i.value=t,i.setAttribute("readonly",""),i.style.cssText="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;",document.body.append(i),i.select();let r=!1;try{r=document.execCommand("copy")}catch{r=!1}return i.remove(),o instanceof HTMLElement&&o.focus({preventScroll:!0}),e!==null&&n!==void 0&&(e.removeAllRanges(),e.addRange(n)),r}var z="claude-style-print-icon";function ke(t){let e=/^url\(["']?data:image\/svg\+xml(;base64)?,(.*?)["']?\)$/s.exec(t.trim());if(e?.[2]!==void 0)try{return e[1]!==void 0?atob(e[2]):decodeURIComponent(e[2])}catch{return}}function U(t){for(let e of t.querySelectorAll(`.${z}`))e.remove();for(let e of t.querySelectorAll("p > .md-link")){let n=e.querySelector(":scope > a");if(n===null||getComputedStyle(e).getPropertyValue("--claude-card").trim()==="")continue;let o=getComputedStyle(n,"::before"),i=o.content==="none"?void 0:ke(o.webkitMaskImage||o.getPropertyValue("mask-image"));if(i===void 0)continue;let[r="20px",l=r]=(o.webkitMaskSize||"20px").split(" "),s=document.createElement("span");s.className=z,s.setAttribute("aria-hidden","true"),s.style.cssText=`top: ${o.top}; left: ${o.left}; width: ${o.width}; height: ${o.height}; color: ${o.color}; translate: ${o.translate};`,s.innerHTML=i;let c=s.querySelector("svg");c!==null&&(c.setAttribute("width",r),c.setAttribute("height",l),n.append(s))}}function Le(t){for(let e of t.querySelectorAll("p")){if(e.closest("li")!==null||e.children.length!==1)continue;let n=e.firstElementChild;if(!(n instanceof HTMLAnchorElement)||!n.hasAttribute("href")||!Array.from(e.childNodes).every(r=>r===n||r.nodeType===Node.TEXT_NODE&&(r.textContent??"").trim()===""))continue;let i=document.createElement("span");i.className="md-link",i.setAttribute("md-inline","link"),n.replaceWith(i),i.append(n)}}function _(){let t=document.querySelector("#write");t===null||!m()||(M(),Le(t),W(),D(()=>U(t)),B(),q(),U(t))}document.documentElement.dataset.claudeStyleExport===void 0&&(document.documentElement.dataset.claudeStyleExport="",document.readyState==="loading"?document.addEventListener("DOMContentLoaded",_):_());})();
 
 /*
- * End of Claude Style Enhance 0.1.4 for Typora: HTML export
+ * End of Claude Style Enhance 0.1.5 for Typora: HTML export
  * https://github.com/Xv-Bowen/Claude-Style-Typora
  * Written by Xv-Bowen (https://github.com/Xv-Bowen)
  * Copyright (c) 2026 Xv-Bowen
