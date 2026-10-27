@@ -1415,6 +1415,10 @@ body:not(.html-for-mac) #write:has(.md-image.md-img-loaded.md-expand) {
     background: var(--surface-fence-on-page);
 }
 
+.typora-export #write .md-fences .CodeMirror-gutters {
+    padding-inline-end: 0;
+}
+
 #write .md-fences .CodeMirror-linenumber {
     min-width: 3ch;
     padding: 0;
@@ -2979,6 +2983,32 @@ body:has(content :focus, #file-library :focus) #typora-sidebar.active-tab-files.
 #ty-sidebar-footer > div {
     align-items: center;
     gap: 6px;
+}
+
+body:not(.html-for-mac) .sidebar-footer {
+    height: auto;
+}
+
+body:not(.html-for-mac) .active-tab-files.use-file-tree-style:not(.ty-on-search) .sidebar-content {
+    bottom: 48.5px;
+}
+
+body:not(.html-for-mac) #ty-sidebar-footer > div {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+body:not(.html-for-mac) #sidebar-menu-btn {
+    order: -2;
+}
+
+body:not(.html-for-mac) #sidebar-new-file-btn {
+    flex: none;
+    order: -1;
+}
+
+body:not(.html-for-mac) #typora-sidebar.use-file-tree-style #sidebar-menu-btn > .sidebar-footer-item {
+    opacity: 1;
 }
 
 #ty-sidebar-footer > div::before,
