@@ -4,6 +4,8 @@ English · [简体中文](README.zh-CN.md)
 
 A light and a dark theme for [Typora](https://typora.io) that make your documents read like a reply in Claude. The text, code and tables follow Claude's chat view, alerts follow the way Claude shows a document, a file linked on its own becomes the card Claude shows for a file it shares, and Typora's own interface (sidebar, menus, floating toolbar, find bar, dialogs) takes on Claude's look as well.
 
+Claude Style needs only the two theme files; see [Installation](#installation). An optional [enhancement script](#enhancement-script-optional) makes the code cards' copy button and the lock at the foot of the sidebar work when clicked, lets you zoom and drag enlarged pictures, and works around a few problems in Typora itself. Without it, none of the theme's look is lost.
+
 Claude Style is an independent theme. It is not made, endorsed or supported by Anthropic, and it contains no fonts, icons or other files from Anthropic. Claude is a trademark of Anthropic.
 
 ## Preview
@@ -34,7 +36,7 @@ Test report: [Claude Style 1.2.4 Linux full test report](reports/claude-style-1.
 
 The desktop app's interface changes over time, so Claude Style comes in two series:
 
-- **The 1.2 series** follows the new interface that came after version 3.1623 (version 3.6556). It keeps being updated, and the enhancement script works only with it.
+- **The 1.2 series** follows the new interface that came after version 3.1623 (version 3.6556). It keeps being updated.
 - **The 1.1 series** follows the desktop app as of October 2026 (version 3.1623), before the new interface. It is no longer updated; its last release is 1.1.16, and moving to the 1.2 series soon is recommended.
 
 **How the two series differ**
@@ -70,24 +72,26 @@ Claude Style aims to make documents in Typora read like a reply in Claude, so wh
 3. Copy both files into that folder.
 4. Quit Typora and open it again, then choose **Claude Style Light** or **Claude Style Dark** from the **Themes** menu.
 
+That completes the installation: the theme's whole look is in place. The [enhancement script](#enhancement-script-optional) is optional; install it if you want what it adds.
+
 To switch between light and dark with the system appearance, turn on **Use separate theme in dark mode** in **Settings → Appearance**, then choose Claude Style Light for light mode and Claude Style Dark for dark mode.
 
 Typora keeps themes in memory while it runs. After you replace the files with a newer version, quit and reopen Typora; switching themes from the menu does not make Typora read the theme files again.
 
-The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, and the enhancement script works only with the 1.2 series, so please move to the 1.2 series soon. To keep the look of the 1.1 series anyway, download its last release, 1.1.16, from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
+The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, so please move to the 1.2 series soon. To keep the look of the 1.1 series anyway, download its last release, 1.1.16, from the [Releases page](https://github.com/Xv-Bowen/claude-style-typora/releases).
 
 ## What it covers
 
 | Area | What you get |
 | --- | --- |
 | Reading | Claude's text size, line spacing and heading scale; links, quotes, lists, tables, keycaps, task lists and footnotes as in Claude |
-| Code | Claude's code card with a language label and Claude's syntax colours, and a copy button at its top right while the pointer is on it (it works with the enhancement script); inline code as in Claude |
+| Code | Claude's code card with a language label and Claude's syntax colours, and a copy button at its top right while the pointer is on it, which copies the code once the enhancement script is installed; inline code as in Claude |
 | Math | Formulas set at the same size as in Claude |
 | Alerts | GitHub alerts (note, tip, important, warning, caution) drawn the way Claude shows them in a document: a coloured line down the left side and a coloured title with its icon on the first line |
 | Diagrams | Mermaid diagrams in the colours Claude uses for them |
-| File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links. HTML and PDF exports draw no cards: file links are plain links there (with the [enhancement script](#enhancement-script-optional)'s export snippet, exports draw them too) |
+| File links | A file linked in a paragraph of its own shows as the card Claude draws for a file it shares: coloured by the kind of file, with its icon, its name, and the kind and extension under it. Command-click (Ctrl-click on Windows and Linux) opens it; put the caret in it to edit the link. Links to web pages, mail addresses, a place in the document or a part of a file stay links. HTML and PDF exports draw no cards: file links are plain links there. A snippet pasted into the export settings makes exports draw them too, with no need for the enhancement script (see [File cards in exports](#file-cards-in-exports-optional)) |
 | Pictures | When the text cursor moves onto a picture (click it, or reach it with the arrow keys), the picture is shown enlarged in the middle of the window with the rest of the window dimmed and a close button at its top right, as Claude shows a picture. Clicking anywhere in the text, or leaving with the arrow keys, closes it; on the Mac, so does clicking the close button (on Windows and Linux, see the questions below) |
-| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to, and follows Typora's language with the enhancement script) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The bar at the foot of the sidebar has no switch between the file tree and the article list; switch with View → File Tree or View → Articles. At the right of the bar at the foot of the sidebar, a lock shows whether the document is in Read-Only Mode (View → Readonly Mode): open while you can edit, shut and shown pressed while the mode is on. Without the enhancement script, clicking it does nothing; with the script, a click switches the mode. A name too long for its row fades out at the end, as in Claude's sidebar; the whole path shows when the pointer rests on it. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to (with the enhancement script they follow Typora's language) |
+| Sidebar | File tree, outline and search in the look of Claude's sidebar, with its menus. Under the Files / Outline switch sit a New row and a Search row, as at the top of Claude's sidebar (they read 新建 and 搜索 in Chinese, New and Search in English, and Typora's own words in other languages), and a heading reading 项目列表 ("project list"; it is in Chinese whatever language Typora is set to) stands over the files. On the Mac, the bar at the foot of the sidebar, with the folder's name, always shows. The bar at the foot of the sidebar has no switch between the file tree and the article list; switch with View → File Tree or View → Articles. At the right of the bar at the foot of the sidebar, a lock shows whether the document is in Read-Only Mode (View → Readonly Mode): open while you can edit, shut and shown pressed while the mode is on. The lock only shows the mode; with the enhancement script, a click switches it. A name too long for its row fades out at the end, as in Claude's sidebar; the whole path shows when the pointer rests on it. The sidebar search opens as a card in the middle of the window, like Claude's search: file names and matching lines in one list, with the rest of the window dimmed. At its foot, as at the foot of Claude's search, it names the keys that work there: 关闭 Esc ("close") while the field is empty and 选择 ↑ ↓ ("select") once something is typed; on the right are the switches 区分大小写 ("case sensitive"), 查找整个单词 ("whole word") and 正则表达式 ("regular expression"). These words are in Chinese whatever language Typora is set to |
 | Floating toolbar | The look of Claude's review bar: its buttons, menus and submenus open and behave the way Claude's do, and the heading levels sit in a submenu of Paragraph |
 | Find and quick open | The find and replace bar is a card at the top right of the page, as Claude's find bar is; when nothing matches it reads 0 / 0. Quick open stands where Claude's search does, with the rest of the window dimmed, one line for each result: its icon, its name and, on the right, its folder; search results mark their matches in bold, as Claude's search does; at its foot it names the keys that work there, as the sidebar search does |
 | Dialogs and notices | Dialogs, notifications and tooltips in Claude's look |
@@ -95,7 +99,9 @@ The 1.1 series is no longer updated: problems are fixed only in the 1.2 series, 
 | File preview | The header and the Open with button drawn as in Claude's document panel |
 | Modes | Source mode as a plain code view; focus mode dims the other blocks to Claude's muted text colour |
 | Motion | Only what moves in Claude moves; everything else changes at once |
-| Export | HTML and PDF use the same styles as the editor (file cards are drawn in the editor only, and in exports too with the enhancement script's export snippet) |
+| Export | HTML and PDF use the same styles as the editor (file cards are drawn in the editor only, and in exports too with a snippet pasted into the export settings; see [File cards in exports](#file-cards-in-exports-optional)) |
+
+Except where it names the enhancement script, the table describes the theme on its own. Everything the script adds is listed under [Enhancement script](#enhancement-script-optional).
 
 ### Fonts
 
@@ -119,9 +125,22 @@ Printing and PDF export follow the theme you are using: the light theme prints o
 
 Code in HTML exports stays on one line and scrolls, as it does in the editor. In print and PDF, long code lines wrap, because paper cannot scroll.
 
+## File cards in exports (optional)
+
+Exported HTML and PDF draw no file cards. For them to draw file cards too, with their icons and thumbnails, download `claude-style-enhance.zip` from the [latest release](https://github.com/Xv-Bowen/claude-style-typora/releases/latest), unzip it and paste the whole content of `claude-style-export-head.txt` into Typora's export settings (the enhancement script is in the same zip; only this file is needed here):
+
+- HTML: **Settings → Export → HTML**, into **Append in `<head />`**.
+- PDF: **Settings → Export → PDF**, into **Append Extra Content (HTML)**.
+
+The snippet and the enhancement script do not depend on each other: use either one, or both. With the script installed, exports still need the snippet to draw cards, because exported files do not include the installed script.
+
+The snippet takes effect when the exported page uses Claude Style. It also makes the copy button of code cards work in exported HTML. To stop using it, delete it from the export settings.
+
 ## Enhancement script (optional)
 
-A theme can only change how Typora looks. An optional script, `claude-style-enhance.js`, adds a few things a theme cannot do. The theme draws the buttons and icons, and the script makes them work: without it, the theme works as it does now, except that the code cards' copy button and the lock at the foot of the sidebar do nothing when clicked; with it, the script does nothing while another theme is in use. The script does not go online and does not change your documents. The script is made for the 1.2 series only: script 0.1.3 and later need Claude Style 1.2.3 or later, and with an older theme (the 1.1 series included) the script does nothing. Scripts 0.1.5 (from Claude Style 1.2.5), 0.1.4 (in Claude Style 1.2.4), 0.1.3 (in Claude Style 1.2.3) and 0.1.1 (in Claude Style 1.2.2) are adapted to Typora 1.14.15, and 0.1.0 (in Claude Style 1.2.1) to Typora 1.14.10. The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
+Without the enhancement script, none of the theme's look is lost, and the theme works as usual. A theme can only change how Typora looks, and a few things need a program; the optional script `claude-style-enhance.js` adds those. The theme draws the buttons and icons and the script only makes them work, so without it the code cards' copy button and the lock at the foot of the sidebar show but do nothing when clicked.
+
+The script does not go online and does not change your documents, and it does nothing while another theme is in use.
 
 With the script:
 
@@ -136,7 +155,6 @@ With the script:
 - **Outline**: the outline marks the section you are reading.
 - **Top folder**: clicking the top folder's row folds and unfolds it, and Typora remembers it after a restart.
 - **Interface words**: the Chinese words the theme writes into the interface (项目列表, the keys named at the foot of the search card and of quick open, the three search switches) follow the language Typora is set to; in Simplified Chinese they stay as they are.
-- **Export**: exported HTML and PDF draw file cards too, with their icons and thumbnails, and the copy button of code cards in HTML works too. This takes a snippet pasted into Typora's export settings; see [Exporting HTML and PDF](#exporting-html-and-pdf) below.
 
 ### Installing the script
 
@@ -150,7 +168,8 @@ Then open Typora and choose Claude Style Light or Claude Style Dark.
 
 The installer adds only one line to Typora's own page file, which loads `claude-style-enhance.js` from the theme folder, and keeps a copy of that file first. Every Typora update puts Typora's own file back, so run the installer again after updating Typora.
 
-#### Without the installer
+<details>
+<summary>Without the installer: doing it yourself</summary>
 
 The installer does only two things, which you can also do yourself or hand to an AI tool you use. Quit Typora first, and keep a copy of the page file you are about to change:
 
@@ -174,18 +193,15 @@ The installer does only two things, which you can also do yourself or hand to an
 
 After a Typora update, add the line again. To uninstall, delete the line and `claude-style-enhance.js` from the theme folder.
 
-### Exporting HTML and PDF
-
-Exported files do not include the installed script. For exported HTML and PDF to draw file cards too, paste the whole content of the unzipped `claude-style-export-head.txt` into Typora's export settings (this works without installing the script):
-
-- HTML: **Settings → Export → HTML**, into **Append in `<head />`**.
-- PDF: **Settings → Export → PDF**, into **Append Extra Content (HTML)**.
-
-The snippet takes effect when the exported page uses Claude Style.
+</details>
 
 ### Uninstalling the script
 
 Quit Typora and run `uninstall-mac.sh`, `uninstall-windows.ps1` or `uninstall-linux.sh` from the same folder, the way you ran the installer. It takes the line out of Typora's page file and deletes the script from the theme folder; remove the snippet from the export settings yourself.
+
+### Versions the script works with
+
+The script is made for the 1.2 series only: script 0.1.3 and later need Claude Style 1.2.3 or later, and with an older theme (the 1.1 series included) the script does nothing. Scripts 0.1.5 (from Claude Style 1.2.5), 0.1.4 (in Claude Style 1.2.4), 0.1.3 (in Claude Style 1.2.3) and 0.1.1 (in Claude Style 1.2.2) are adapted to Typora 1.14.15, and 0.1.0 (in Claude Style 1.2.1) to Typora 1.14.10. The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
 
 ## Questions you may have
 
