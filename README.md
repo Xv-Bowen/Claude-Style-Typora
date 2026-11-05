@@ -201,7 +201,17 @@ Quit Typora and run `uninstall-mac.sh`, `uninstall-windows.ps1` or `uninstall-li
 
 ### Versions the script works with
 
-The script is made for the 1.2 series only: script 0.1.3 and later need Claude Style 1.2.3 or later, and with an older theme (the 1.1 series included) the script does nothing. Scripts 0.1.5 (from Claude Style 1.2.5), 0.1.4 (in Claude Style 1.2.4), 0.1.3 (in Claude Style 1.2.3) and 0.1.1 (in Claude Style 1.2.2) are adapted to Typora 1.14.15, and 0.1.0 (in Claude Style 1.2.1) to Typora 1.14.10. The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
+The script is made for the 1.2 series only: script 0.1.3 and later need Claude Style 1.2.3 or later, and with an older theme (the 1.1 series included) the script does nothing. The table shows which releases of Claude Style include each version of the script, and the version of Typora that script is adapted to:
+
+| Enhancement script | Included in Claude Style | Adapted to Typora |
+| --- | --- | --- |
+| 0.1.5 | 1.2.5 and later | 1.14.15 |
+| 0.1.4 | 1.2.4 | 1.14.15 |
+| 0.1.3 | 1.2.3 | 1.14.15 |
+| 0.1.1 | 1.2.2 | 1.14.15 |
+| 0.1.0 | 1.2.1 | 1.14.10 |
+
+The script works by hooking into Typora's own code, so a later version of Typora may need an update of the script.
 
 ## Questions you may have
 
